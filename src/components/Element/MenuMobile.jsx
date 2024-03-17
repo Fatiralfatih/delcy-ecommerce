@@ -5,25 +5,31 @@ import { IoMdClose } from 'react-icons/io'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Link } from 'react-router-dom'
 import { FaArrowRight, FaFacebook, FaGithub, FaInstagram, FaRegHeart } from 'react-icons/fa6'
-import { Card, CardContent } from '../ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { MdOutlineStickyNote2 } from "react-icons/md";
 import { PiMapPin } from "react-icons/pi";
+import useMediaQuery from '@/hooks/useMediaQuery'
 
 
 const MenuMobile = () => {
-    return (
+
+    const isDekstop = useMediaQuery("(min-width: 768px)");
+
+    return !isDekstop && (
         <Drawer direction="left">
             <DrawerTrigger asChild>
                 <Button
                     variant="outline"
                     className="border-0 hover:text-indigo-500"
+                    name="hambuger"
                 >
                     <RxHamburgerMenu
                         className="text-2xl"
                     />
                 </Button>
             </DrawerTrigger>
-            <DrawerContent className="h-screen overflow-auto">
+
+            <DrawerContent className="h-screen overflow-auto max-w-sm sm:max-w-lg">
                 {/**Header */}
                 <div className="flex mt-4 px-3 items-center gap-2">
                     <DrawerClose asChild >
@@ -31,6 +37,7 @@ const MenuMobile = () => {
                             variant="outline"
                             size="icon"
                             className="border-none"
+                            name="close-menu"
                         >
                             <IoMdClose className="text-2xl text-gray-600" />
                         </Button>
@@ -48,21 +55,22 @@ const MenuMobile = () => {
                         <AvatarFallback>profil image</AvatarFallback>
                     </Avatar>
                     <div className="mb-2">
-                        <h2 className="font-bold text-xl max-w-[13rem] line-clamp-1">Fatir Al Fatih Fatir Al FatihFatir Al FatihFatir Al FatihFatir Al Fatih</h2>
-                        <p className="max-w-[13rem] line-clamp-1">fatiralfatih@gmail.com fatiralfatih@gmail.comfatiralfatih@gmail.comfatiralfatih@gmail.com</p>
+                        <h2 className="font-bold text-xl max-w-[13rem] line-clamp-1 sm:max-w-[21rem]">Fatir Al Fatih Fatir Al FatihFatir Al FatihFatir Al FatihFatir Al Fatih</h2>
+                        <p className="max-w-[13rem] line-clamp-1 sm:max-w-[13rem]">fatiralfatih@gmail.com</p>
                     </div>
                 </div>
                 <div className="mt-4 px-4">
                     <Button
                         className="w-full"
                         variant="primary"
+                        name="edit-profil"
                     >
                         Edit Profil
                     </Button>
                 </div>
 
                 {/** social media */}
-                <div className="flex flex-col w-fit gap-4 mt-7 px-4">
+                <div className="flex flex-col w-fit gap-4 mt-10 px-4">
                     <Link
                         to="https://www.instagram.com/fatiralfatihh/"
                         target="_blank"
@@ -71,10 +79,11 @@ const MenuMobile = () => {
                         <Button
                             size="icon"
                             variant="instagram"
+                            name="instagram"
                         >
                             <FaInstagram className="text-2xl text-white" />
                         </Button>
-                        <p className="font-semibold mt-2 max-w-[13rem] line-clamp-1 cursor-pointer link-underline link-underline-black">Fatir Al Fatih panjang banget banget bangetbangetbangetbanget</p>
+                        <p className="font-semibold mt-2 max-w-[13rem] line-clamp-1 cursor-pointer link-underline link-underline-black sm:max-w-[20rem]">Fatir Al Fatih panjang banget banget bangetbangetbangetbanget</p>
                     </Link>
                     <Link
                         to="https://www.facebook.com/fatir.alfatih.144/"
@@ -84,10 +93,11 @@ const MenuMobile = () => {
                         <Button
                             size="icon"
                             variant="facebook"
+                            name="facebook"
                         >
                             <FaFacebook className="text-2xl text-white" />
                         </Button>
-                        <p className="font-semibold mt-2 max-w-[13rem] line-clamp-1 cursor-pointer link-underline link-underline-black">Fatir Al Fatih panjang banget banget bangetbangetbangetbanget</p>
+                        <p className="font-semibold mt-2 max-w-[13rem] line-clamp-1 cursor-pointer link-underline link-underline-black sm:max-w-[20rem]">Fatir Al Fatih panjang banget banget bangetbangetbangetbanget</p>
                     </Link>
                     <Link
                         to="https://github.com/Fatiralfatih"
@@ -96,15 +106,16 @@ const MenuMobile = () => {
                     >
                         <Button
                             size="icon"
+                            name="github"
                         >
                             <FaGithub className="text-2xl text-white" />
                         </Button>
-                        <p className="font-semibold mt-2 max-w-[13rem] line-clamp-1 cursor-pointer link-underline link-underline-black">Fatir Al Fatih panjang banget banget bangetbangetbangetbanget</p>
+                        <p className="font-semibold mt-2 max-w-[13rem] line-clamp-1 cursor-pointer link-underline link-underline-black sm:max-w-[20rem]">Fatir Al Fatih panjang banget banget bangetbangetbangetbanget</p>
                     </Link>
                 </div>
 
                 {/** List order */}
-                <Card className="mt-9 max-w-[350px] mx-4 shadow-lg">
+                <Card className="mt-10 max-w-[350px] sm:max-w-lg mx-4 shadow-lg">
                     <CardContent className="pt-4 pb-5 space-y-5">
                         <Button
                             className="w-full flex justify-between px-4"
@@ -147,11 +158,11 @@ const MenuMobile = () => {
                 </Card>
 
                 {/** authentication */}
-                <DrawerFooter className="mt-5">
+                <DrawerFooter className="mt-[80px] sm:mt-[120px] w-full">
                     <Button
                         variant="warning"
                     >
-                        Login / logout
+                        Login
                     </Button>
                 </DrawerFooter>
             </DrawerContent>

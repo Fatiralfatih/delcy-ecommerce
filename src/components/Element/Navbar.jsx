@@ -3,22 +3,27 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Button } from "@/components/ui/button";
 import { CiSearch } from "react-icons/ci";
 import MenuMobile from "./MenuMobile";
+import { FaRegHeart, FaRegUser } from "react-icons/fa6";
 
 const Navbar = () => {
 
     return (
         <header>
-            <nav className="fixed top-0 left-0 right-0 py-4 container  ">
-                <div className=" flex justify-between gap-1 items-center">
-                    <h1 className="hidden sm:block">Delcy</h1>
+            <nav className="fixed top-0 left-0 right-0 py-5 container md:py-8">
+                <div className=" flex justify-between gap-1 items-center sm:gap-8 ">
+                    <h1 className="hidden sm:block sm:text-2xl font-black">
+                        Delcy.
+                        <span className="text-fuchsia-500">GG</span>
+                    </h1>
 
                     {/** Menu web */}
-                    <div className="overflow-auto rounded-md ">
+                    <div className="overflow-auto rounded-md w-full sm:w-[320px] md:min-w-[350px] lg:w-[700px] max-w-screen-md">
                         <Input
                             name="search"
                             type="search"
-                            className="w-[14rem]"
-                            iconLeft={<CiSearch className="text-lg" />}
+                            aria-label="input-search"
+                            className="w-full border-2"
+                            iconLeft={<CiSearch className="text-xl" />}
                             placeholder="Cari di Delcy"
                         />
                     </div>
@@ -28,11 +33,31 @@ const Navbar = () => {
                             className="border-0"
                         >
                             <AiOutlineShoppingCart
-                                className="text-2xl hover:text-indigo-500"
+                                className="text-2xl hover:text-indigo-500 md:text-3xl"
+                            />
+                        </Button>
+                        <Button
+                            variant="outline"
+                            className="border-0 hidden sm:flex"
+                            name="whislist"
+                        >
+                            <FaRegHeart
+                                className="text-2xl hover:text-indigo-500 md:text-3xl"
+                            />
+                        </Button>
+                        <Button
+                            variant="outline"
+                            className="border-0 hidden sm:flex"
+                            name="user"
+                        >
+                            <FaRegUser
+                                className="text-2xl hover:text-indigo-500 "
                             />
                         </Button>
                         {/** Menu Mobile */}
-                        <MenuMobile />
+                        <div className="md:hidden">
+                            <MenuMobile />
+                        </div>
                         {/** End Menu Mobile */}
                     </div>
                 </div>

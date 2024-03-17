@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import { bool, string } from "prop-types";
 
 const buttonVariants = cva(
-  "inline-flex items-center py-5 justify-center whitespace-nowrap rounded-md font-normal font-mono text-lg border border-black  transition-all ease-in-out delay-75",
+  "inline-flex items-center py-5 justify-center whitespace-nowrap rounded-md font-normal font-mono text-lg border border-black transition-all ease-in-out delay-75",
   {
     variants: {
       variant: {
