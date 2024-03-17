@@ -1,12 +1,13 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { string } from "prop-types"
 
 const Card = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      "rounded-lg border-2 border-zinc-200 bg-white text-zinc-950 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50",
+      "rounded-lg border border-zinc-200 bg-white text-zinc-950 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50",
       className
     )}
     {...props} />
@@ -49,5 +50,26 @@ const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
     {...props} />
 ))
 CardFooter.displayName = "CardFooter"
+
+Card.propTypes = {
+  className: string,
+}
+
+CardHeader.propTypes = {
+  className: string,
+}
+
+CardTitle.propTypes = {
+  className: string,
+}
+CardDescription.propTypes = {
+  className: string,
+}
+CardContent.propTypes = {
+  className: string,
+}
+CardFooter.propTypes = {
+  className: string,
+}
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }

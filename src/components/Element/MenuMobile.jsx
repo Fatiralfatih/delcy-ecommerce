@@ -29,7 +29,7 @@ const MenuMobile = () => {
                 </Button>
             </DrawerTrigger>
 
-            <DrawerContent className="h-screen overflow-auto max-w-sm sm:max-w-lg">
+            <DrawerContent className="h-screen absolute top-0 sm:top-5 overflow-auto max-w-sm sm:max-w-lg">
                 {/**Header */}
                 <div className="flex mt-4 px-3 items-center gap-2">
                     <DrawerClose asChild >
@@ -158,7 +158,7 @@ const MenuMobile = () => {
                 </Card>
 
                 {/** authentication */}
-                <DrawerFooter className="mt-[80px] sm:mt-[120px] w-full">
+                <DrawerFooter className="mt-[80px]  w-full sm:mt-[120px]">
                     <Button
                         variant="warning"
                     >

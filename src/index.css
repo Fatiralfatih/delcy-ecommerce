@@ -46,4 +46,8 @@
         background-size: 100% 3px;
         background-position: 0 100%
     }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
 }
