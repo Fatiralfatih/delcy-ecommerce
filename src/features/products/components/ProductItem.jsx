@@ -6,7 +6,7 @@ import { TbListDetails } from "react-icons/tb";
 const ProductItem = ({ title, testimony, price, image }) => {
 
     return (
-        <Card className="max-w-md">
+        <Card className="max-w-md shadow-lg">
             <CardHeader className="p-2">
                 <figure className="w-full h-[140px] max-h-[300px] md:h-[180px] xl:h-[200px]">
                     <img
