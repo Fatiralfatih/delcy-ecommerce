@@ -31,6 +31,10 @@ module.exports = {
         primary: '#8BD3DD',
         danger: '#FE98A3',
         warning: '#FAAE2B',
+        success: {
+          300: '#DDF8E7',
+          500: '#AAEEC4'
+        },
       },
       keyframes: {
         "accordion-down": {

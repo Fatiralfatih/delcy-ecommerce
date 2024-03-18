@@ -29,7 +29,7 @@ const MenuMobile = () => {
                 </Button>
             </DrawerTrigger>
 
-            <DrawerContent className="h-screen absolute top-0 sm:top-5 overflow-auto max-w-sm sm:max-w-lg">
+            <DrawerContent className="h-screen fixed top-0 bottom-0 sm:top-5 overflow-auto max-w-sm sm:max-w-lg">
                 {/**Header */}
                 <div className="flex mt-4 px-3 items-center gap-2">
                     <DrawerClose asChild >
@@ -170,4 +170,4 @@ const MenuMobile = () => {
     )
 }
 
-export default MenuMobile
+export { MenuMobile }

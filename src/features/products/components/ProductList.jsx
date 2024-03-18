@@ -1,15 +1,14 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Button, Card, CardContent, CardHeader } from "@/components/ui"
 import { object, string } from "prop-types"
 import { CiStar } from "react-icons/ci"
-import { FaCartPlus } from "react-icons/fa6"
+import { TbListDetails } from "react-icons/tb";
 
 const ProductList = ({ title, testimony, price, image }) => {
 
     return (
         <Card className="max-w-md">
             <CardHeader className="p-2">
-                <figure className="w-full h-[170px]">
+                <figure className="w-full h-[140px] max-h-[300px] md:h-[180px] xl:h-[200px]">
                     <img
                         src={image.src}
                         alt={image.alt}
@@ -18,7 +17,7 @@ const ProductList = ({ title, testimony, price, image }) => {
                 </figure>
             </CardHeader>
             <CardContent>
-                <article className="flex flex-col gap-0 flex-shrink-0 pt-3">
+                <article className="grid pt-3">
                     <h1 className="text-sm font-semibold line-clamp-2 w-full">{title}</h1>
                     <div className="flex gap-1 text-xs items-center">
                         <Button
@@ -31,16 +30,20 @@ const ProductList = ({ title, testimony, price, image }) => {
                         </Button>
                         {testimony.rating} ({testimony.review} reviews)
                     </div>
-                    <div className="flex justify-between items-center pe-1 pb-2">
+                    <article>
                         <h1 className="text-sm pt-1 font-black md:text-lg">Rp{price}</h1>
+                    </article>
+
+                    <div className="flex items-center pe-1 pb-2 mt-4">
                         <Button
-                            className=" text-xs rounded-xl"
-                            variant="primary"
-                            size="icon"
+                            className=" w-full text-xs lg:text-sm"
+                            variant="success"
                         >
-                            <FaCartPlus
-                                className="text-sm md:text-lg"
-                            />
+                            <span className="pe-2">
+                                <TbListDetails
+                                    className="text-sm md:text-lg" />
+                            </span>
+                            Lihat Detail
                         </Button>
                     </div>
                 </article>

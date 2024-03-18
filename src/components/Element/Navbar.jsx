@@ -1,8 +1,7 @@
-import { Input } from "@/components/ui/input"
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Button } from "@/components/ui/button";
-import MenuMobile from "./MenuMobile";
 import { FaRegHeart, FaRegUser } from "react-icons/fa6";
+import { MenuMobile } from "@/components/element";
+import { Button, Input } from "@/components/ui";
 
 const Navbar = () => {
 
@@ -62,4 +61,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export { Navbar }

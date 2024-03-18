@@ -50,4 +50,9 @@
     .scrollbar-hide::-webkit-scrollbar {
         display: none;
     }
+
+    .dropdown-content{
+        transform: translateY(-5%);
+        transition: transform 150ms ease-in-out,opacity 100ms ease-in-out;
+    }
 }
