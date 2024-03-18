@@ -1,6 +1,6 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaRegHeart, FaRegUser } from "react-icons/fa6";
-import { MenuMobile } from "@/components/element";
+import { MenuMobile } from "@/components/Element";
 import { Button, Input } from "@/components/ui";
 
 const Navbar = () => {
