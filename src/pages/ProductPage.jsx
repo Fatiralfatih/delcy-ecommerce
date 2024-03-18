@@ -1,6 +1,7 @@
 import { products } from "@/lib/dummyData";
 import { Button, Card, CardContent, CardHeader, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui";
 import { ProductCategoryList, ProductColorList, ProductList, ProductSizeList } from "@/features/products/components";
+import { ProductItem } from "@/features/products/components/ProductItem";
 
 const ProductPage = () => {
 
@@ -56,14 +57,15 @@ const ProductPage = () => {
                             </SelectContent>
                         </Select>
                     </div>
-                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 ">
+
+                    <ProductList>
                         {products.map(product => (
-                            <ProductList
+                            <ProductItem
                                 key={product.id}
                                 {...product}
                             />
                         ))}
-                    </div>
+                    </ProductList>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import ProductPage from "@/pages/ProductPage"
-import { Navbar } from "@/components/Element"
+import { Navbar } from "@/components/element"
 
 function App() {
 
