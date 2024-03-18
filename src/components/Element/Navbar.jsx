@@ -8,9 +8,9 @@ const Navbar = () => {
 
     return (
         <header>
-            <nav className="fixed top-0 left-0 right-0 py-5 bg-white container md:py-8">
+            <nav className="fixed top-0 left-0 z-10 right-0 py-5 bg-white container md:py-8">
                 <div className=" flex justify-between gap-1 items-center sm:gap-8 lg:gap-44 ">
-                    <Link to={'/'}>
+                    <Link to={'/'} className="bg-white">
                         <h1 className="hidden sm:block sm:text-2xl font-black lg:text-3xl">
                             Delcy.
                             <span className="text-fuchsia-500">GG</span>

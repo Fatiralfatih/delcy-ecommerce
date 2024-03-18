@@ -6,7 +6,7 @@ import { ProductItem } from "@/features/products/components/ProductItem";
 const ProductPage = () => {
 
     return (
-        <div className="container">
+        <div className="container relative">
 
             {/**Category mobile */}
             <div className="flex gap-3 w-full overflow-auto scrollbar-hide md:hidden">
@@ -57,8 +57,19 @@ const ProductPage = () => {
                             </SelectContent>
                         </Select>
                     </div>
-
                     <ProductList>
+                        {products.map(product => (
+                            <ProductItem
+                                key={product.id}
+                                {...product}
+                            />
+                        ))}
+                        {products.map(product => (
+                            <ProductItem
+                                key={product.id}
+                                {...product}
+                            />
+                        ))}
                         {products.map(product => (
                             <ProductItem
                                 key={product.id}
