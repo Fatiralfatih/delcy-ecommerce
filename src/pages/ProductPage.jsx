@@ -2,12 +2,26 @@ import { Button, Card, CardContent, CardHeader, Select, SelectContent, SelectGro
 import { ProductCategoryList, ProductColorList, ProductList, ProductSizeList, SkeletonCategories, SkeletonCategoryMobile, SkeletonProduct } from "@/features/products/components";
 import { ProductItem } from "@/features/products/components/ProductItem";
 import NotFound404 from "./NotFound404";
-import { useFetchCategories, useFetchProducts } from "@/hooks";
+import { useFetch } from "@/hooks";
 
 const ProductPage = () => {
 
-    const { categories, errorInCategories, loadingInCategories } = useFetchCategories()
-    const { products, loadingInProduct, errorInProduct } = useFetchProducts()
+    const {
+        data: categories,
+        isloading: loadingInCategories,
+        isError: errorInCategories
+    } = useFetch({
+        baseUrl: '/categories'
+    })
+
+    const {
+        data: products,
+        isloading: loadingInProduct,
+        isError: errorInProduct
+    } = useFetch({
+        baseUrl: '/products'
+    })
+
 
     if (errorInProduct || errorInCategories) {
         return <NotFound404 error={true} />

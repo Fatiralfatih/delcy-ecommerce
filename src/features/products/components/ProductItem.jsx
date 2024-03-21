@@ -1,6 +1,8 @@
 import { Button, Card, CardContent, CardHeader } from "@/components/ui"
+import { formatRupiah } from "@/lib";
 import { number, string } from "prop-types"
 import { CiStar } from "react-icons/ci"
+import { FaRegHeart } from "react-icons/fa6";
 import { TbListDetails } from "react-icons/tb";
 
 const ProductItem = ({ id, title, thumbnail, price }) => {
@@ -8,12 +10,19 @@ const ProductItem = ({ id, title, thumbnail, price }) => {
     return (
         <Card className="max-w-md rounded-sm md:shadow-lg">
             <CardHeader className="p-2">
-                <figure className="w-full h-[150px] sm:h-[180px] max-h-[300px] md:h-[200px]">
+                <figure className="w-full group h-[150px] relative sm:h-[180px] max-h-[300px] md:h-[200px]">
                     <img
                         src={thumbnail}
                         alt={`image-${title}`}
                         className="w-full h-full max-w-md rounded-lg bg-cover aspect-auto"
                     />
+                    <Button
+                        className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 duration-500 border-0"
+                        variant="ghost"
+                        size="icon"
+                    >
+                        <FaRegHeart className="text-2xl text-pink-500 md:text-4xl" />
+                    </Button>
                 </figure>
             </CardHeader>
             <CardContent>
@@ -30,7 +39,7 @@ const ProductItem = ({ id, title, thumbnail, price }) => {
                         </Button>
                         404 (23 reviews)
                     </div>
-                    <h1 className="text-sm pt-1 font-black md:text-lg">Rp {price}</h1>
+                    <h1 className="text-sm pt-1 font-black md:text-lg">{formatRupiah(price)} </h1>
                     <div className="flex w-full pe-1 pb-2 mt-4">
                         <Button
                             className=" w-full text-xs lg:text-sm"

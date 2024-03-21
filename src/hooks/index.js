@@ -1,3 +1,2 @@
 export * from './useMediaQuery';
-export * from './useFetchProducts';
-export * from './useFetchCategories';
+export * from './useFetch';

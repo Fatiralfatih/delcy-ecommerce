@@ -16,6 +16,9 @@ export const SkeletonCategories = () => {
                         <Skeleton 
                         className="w-28 h-3"
                         />
+                        <Skeleton 
+                        className="w-28 h-3"
+                        />
                     </div>
                 </div>
             ))}

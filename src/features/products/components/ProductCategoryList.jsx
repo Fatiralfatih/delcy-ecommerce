@@ -39,11 +39,11 @@ const ProductCategoryList = ({ categories }) => {
                         className="flex gap-2 items-center"
                     >
                         <Checkbox
-                            id="gaming"
+                            id={category.name}
                             className=" mb-1"
                         />
                         <label
-                            htmlFor="gaming"
+                            htmlFor={category.name}
                             className="cursor-pointer"
                         >
                             {category.name}
