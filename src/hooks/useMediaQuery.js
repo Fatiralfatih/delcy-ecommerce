@@ -18,4 +18,4 @@ const useMediaQuery = (query) => {
     return value
 }
 
-export default useMediaQuery;
+export { useMediaQuery };

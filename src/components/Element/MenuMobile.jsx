@@ -8,7 +8,7 @@ import { FaArrowRight, FaFacebook, FaGithub, FaInstagram, FaRegHeart } from 'rea
 import { Card, CardContent } from '@/components/ui/card'
 import { MdOutlineStickyNote2 } from "react-icons/md";
 import { PiMapPin } from "react-icons/pi";
-import useMediaQuery from '@/hooks/useMediaQuery'
+import { useMediaQuery } from '@/hooks'
 
 
 const MenuMobile = () => {

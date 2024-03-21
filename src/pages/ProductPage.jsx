@@ -1,67 +1,22 @@
 import { Button, Card, CardContent, CardHeader, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui";
 import { ProductCategoryList, ProductColorList, ProductList, ProductSizeList, SkeletonCategories, SkeletonCategoryMobile, SkeletonProduct } from "@/features/products/components";
 import { ProductItem } from "@/features/products/components/ProductItem";
-import { useEffect, useState } from "react";
 import NotFound404 from "./NotFound404";
-import { axiosInstance } from "@/lib/axiosInstance";
+import { useFetchCategories, useFetchProducts } from "@/hooks";
 
 const ProductPage = () => {
 
-    const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [error, setError] = useState('');
-    const [isloading, setIsLoading] = useState(false);
-    const [initialize, setinitialize] = useState(true);
+    const { categories, errorInCategories, loadingInCategories } = useFetchCategories()
+    const { products, loadingInProduct, errorInProduct } = useFetchProducts()
 
-    const getProducts = async () => {
-        try {
-            setinitialize(false);
-            setIsLoading(true)
-            const response = await axiosInstance.get('/products');
-            setProducts(response.data.data)
-        } catch (error) {
-            setError({
-                message: error.message,
-                status: error.response.status,
-            });
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
-    const getCategories = async () => {
-        try {
-            const response = await axiosInstance.get('/categories')
-            setCategories(response.data.data);
-        } catch (error) {
-            setError({
-                message: error.message,
-                status: error.status,
-            })
-        }
-    }
-
-    useEffect(() => {
-        getProducts();
-        getCategories();
-    }, [])
-
-    if (initialize) {
-        return null
-    }
-
-    if (error) {
-        return (
-            <div className="flex justify-center items-center">
-                <NotFound404 error={error} />
-            </div>
-        )
+    if (errorInProduct || errorInCategories) {
+        return <NotFound404 error={true} />
     }
 
     return (
         <div className="container pb-96">
             {/**Category mobile */}
-            {isloading && (<SkeletonCategoryMobile />)}
+            {loadingInCategories && (<SkeletonCategoryMobile />)}
             <div className="flex gap-3 w-full overflow-auto scrollbar-hide md:hidden">
                 {
                     categories.map(category => (
@@ -82,7 +37,7 @@ const ProductPage = () => {
                         <h1 className="text-2xl font-black">Filter</h1>
                     </CardHeader>
                     <CardContent className="sticky top-[100px] md:top-[79px]">
-                        {isloading ? (
+                        {loadingInCategories ? (
                             <SkeletonCategories />
                         ) : (
                             <>
@@ -116,7 +71,7 @@ const ProductPage = () => {
                             </SelectContent>
                         </Select>
                     </div>
-                    {isloading && (
+                    {loadingInProduct && (
                         <SkeletonProduct />
                     )}
                     <ProductList>
