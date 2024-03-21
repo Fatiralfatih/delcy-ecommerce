@@ -2,26 +2,20 @@ import { Button, Card, CardContent, CardHeader, Select, SelectContent, SelectGro
 import { ProductCategoryList, ProductColorList, ProductList, ProductSizeList, SkeletonCategories, SkeletonCategoryMobile, SkeletonProduct } from "@/features/products/components";
 import { ProductItem } from "@/features/products/components/ProductItem";
 import NotFound404 from "./NotFound404";
-import { useFetch } from "@/hooks";
+import { useQuery } from "@tanstack/react-query";
+import { axiosInstance } from "@/lib";
 
 const ProductPage = () => {
 
-    const {
-        data: categories,
-        isloading: loadingInCategories,
-        isError: errorInCategories
-    } = useFetch({
-        baseUrl: '/categories'
+    const { isLoading: loadingInCategories, isError: errorInCategories, data: categories } = useQuery({
+        queryKey: ['categories-data'],
+        queryFn: () => axiosInstance.get('/categories')
     })
 
-    const {
-        data: products,
-        isloading: loadingInProduct,
-        isError: errorInProduct
-    } = useFetch({
-        baseUrl: '/products'
+    const { isLoading: loadingInProduct, isError: errorInProduct, data: products } = useQuery({
+        queryKey: ['product-data'],
+        queryFn: () => axiosInstance.get('/products')
     })
-
 
     if (errorInProduct || errorInCategories) {
         return <NotFound404 error={true} />
@@ -33,11 +27,11 @@ const ProductPage = () => {
             {loadingInCategories && (<SkeletonCategoryMobile />)}
             <div className="flex gap-3 w-full overflow-auto scrollbar-hide md:hidden">
                 {
-                    categories.map(category => (
+                    categories?.data.data.map(category => (
                         <Button
                             key={category.id}
                             variant="ghost"
-                            className="capitalize px-2 py-1 hover:text-white hover:bg-slate-400"
+                            className="capitalize px-2 py-1 rounded-xl hover:bg-success-500 hover:text-zinc-800"
                         >
                             {category.name}
                         </Button>
@@ -89,7 +83,7 @@ const ProductPage = () => {
                         <SkeletonProduct />
                     )}
                     <ProductList>
-                        {products.map(product => (
+                        {products?.data.data.map(product => (
                             <ProductItem
                                 key={product.id}
                                 {...product}

@@ -1,12 +1,8 @@
-import { Button, Checkbox } from "@/components/ui"
-import { array } from "prop-types";
-import { useState } from "react";
-import { IoIosArrowDown } from "react-icons/io"
+import { Checkbox } from "@/components/ui"
+import { object } from "prop-types";
 import { TbCategory } from "react-icons/tb"
 
 const ProductCategoryList = ({ categories }) => {
-
-    const [showCategory, setShowCategory] = useState(false);
 
     return (
         <div className="flex flex-col gap-2">
@@ -20,20 +16,11 @@ const ProductCategoryList = ({ categories }) => {
                     </span>
                     Category
                 </label>
-                <Button
-                    id="category"
-                    variant="ghost"
-                    className="border-0"
-                    name="category"
-                    onClick={() => setShowCategory(!showCategory)}
-                >
-                    <IoIosArrowDown className="text-lg" />
-                </Button>
             </div>
 
             <ul
-                className={`ps-3 space-y-2 overflow-hidden transition-all ease-in-out duration-500 max-h-0 ${!showCategory ? 'max-h-32' : 'max-h-0'}`}>
-                {categories.map(category => (
+                className={`ps-3 space-y-2 max-h-full`}>
+                {categories?.data.data.map(category => (
                     <li
                         key={category.id}
                         className="flex gap-2 items-center"
@@ -56,7 +43,7 @@ const ProductCategoryList = ({ categories }) => {
 }
 
 ProductCategoryList.propTypes = {
-    categories: array,
+    categories: object.isRequired,
 }
 
 export { ProductCategoryList }
