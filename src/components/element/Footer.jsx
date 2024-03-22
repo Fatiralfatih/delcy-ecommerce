@@ -6,7 +6,7 @@ const Footer = () => {
     const year = new Date().getFullYear()
 
     return (
-        <div className="mt-[100px] container">
+        <div className="container py-9">
             <Card className="px-4 py-6">
                 <CardContent>
                     <div className="flex flex-col gap-4">
@@ -39,7 +39,7 @@ const Footer = () => {
                                 </Button>
                                 <Button
                                     size="icon"
-                                    className="text-2xl text-white"
+                                    className="text-2xl hover:bg-zinc-950/80 hover:text-white"
                                 >
                                     <FaGithub />
                                 </Button>

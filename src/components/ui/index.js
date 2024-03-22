@@ -7,3 +7,6 @@ export * from './input';
 export * from './checkbox';
 export * from './select';
 export * from './skeleton';
+export * from './breadcrumb';
+export * from './carousel';
+export * from './Divide';

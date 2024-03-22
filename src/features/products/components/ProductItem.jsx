@@ -4,8 +4,9 @@ import { number, string } from "prop-types"
 import { CiStar } from "react-icons/ci"
 import { FaRegHeart } from "react-icons/fa6";
 import { TbListDetails } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
-const ProductItem = ({ id, title, thumbnail, price }) => {
+const ProductItem = ({ id, title, slug, thumbnail, price }) => {
 
     return (
         <Card className="max-w-md rounded-sm md:shadow-lg">
@@ -41,17 +42,18 @@ const ProductItem = ({ id, title, thumbnail, price }) => {
                     </div>
                     <h1 className="text-sm pt-1 font-black md:text-lg">{formatRupiah(price)} </h1>
                     <div className="flex w-full pe-1 pb-2 mt-4">
-                        <Button
-                            className=" w-full text-xs lg:text-sm"
-                            name={`${id}`}
-                            variant="success"
-                        >
-                            <span className="pe-2">
-                                <TbListDetails
-                                    className="text-sm md:text-lg" />
-                            </span>
-                            Lihat Detail
-                        </Button>
+                        <Link to={`/${slug}`} className="w-full">
+                            <Button
+                                className=" w-full text-xs lg:text-sm"
+                                name={`${id}`}
+                            >
+                                <span className="pe-2">
+                                    <TbListDetails
+                                        className="text-sm md:text-lg" />
+                                </span>
+                                Lihat Detail
+                            </Button>
+                        </Link>
                     </div>
                 </article>
             </CardContent>
@@ -61,6 +63,7 @@ const ProductItem = ({ id, title, thumbnail, price }) => {
 
 ProductItem.propTypes = {
     id: number.isRequired,
+    slug: string.isRequired,
     price: string,
     title: string.isRequired,
     thumbnail: string,

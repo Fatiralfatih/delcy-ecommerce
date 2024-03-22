@@ -3,6 +3,7 @@ import { FaRegHeart, FaRegUser } from "react-icons/fa6";
 import { MenuMobile } from "@/components/element";
 import { Button, Input } from "@/components/ui";
 import { Link } from "react-router-dom";
+import { CiSearch } from "react-icons/ci";
 
 const Navbar = () => {
 
@@ -23,7 +24,7 @@ const Navbar = () => {
                         type="search"
                         aria-label="input-search"
                         className="w-full border-2 max-w-3xl"
-                        // iconLeft={<CiSearch className="text-xl" />}
+                        iconLeft={<CiSearch className="text-xl" />}
                         placeholder="Cari di Delcy....." />
                     <div className="flex justify-center gap-1 items-center">
                         <Button

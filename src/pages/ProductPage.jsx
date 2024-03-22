@@ -22,7 +22,7 @@ const ProductPage = () => {
     }
 
     return (
-        <div className="container pb-96">
+        <div className="container pt-24">
             {/**Category mobile */}
             {loadingInCategories && (<SkeletonCategoryMobile />)}
             <div className="flex gap-3 w-full overflow-auto scrollbar-hide md:hidden">

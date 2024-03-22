@@ -10,11 +10,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-zinc-900 text-zinc-50 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 shadow-intervaless-button active:shadow-intervaless-button-active",
+        default: "bg-zinc-900 text-white hover:bg-success-500 hover:text-zinc-900 shadow-intervaless-button active:shadow-intervaless-button-active shadow-intervaless-button active:shadow-intervaless-button-active",
         primary: "bg-primary text-zinc-800 hover:bg-primary/90 shadow-intervaless-button active:shadow-intervaless-button-active",
         facebook: "bg-cyan-800/80 text-zinc-800 hover:bg-sky-800/90 shadow-intervaless-button active:shadow-intervaless-button-active",
         instagram: "bg-pink-800/80 text-white hover:bg-fuchsia-800/90 shadow-intervaless-button active:shadow-intervaless-button-active",
-        success: 'bg-zinc-900 text-white hover:bg-success-500 hover:text-zinc-900 shadow-intervaless-button active:shadow-intervaless-button-active',
         danger:
           "bg-danger text-zinc-800 hover:bg-danger/90 dark:bg-red-900 dark:text-zinc-50 dark:hover:bg-red-900/90 shadow-intervaless-button active:shadow-intervaless-button-active",
         warning: "bg-warning text-zinc-800 hover:bg-warning/90 shadow-intervaless-button active:shadow-intervaless-button-active",

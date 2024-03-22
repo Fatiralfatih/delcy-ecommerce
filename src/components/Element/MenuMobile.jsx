@@ -107,8 +107,9 @@ const MenuMobile = () => {
                         <Button
                             size="icon"
                             name="github"
+                            className="hover:text-white hover:bg-zinc-950/80"
                         >
-                            <FaGithub className="text-2xl text-white" />
+                            <FaGithub className="text-2xl " />
                         </Button>
                         <p className="font-semibold mt-2 max-w-[13rem] line-clamp-1 cursor-pointer link-underline link-underline-black sm:max-w-[20rem]">Fatir Al Fatih panjang banget banget bangetbangetbangetbanget</p>
                     </Link>
