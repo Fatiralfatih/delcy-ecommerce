@@ -1,7 +1,10 @@
-import { Button, Card, CardContent } from "@/components/ui"
+import { Button, Card, CardContent, Input } from "@/components/ui"
+import { useState } from "react"
 import { FaFacebook, FaGithub, FaInstagram } from "react-icons/fa6"
 
 const Footer = () => {
+
+    const [result, setResult] = useState('')
 
     const year = new Date().getFullYear()
 
@@ -21,6 +24,41 @@ const Footer = () => {
                         <div className="flex gap-8 flex-col sm:flex-row sm:justify-between items-center">
                             <div className="sm:mt-8">
                                 <p className="text-sm">&copy; {year} Delcy Inc. All rights reserver </p>
+                            </div>
+
+                            <div className=" hidden lg:flex lg:flex-col lg:w-fit lg:gap-4">
+                                <div className="flex gap-3 items-center">
+                                    <Input
+                                        className="w-24 h-8"
+                                        type="number"
+                                        placeholder="..."
+                                    />
+                                    <span className="text-xl ">+</span>
+                                    <Input
+                                        className="w-24 h-8"
+                                        type="number"
+                                        placeholder="..."
+                                    />
+                                    <Button
+                                        variant="outline"
+                                        className="w-10 h-8 py-0 text-lg"
+                                        name="result-0"
+                                        onClick={() => setResult('Hello World!')}
+                                    >
+                                        =
+                                    </Button>
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <p>Result : {result}</p>
+                                    <Button
+                                        variant="outline"
+                                        name="reset-0"
+                                        className="w-fit"
+                                        onClick={() => setResult('')}
+                                    >
+                                        coba lagi
+                                    </Button>
+                                </div>
                             </div>
                             <div className="flex gap-4">
                                 <Button
