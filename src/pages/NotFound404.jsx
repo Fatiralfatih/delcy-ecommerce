@@ -28,4 +28,4 @@ NotFound404.propTypes = {
     error: bool,
 }
 
-export default NotFound404
+export { NotFound404 }

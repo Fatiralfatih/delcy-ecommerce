@@ -23,20 +23,22 @@ const Footer = () => {
 
                         <div className="flex gap-8 flex-col sm:flex-row sm:justify-between items-center">
                             <div className="sm:mt-8">
-                                <p className="text-sm">&copy; {year} Delcy Inc. All rights reserver </p>
+                                <p className="text-sm">&copy; {year} Delcy Inc. All rights reserved </p>
                             </div>
 
                             <div className=" hidden lg:flex lg:flex-col lg:w-fit lg:gap-4">
                                 <div className="flex gap-3 items-center">
                                     <Input
                                         className="w-24 h-8"
-                                        type="number"
+                                        type="input-1"
+                                        name="increase"
                                         placeholder="..."
                                     />
                                     <span className="text-xl ">+</span>
                                     <Input
                                         className="w-24 h-8"
                                         type="number"
+                                        name="input-2"
                                         placeholder="..."
                                     />
                                     <Button
@@ -53,10 +55,10 @@ const Footer = () => {
                                     <Button
                                         variant="outline"
                                         name="reset-0"
-                                        className="w-fit"
+                                        className="w-fit hover:bg-success-500"
                                         onClick={() => setResult('')}
                                     >
-                                        coba lagi
+                                        reset
                                     </Button>
                                 </div>
                             </div>

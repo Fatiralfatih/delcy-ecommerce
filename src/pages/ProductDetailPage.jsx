@@ -103,4 +103,4 @@ const ProductDetailPage = () => {
     )
 }
 
-export default ProductDetailPage
+export { ProductDetailPage }

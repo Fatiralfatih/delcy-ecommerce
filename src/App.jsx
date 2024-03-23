@@ -1,8 +1,6 @@
-import ProductPage from "@/pages/ProductPage"
 import { Footer, Navbar } from "@/components/element"
 import { Route, Routes } from "react-router-dom"
-import NotFound404 from "@/pages/NotFound404"
-import ProductDetailPage from "./pages/ProductDetailPage"
+import { CartPage, NotFound404, ProductDetailPage, ProductPage } from "./pages"
 
 function App() {
 
@@ -14,6 +12,7 @@ function App() {
           <Route path="*" element={<NotFound404 />} />
           <Route path="/" element={<ProductPage />} />
           <Route path="/:slug" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </main>
       <Footer />

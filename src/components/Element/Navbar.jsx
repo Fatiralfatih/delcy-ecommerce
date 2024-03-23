@@ -27,14 +27,16 @@ const Navbar = () => {
                         iconLeft={<CiSearch className="text-xl" />}
                         placeholder="Cari di Delcy....." />
                     <div className="flex justify-center gap-1 items-center">
-                        <Button
-                            variant="outline"
-                            className="border-0"
-                        >
-                            <AiOutlineShoppingCart
-                                className="text-2xl hover:text-indigo-500 "
-                            />
-                        </Button>
+                        <Link to={'cart'}>
+                            <Button
+                                variant="outline"
+                                className="border-0"
+                            >
+                                <AiOutlineShoppingCart
+                                    className="text-2xl hover:text-indigo-500 "
+                                />
+                            </Button>
+                        </Link>
                         <Button
                             variant="outline"
                             className="border-0 hidden sm:flex"
