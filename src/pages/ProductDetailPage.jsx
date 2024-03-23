@@ -1,5 +1,5 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselThumbs } from "@/components/ui"
-import { DetailProductItem, Detailtransaction } from "@/features/products/product-detail/components"
+import { DetailProductItem, Detailtransaction, ReviewsContent, ReviewsItem, SimilarProductContent, SimilarProductItem } from "@/features/products/product-detail/components"
 import { images } from "@/lib"
 import { LuHome } from "react-icons/lu"
 import { RxSlash } from "react-icons/rx"
@@ -50,8 +50,8 @@ const ProductDetailPage = () => {
                 </BreadcrumbList>
             </Breadcrumb>
 
-            {/**product detail */}
-            <div className="flex flex-col md:flex-row mt-5 md:container">
+            {/**product detail and transaction detail */}
+            <section className="flex flex-col md:flex-row pt-5 md:container">
                 <Carousel className="basis-[400px] lg:basis-[600px]">
                     <CarouselContent className=" max-w-[25rem] md:max-w-md lg:max-w-full">
                         {images.map(image => (
@@ -82,7 +82,22 @@ const ProductDetailPage = () => {
                     {/** detail transaction */}
                     <Detailtransaction />
                 </div>
-            </div>
+            </section>
+
+            {/** reviews and similar product */}
+            <section className="px-4 pt-5 md:container md:flex md:flex-col md:gap-3">
+                { /**reviews */}
+                <ReviewsContent>
+                    <ReviewsItem />
+                </ReviewsContent>
+
+                {/**similar products */}
+                <SimilarProductContent
+                    className="mt-0"
+                >
+                    <SimilarProductItem />
+                </SimilarProductContent>
+            </section>
 
         </div>
     )

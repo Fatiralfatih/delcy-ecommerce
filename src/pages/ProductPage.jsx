@@ -1,6 +1,5 @@
 import { Button, Card, CardContent, CardHeader, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui";
-import { ProductCategoryList, ProductColorList, ProductList, ProductSizeList, SkeletonCategories, SkeletonCategoryMobile, SkeletonProduct } from "@/features/products/components";
-import { ProductItem } from "@/features/products/components/ProductItem";
+import { ProductCategoryList, ProductColorList, ProductItem, ProductList, ProductSizeList, SkeletonCategories, SkeletonCategoryMobile, SkeletonProduct } from "@/features/products/components";
 import NotFound404 from "./NotFound404";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib";

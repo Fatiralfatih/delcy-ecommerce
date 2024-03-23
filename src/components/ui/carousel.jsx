@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from "react"
 import useEmblaCarousel from "embla-carousel-react";
 
@@ -203,7 +204,7 @@ const CarouselNext = React.forwardRef(({ className, variant = "outline", size = 
 })
 CarouselNext.displayName = "CarouselNext"
 
-const CarouselThumbs = React.forwardRef(({ images, className }) => {
+const CarouselThumbs = React.forwardRef(({ images, className }, ref) => {
 
   const { emblaThumbsRef, onThumbClick } = useCarousel()
 
