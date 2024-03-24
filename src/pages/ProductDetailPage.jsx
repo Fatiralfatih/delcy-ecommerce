@@ -8,6 +8,7 @@ const ProductDetailPage = () => {
 
     return (
         <div className="pt-[90px]">
+        
             {/** bredcrumbs */}
             <Breadcrumb className="container">
                 <BreadcrumbList className="text-zinc-800 flex-nowrap overflow-auto">
