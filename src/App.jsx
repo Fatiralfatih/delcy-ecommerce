@@ -10,8 +10,12 @@ function App() {
       <main className="min-h-screen pb-9 bg-[#F0F2F5]">
         <Routes>
           <Route path="*" element={<NotFound404 />} />
-          <Route path="/" element={<ProductPage />} />
-          <Route path="/:slug" element={<ProductDetailPage />} />
+          <Route
+            path="/"
+            element={<ProductPage />} />
+          <Route
+            path="/:slug"
+            element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage />} />
         </Routes>
       </main>

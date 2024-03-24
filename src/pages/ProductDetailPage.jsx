@@ -3,8 +3,25 @@ import { DetailProductItem, Detailtransaction, ReviewsContent, ReviewsItem, Simi
 import { images } from "@/lib"
 import { LuHome } from "react-icons/lu"
 import { RxSlash } from "react-icons/rx"
+import { useParams } from "react-router-dom"
+import { NotFound404 } from "."
+import { useProductBySlug } from "@/features/products/product-detail/hooks"
+import { useProducts } from "@/features/products/hooks"
 
 const ProductDetailPage = () => {
+    const { slug } = useParams()
+    const { data: products } = useProducts()
+    const { data: product, isError, isLoading } = useProductBySlug({ slug });
+    const filterSimilarProductByCategory =
+        products?.data.data.filter(prdct => prdct.category.name === product?.data.data.category.name);
+
+    if (isError) {
+        return <NotFound404 error={true} />
+    }
+
+    if (isLoading) {
+        return <h1 className="flex justify-center items-center min-h-screen">Seadng loadig...</h1>
+    }
 
     return (
         <div className="pt-[90px]">
@@ -21,9 +38,9 @@ const ProductDetailPage = () => {
                     <BreadcrumbItem>
                         <BreadcrumbLink
                             href="/"
-                            className="bg-zinc-200 py-1 px-4 rounded-lg "
+                            className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
                         >
-                            Home
+                            home
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator>
@@ -32,9 +49,9 @@ const ProductDetailPage = () => {
                     <BreadcrumbItem>
                         <BreadcrumbLink
                             href="#"
-                            className="bg-zinc-200 py-1 px-4 rounded-lg"
+                            className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
                         >
-                            Skena
+                            {product?.data.data.category.name}
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator>
@@ -43,9 +60,9 @@ const ProductDetailPage = () => {
                     <BreadcrumbItem>
                         <BreadcrumbLink
                             href="#"
-                            className="bg-zinc-200 py-1 px-4 rounded-lg"
+                            className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
                         >
-                            Matnernal
+                            {product?.data.data.title}
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                 </BreadcrumbList>
@@ -53,17 +70,17 @@ const ProductDetailPage = () => {
 
             {/**product detail and transaction detail */}
             <section className="flex flex-col md:flex-row pt-5 md:container">
-                <Carousel className="basis-[400px] lg:basis-[600px]">
-                    <CarouselContent className=" max-w-[25rem] md:max-w-md lg:max-w-full">
-                        {images.map(image => (
+                <Carousel className="basis-[400px] md:basis-[600px] lg:basis-auto">
+                    <CarouselContent className=" max-w-[25rem] md:max-w-lg">
+                        {images.map(galery => (
                             <CarouselItem
-                                key={image.alt}
+                                key={galery.alt}
                                 className="pl-0 md:pl-2"
                             >
                                 <figure className="w-full" >
                                     <img
-                                        src={image.src}
-                                        alt={image.alt}
+                                        src={galery.image}
+                                        alt={'sda'}
                                         className="rounded-xl w-full h-full"
                                     />
                                 </figure>
@@ -78,7 +95,7 @@ const ProductDetailPage = () => {
                 <div className="flex flex-col gap-5 pt-4 px-4 md:flex-row md:pt-0">
 
                     {/** detail product */}
-                    <DetailProductItem />
+                    <DetailProductItem product={product} />
 
                     {/** detail transaction */}
                     <Detailtransaction />
@@ -96,12 +113,15 @@ const ProductDetailPage = () => {
                 <SimilarProductContent
                     className="mt-0"
                 >
-                    <SimilarProductItem />
+                    <SimilarProductItem
+                        products={filterSimilarProductByCategory}
+                    />
                 </SimilarProductContent>
             </section>
 
         </div>
     )
 }
+
 
 export { ProductDetailPage }

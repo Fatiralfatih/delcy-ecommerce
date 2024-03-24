@@ -1,9 +1,9 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
 import { LuChevronRight, LuMoreHorizontal } from "react-icons/lu";
 
 import { cn } from "@/lib/utils"
 import { element, string } from "prop-types";
+import { Link } from "react-router-dom";
 
 const Breadcrumb = React.forwardRef(
   ({ ...props }, ref) => <nav ref={ref} aria-label="breadcrumb" {...props} />
@@ -29,14 +29,18 @@ const BreadcrumbItem = React.forwardRef(({ className, ...props }, ref) => (
 ))
 BreadcrumbItem.displayName = "BreadcrumbItem"
 
-const BreadcrumbLink = React.forwardRef(({ asChild, className, ...props }, ref) => {
-  const Comp = asChild ? Slot : "a"
+const BreadcrumbLink = React.forwardRef(({ href, className, children, ...props }, ref) => {
 
   return (
-    (<Comp
+    (<Link
       ref={ref}
+      to={href}
       className={cn("transition-all duration-300 hover:bg-success-500 ease-in-out hover:text-zinc-950 dark:hover:text-zinc-50", className)}
-      {...props} />)
+      {...props}
+    >
+      {children}
+    </Link>
+    )
   );
 })
 BreadcrumbLink.displayName = "BreadcrumbLink"
@@ -91,7 +95,8 @@ BreadcrumbItem.propTypes = {
 }
 BreadcrumbLink.propTypes = {
   className: string,
-  asChild: string,
+  href: string,
+  children: string
 }
 
 BreadcrumbPage.propTypes = {

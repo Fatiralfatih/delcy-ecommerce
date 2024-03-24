@@ -1,24 +1,26 @@
 import { Button, Card, CardContent, CardHeader, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui";
 import { ProductCategoryList, ProductColorList, ProductItem, ProductList, ProductSizeList, SkeletonCategories, SkeletonCategoryMobile, SkeletonProduct } from "@/features/products/components";
-import { useQuery } from "@tanstack/react-query";
-import { axiosInstance } from "@/lib";
 import { NotFound404 } from ".";
+import { useCategories, useProducts } from "@/features/products/hooks";
 
 const ProductPage = () => {
 
-    const { isLoading: loadingInCategories, isError: errorInCategories, data: categories } = useQuery({
-        queryKey: ['categories-data'],
-        queryFn: () => axiosInstance.get('/categories')
-    })
+    const {
+        data: products,
+        isError: isErrorInProduct,
+        isLoading: loadingInProduct
+    } = useProducts()
 
-    const { isLoading: loadingInProduct, isError: errorInProduct, data: products } = useQuery({
-        queryKey: ['product-data'],
-        queryFn: () => axiosInstance.get('/products')
-    })
+    const {
+        data: categories,
+        isError: errorInCategories,
+        isLoading: loadingInCategories
+    } = useCategories()
 
-    if (errorInProduct || errorInCategories) {
+    if (isErrorInProduct || errorInCategories) {
         return <NotFound404 error={true} />
     }
+
 
     return (
         <div className="container pt-24">

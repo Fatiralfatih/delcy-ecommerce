@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 const NotFound404 = ({ error }) => {
     return (
-        <div className="flex min-h-[60vh] justify-center items-center">
+        <div className="flex min-h-[60vh] justify-center items-center lg:min-h-[80vh]">
             <Card className="px-[20px] md:px-[30px] border-0 bg-opacity-0">
                 <CardContent className=" bg-violet-500/50 rounded-lg shadow-intervaless-button  py-[100px] px-[30px] md:px-[150px]">
                     <div className="flex justify-between gap-10 items-center">
