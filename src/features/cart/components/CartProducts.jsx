@@ -1,6 +1,6 @@
 import { Card, CardContent, } from "@/components/ui"
 import { cn } from "@/lib"
-import { array, string } from "prop-types"
+import { array, element, string } from "prop-types"
 
 const CartProducts = ({ children, className }) => {
     return (
@@ -13,7 +13,7 @@ const CartProducts = ({ children, className }) => {
 }
 
 CartProducts.propTypes = {
-    children: array,
+    children: array || element,
     className: string,
 }
 

@@ -4,6 +4,7 @@ import { string } from "prop-types"
 import { CiStar } from "react-icons/ci"
 
 const ReviewsItem = ({ className }) => {
+
     return (
         <CardContent className={cn("space-y-3", className)}>
             <Card className="border-2">
