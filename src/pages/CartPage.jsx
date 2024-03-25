@@ -62,4 +62,4 @@ const CartPage = () => {
     )
 }
 
-export { CartPage }
+export default CartPage;

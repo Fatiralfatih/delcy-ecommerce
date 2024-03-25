@@ -1,20 +1,19 @@
 import { Button, Divide } from "@/components/ui"
 import { formatRupiah } from "@/lib"
-import { object } from "prop-types"
+import { string } from "prop-types"
 import { CiHeart, CiStar } from "react-icons/ci"
 
-
-export const DetailProductItem = ({ product }) => {
+export const DetailProductItem = ({ title, price, description }) => {
 
     return (
-        <div className="bg-white p-4 text-lg rounded-xl w-full lg:basis-[70rem] max-w-7xl">
-            <article className="space-y-2 lg:max-w-sm">
+        <div className="bg-white p-4 text-lg rounded-xl w-full lg:basis-[70rem] xl:max-w-xl xl:basis-[75rem]">
+            <article className="space-y-2">
                 <div className="flex flex-col">
                     <div className="flex justify-between ">
                         <h1
                             className="font-bold text-xl line-clamp-3 h-fit lg:line-clamp-none"
                         >
-                            {product?.data.data.title}
+                            {title}
                         </h1>
                         <Button
                             variant="ghost"
@@ -39,7 +38,7 @@ export const DetailProductItem = ({ product }) => {
                 <h1
                     className="font-semibold text-xl md:text-lg lg:text-xl"
                 >
-                    {formatRupiah(product?.data.data.price)}
+                    {formatRupiah(price)}
                 </h1>
             </article>
 
@@ -106,7 +105,7 @@ export const DetailProductItem = ({ product }) => {
                 <p
                     className="text-sm md:text-xs lg:text-sm"
                 >
-                    {product?.data.data.description}
+                    {description}
                 </p>
             </article>
         </div>
@@ -114,5 +113,7 @@ export const DetailProductItem = ({ product }) => {
 }
 
 DetailProductItem.propTypes = {
-    product: object,
+    title: string,
+    price: string,
+    description: string,
 }

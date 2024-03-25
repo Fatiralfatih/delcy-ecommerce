@@ -204,7 +204,7 @@ const CarouselNext = React.forwardRef(({ className, variant = "outline", size = 
 })
 CarouselNext.displayName = "CarouselNext"
 
-const CarouselThumbs = React.forwardRef(({ images, className }, ref) => {
+const CarouselThumbs = React.forwardRef(({ galleries, className }, ref) => {
 
   const { emblaThumbsRef, onThumbClick } = useCarousel()
 
@@ -212,9 +212,9 @@ const CarouselThumbs = React.forwardRef(({ images, className }, ref) => {
     <div className={cn("hidden sm:flex pt-4 ", className)}>
       <div className=" overflow-hidden w-full" ref={emblaThumbsRef}>
         <div className="flex gap-2 w-full ">
-          {images.map((image, index) => (
+          {galleries.map((image, index) => (
             <img
-              key={image.alt}
+              key={image.id}
               src={image.image}
               alt={image.alt}
               className="w-[100px] h-full aspect-auto border cursor-pointer rounded-xl md:w-[60px] lg:w-[90px]"
@@ -256,7 +256,7 @@ CarouselNext.propTypes = {
 }
 
 CarouselThumbs.propTypes = {
-  images: array,
+  galleries: array,
   className: string,
 }
 

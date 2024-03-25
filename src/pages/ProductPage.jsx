@@ -1,34 +1,32 @@
 import { Button, Card, CardContent, CardHeader, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui";
-import { ProductCategoryList, ProductColorList, ProductItem, ProductList, ProductSizeList, SkeletonCategories, SkeletonCategoryMobile, SkeletonProduct } from "@/features/products/components";
-import { NotFound404 } from ".";
-import { useCategories, useProducts } from "@/features/products/hooks";
+import { ProductCategoryList, ProductColorList, ProductItem, ProductList, ProductSizeList, SkeletonCategoryMobile, SkeletonProduct } from "@/features/products/components";
+import { useFetch } from "@/hooks";
+import NotFound404 from "./NotFound404";
+import { array, bool, string } from "prop-types";
 
-const ProductPage = () => {
-
-    const {
-        data: products,
-        isError: isErrorInProduct,
-        isLoading: loadingInProduct
-    } = useProducts()
+const ProductPage = ({ products, errorInProducts, isErrorInProducts, isLoadingInProducts }) => {
 
     const {
         data: categories,
-        isError: errorInCategories,
-        isLoading: loadingInCategories
-    } = useCategories()
+        error: errorInCategories,
+        isError: isErrorInCategories,
+        isloading: isLoadingInCategories
+    } = useFetch({
+        baseUrl: '/categories'
+    })
 
-    if (isErrorInProduct || errorInCategories) {
-        return <NotFound404 error={true} />
+
+    if (isErrorInProducts || isErrorInCategories) {
+        return <NotFound404 error={errorInProducts || errorInCategories} />
     }
-
 
     return (
         <div className="container pt-24">
             {/**Category mobile */}
-            {loadingInCategories && (<SkeletonCategoryMobile />)}
+            {isLoadingInCategories && (<SkeletonCategoryMobile />)}
             <div className="flex gap-3 w-full overflow-auto scrollbar-hide md:hidden">
                 {
-                    categories?.data.data.map(category => (
+                    categories.map(category => (
                         <Button
                             key={category.id}
                             variant="ghost"
@@ -46,18 +44,12 @@ const ProductPage = () => {
                         <h1 className="text-2xl font-black">Filter</h1>
                     </CardHeader>
                     <CardContent className="sticky top-[100px] md:top-[79px]">
-                        {loadingInCategories ? (
-                            <SkeletonCategories />
-                        ) : (
-                            <>
-                                {/**category */}
-                                <ProductCategoryList categories={categories} />
-                                {/** Color */}
-                                <ProductColorList />
-                                {/** Size */}
-                                <ProductSizeList />
-                            </>
-                        )}
+                        {/**category */}
+                        <ProductCategoryList categories={categories} />
+                        {/** Color */}
+                        <ProductColorList />
+                        {/** Size */}
+                        <ProductSizeList />
                     </CardContent>
                 </Card>
                 <div className="space-y-4  pb-5 md:pb-10 w-full rounded-e-lg mt-[30px] md:mt-0 bg-white">
@@ -80,16 +72,17 @@ const ProductPage = () => {
                             </SelectContent>
                         </Select>
                     </div>
-                    {loadingInProduct && (
+                    {isLoadingInProducts && (
                         <SkeletonProduct />
                     )}
                     <ProductList>
-                        {products?.data.data.map(product => (
+                        {products.map(product => (
                             <ProductItem
                                 key={product.id}
                                 {...product}
                             />
-                        ))}
+                        ))
+                        }
                     </ProductList>
                 </div>
             </div>
@@ -97,4 +90,11 @@ const ProductPage = () => {
     )
 }
 
-export { ProductPage }
+ProductPage.propTypes = {
+    products: array,
+    errorInProducts: string,
+    isErrorInProducts: bool,
+    isLoadingInProducts: bool,
+}
+
+export default ProductPage;

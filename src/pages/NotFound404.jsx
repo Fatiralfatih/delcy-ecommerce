@@ -12,7 +12,7 @@ const NotFound404 = ({ error }) => {
                             <h1 className=" text-4xl sm:text-9xl">404</h1>
                         </div>
                         <div className="flex flex-col gap-5">
-                            <h1 className="text-xl sm:text-3xl">{error ? 'Up`s Error, failed request' : 'Can`t Find Page'} :)</h1>
+                            <h1 className="text-xl sm:text-3xl">{error ? error : 'Can`t Find Page'} :)</h1>
                             <Link to={'/'} className="">
                                 <p className="text-xl link-underline w-fit link-underline-black">Delcy.GG</p>
                             </Link>
@@ -28,4 +28,4 @@ NotFound404.propTypes = {
     error: bool,
 }
 
-export { NotFound404 }
+export default NotFound404;

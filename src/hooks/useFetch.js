@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 export const useFetch = ({ baseUrl }) => {
     const [data, setData] = useState([]);
     const [isError, setIsError] = useState(false);
+    const [error, setError] = useState('');
     const [isloading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -13,7 +14,8 @@ export const useFetch = ({ baseUrl }) => {
                 const response = await axiosInstance.get(baseUrl)
                 setData(response.data.data)
             } catch (error) {
-                setIsError(true)
+                setIsError(true);
+                setError(error.message);
             } finally {
                 setIsLoading(false);
             }
@@ -22,5 +24,5 @@ export const useFetch = ({ baseUrl }) => {
     }, [baseUrl])
 
 
-    return { data, isError, isloading }
+    return { data, isError, isloading, error }
 }

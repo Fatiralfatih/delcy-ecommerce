@@ -1,5 +1,5 @@
 import { Checkbox } from "@/components/ui"
-import { object } from "prop-types";
+import { any } from "prop-types";
 import { TbCategory } from "react-icons/tb"
 
 const ProductCategoryList = ({ categories }) => {
@@ -20,7 +20,7 @@ const ProductCategoryList = ({ categories }) => {
 
             <ul
                 className={`ps-3 space-y-2 max-h-full`}>
-                {categories?.data.data.map(category => (
+                {categories.map(category => (
                     <li
                         key={category.id}
                         className="flex gap-2 items-center"
@@ -43,7 +43,7 @@ const ProductCategoryList = ({ categories }) => {
 }
 
 ProductCategoryList.propTypes = {
-    categories: object.isRequired,
+    categories: any,
 }
 
 export { ProductCategoryList }
