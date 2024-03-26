@@ -1,127 +1,162 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselThumbs } from "@/components/ui"
-import { DetailProductItem, Detailtransaction, ReviewsContent, ReviewsItem, SimilarProductContent, SimilarProductItem } from "@/features/products/product-detail/components"
-import { images } from "@/lib"
-import { LuHome } from "react-icons/lu"
-import { RxSlash } from "react-icons/rx"
-import { useParams } from "react-router-dom"
-import { NotFound404 } from "."
-import { useProductBySlug } from "@/features/products/product-detail/hooks"
-import { useProducts } from "@/features/products/hooks"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+  Button,
+  Card,
+  CardHeader,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselThumbs,
+} from "@/components/ui";
+import {
+  DetailProductItem,
+  Detailtransaction,
+  ReviewsItem,
+  SimilarProductItem,
+} from "@/features/products/product-detail/components";
+import { LuFilter, LuHome } from "react-icons/lu";
+import { RxSlash } from "react-icons/rx";
+import { useParams } from "react-router-dom";
+import { NotFound404 } from ".";
+import { useProductBySlug } from "@/features/products/product-detail/hooks";
+import { object } from "prop-types";
 
-const ProductDetailPage = () => {
-    const { slug } = useParams()
-    const { data: products } = useProducts()
-    const { data: product, isError, isLoading } = useProductBySlug({ slug });
-    const filterSimilarProductByCategory =
-        products?.data.data.filter(prdct => prdct.category.name === product?.data.data.category.name);
+const ProductDetailPage = ({ products }) => {
+  const { slug } = useParams();
 
-    if (isError) {
-        return <NotFound404 error={true} />
-    }
+  const {
+    data: product,
+    isError: isErrorInProduct,
+    error: errorInProdutct,
+  } = useProductBySlug({ slug });
 
-    if (isLoading) {
-        return <h1 className="flex justify-center items-center min-h-screen">Seadng loadig...</h1>
-    }
+  const filterProductByCategory = () => {
+    return products?.data.data.filter(
+      (data) =>
+        data.slug !== slug &&
+        data.category.name === product?.data.data.category.name
+    );
+  };
 
-    return (
-        <div className="pt-[90px]">
-        
-            {/** bredcrumbs */}
-            <Breadcrumb className="container">
-                <BreadcrumbList className="text-zinc-800 flex-nowrap overflow-auto">
-                    <BreadcrumbItem>
-                        <LuHome
-                            className="text-xl mb-[0.5px]"
-                        />
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbLink
-                            href="/"
-                            className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
-                        >
-                            home
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator>
-                        <RxSlash className="text-xl text-zinc-500" />
-                    </BreadcrumbSeparator>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink
-                            href="#"
-                            className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
-                        >
-                            {product?.data.data.category.name}
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator>
-                        <RxSlash className="text-xl text-zinc-500" />
-                    </BreadcrumbSeparator>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink
-                            href="#"
-                            className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
-                        >
-                            {product?.data.data.title}
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
+  if (isErrorInProduct) {
+    return <NotFound404 error={errorInProdutct} />;
+  }
 
-            {/**product detail and transaction detail */}
-            <section className="flex flex-col md:flex-row pt-5 md:container">
-                <Carousel className="basis-[400px] md:basis-[600px] lg:basis-auto">
-                    <CarouselContent className=" max-w-[25rem] md:max-w-lg">
-                        {images.map(galery => (
-                            <CarouselItem
-                                key={galery.alt}
-                                className="pl-0 md:pl-2"
-                            >
-                                <figure className="w-full" >
-                                    <img
-                                        src={galery.image}
-                                        alt={'sda'}
-                                        className="rounded-xl w-full h-full"
-                                    />
-                                </figure>
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="top-1/2 left-3 w-10 sm:hidden" />
-                    <CarouselNext className="top-1/2 right-3 w-10 sm:hidden" />
-                    <CarouselThumbs images={images} className="md:max-w-[20rem] lg:max-w-full" />
-                </Carousel>
+  return (
+    <div className="pt-[90px]">
+      {/** bredcrumbs */}
+      <Breadcrumb className="container">
+        <BreadcrumbList className="text-zinc-800 flex-nowrap overflow-auto">
+          <BreadcrumbItem>
+            <LuHome className="text-xl mb-[0.5px]" />
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink
+              href="/"
+              className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
+            >
+              home
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>
+            <RxSlash className="text-xl text-zinc-500" />
+          </BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbLink
+              href="#"
+              className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
+            >
+              {product?.data.data.category.name}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>
+            <RxSlash className="text-xl text-zinc-500" />
+          </BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbLink
+              href="#"
+              className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
+            >
+              {product?.data.data.title}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
-                <div className="flex flex-col gap-5 pt-4 px-4 md:flex-row md:pt-0">
+      {/**product detail and transaction detail */}
+      <section className="flex flex-col md:flex-row pt-5 md:container">
+        <Carousel className="basis-[400px] md:basis-[600px]">
+          <CarouselContent className="max-w-[25rem] md:max-w-lg lg:max-w-full">
+            {product?.data.data.gallery.map((galery) => (
+              <CarouselItem
+                key={galery.id}
+                className="pl-0 md:pl-2"
+              >
+                <figure className="w-full">
+                  <img
+                    src={galery.image}
+                    alt={"sda"}
+                    className="rounded-xl w-full h-full"
+                  />
+                </figure>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="top-1/2 left-3 w-10 sm:hidden" />
+          <CarouselNext className="top-1/2 right-3 w-10 sm:hidden" />
+          <CarouselThumbs
+            images={product}
+            className="md:max-w-[20rem] lg:max-w-full"
+          />
+        </Carousel>
 
-                    {/** detail product */}
-                    <DetailProductItem product={product} />
+        <div className="flex flex-col gap-5 pt-4 px-4 w-full md:flex-row md:pt-0">
+          {/** detail product */}
+          <DetailProductItem product={product} />
 
-                    {/** detail transaction */}
-                    <Detailtransaction />
-                </div>
-            </section>
-
-            {/** reviews and similar product */}
-            <section className="px-4 pt-5 md:container md:flex md:flex-col md:gap-3">
-                { /**reviews */}
-                <ReviewsContent>
-                    <ReviewsItem />
-                </ReviewsContent>
-
-                {/**similar products */}
-                <SimilarProductContent
-                    className="mt-0"
-                >
-                    <SimilarProductItem
-                        products={filterSimilarProductByCategory}
-                    />
-                </SimilarProductContent>
-            </section>
-
+          {/** detail transaction */}
+          <Detailtransaction />
         </div>
-    )
-}
+      </section>
 
+      {/** reviews and similar product */}
+      <section className="px-4 pt-5 md:container md:flex md:flex-col md:gap-3">
+        {/**reviews */}
+        <Card className="border-0  h-fit ">
+          <CardHeader className="p-3 flex-row items-center justify-between">
+            <h1 className="text-2xl font-bold">Reviews</h1>
+            <Button
+              variant="outline"
+              size="icon"
+              className="border-0"
+            >
+              <LuFilter className="text-2xl lg:text-3xl" />
+            </Button>
+          </CardHeader>
+          <ReviewsItem />
+        </Card>
 
-export { ProductDetailPage }
+        {/**similar products */}
+        <Card className="mt-4">
+          <CardHeader className="py-4 px-3">
+            <h1 className="text-2xl font-bold">Similar Product</h1>
+          </CardHeader>
+          <SimilarProductItem products={filterProductByCategory()} />
+        </Card>
+      </section>
+    </div>
+  );
+};
+
+ProductDetailPage.propTypes = {
+  products: object,
+};
+
+export { ProductDetailPage };

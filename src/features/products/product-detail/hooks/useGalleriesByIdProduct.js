@@ -1,10 +1,14 @@
 import { axiosInstance } from "@/lib";
 import { useQuery } from "@tanstack/react-query"
 
-export const useGalleriesByIdProduct = ({ id }) => {
-    console.log(id);
+export const useGalleriesByIdProduct = ({ product }) => {
     return useQuery({
-        queryKey: ['galleries-product'],
-        queryFn: () => axiosInstance.get(`/galleries/${id}`).catch(error => console.log(error.message))
-    });
+        queryKey: ['galleries-by-id-product'],
+        queryFn: async () => {
+            if (product.data && product.data.data.id) {
+                const response = await axiosInstance.get(`galleries/1`)
+                return response
+            }
+        }
+    })
 }

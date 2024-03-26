@@ -1,6 +1,4 @@
 export * from './DetailProductItem'
 export * from './DetailTransaction'
-export * from './ReviewsContent'
 export * from './ReviewsItem'
-export * from './SimilarProductContent'
 export * from './SimilarProductItem'

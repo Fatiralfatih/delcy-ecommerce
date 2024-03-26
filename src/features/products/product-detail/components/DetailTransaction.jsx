@@ -4,7 +4,7 @@ import { FaMinus, FaPlus } from "react-icons/fa6"
 
 export const Detailtransaction = () => {
     return (
-        <div className="p-4 bg-white space-y-3 rounded-lg w-full h-fit ">
+        <div className="p-4 bg-white space-y-3 rounded-lg w-full h-fit xl:basis-auto ">
             <h1
                 className="text-xl font-black md:text-lg lg:text-xl"
             >

@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query"
 const useCategories = () => {
     return useQuery({
         queryKey: ['categories-data'],
-        queryFn: () => axiosInstance.get('/categories').catch(error => console.log(error.message))
+        queryFn: () => axiosInstance.get('/categories').catch(error => { throw new Error(error.message) })
     })
 }
 

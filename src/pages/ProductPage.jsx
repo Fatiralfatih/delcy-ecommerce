@@ -1,26 +1,21 @@
 import { Button, Card, CardContent, CardHeader, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui";
 import { ProductCategoryList, ProductColorList, ProductItem, ProductList, ProductSizeList, SkeletonCategories, SkeletonCategoryMobile, SkeletonProduct } from "@/features/products/components";
 import { NotFound404 } from ".";
-import { useCategories, useProducts } from "@/features/products/hooks";
+import { useCategories } from "@/features/products/hooks";
+import { bool, object, string } from "prop-types";
 
-const ProductPage = () => {
-
-    const {
-        data: products,
-        isError: isErrorInProduct,
-        isLoading: loadingInProduct
-    } = useProducts()
+const ProductPage = ({ products, isErrorInProducts, errorInProducts, isLoadingInProducts }) => {
 
     const {
         data: categories,
-        isError: errorInCategories,
-        isLoading: loadingInCategories
+        isError: isErrorInCategories,
+        isLoading: loadingInCategories,
+        error: errorInCategories
     } = useCategories()
 
-    if (isErrorInProduct || errorInCategories) {
-        return <NotFound404 error={true} />
+    if (isErrorInProducts || isErrorInCategories) {
+        return <NotFound404 error={errorInProducts || errorInCategories} />
     }
-
 
     return (
         <div className="container pt-24">
@@ -80,7 +75,7 @@ const ProductPage = () => {
                             </SelectContent>
                         </Select>
                     </div>
-                    {loadingInProduct && (
+                    {isLoadingInProducts && (
                         <SkeletonProduct />
                     )}
                     <ProductList>
@@ -95,6 +90,13 @@ const ProductPage = () => {
             </div>
         </div>
     )
+}
+
+ProductPage.propTypes = {
+    products: object,
+    errorInProducts: string,
+    isErrorInProducts: bool,
+    isLoadingInProducts: bool,
 }
 
 export { ProductPage }

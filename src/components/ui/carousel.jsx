@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
-import { array, string } from "prop-types";
+import { array, object, string } from "prop-types";
 
 const CarouselContext = React.createContext(null)
 
@@ -212,11 +212,11 @@ const CarouselThumbs = React.forwardRef(({ images, className }, ref) => {
     <div className={cn("hidden sm:flex pt-4 ", className)}>
       <div className=" overflow-hidden w-full" ref={emblaThumbsRef}>
         <div className="flex gap-2 w-full ">
-          {images.map((image, index) => (
+          {images?.data.data.gallery.map((image, index) => (
             <img
-              key={image.alt}
+              key={image.id}
               src={image.image}
-              alt={image.alt}
+              alt={image.id}
               className="w-[100px] h-full aspect-auto border cursor-pointer rounded-xl md:w-[60px] lg:w-[90px]"
               onClick={() => onThumbClick(index)}
             />
@@ -256,7 +256,7 @@ CarouselNext.propTypes = {
 }
 
 CarouselThumbs.propTypes = {
-  images: array,
+  images: object,
   className: string,
 }
 

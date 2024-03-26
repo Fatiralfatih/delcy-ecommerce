@@ -1,11 +1,11 @@
 import { axiosInstance } from "@/lib"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query";
 
 
 const useProducts = () => {
     return useQuery({
         queryKey: ['product-data'],
-        queryFn: () => axiosInstance.get('/products').catch(error => console.log('products ' + error.message))
+        queryFn: () => axiosInstance.get('/products').catch(error => { throw new Error(error.message) })
     })
 }
 
