@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-10 mt-3 px-2 md:px-4 lg:px-5 xl:px-10 ">
       <div className="flex justify-between items-center py-4 px-5 rounded-full md:px-8 md:py-0">
-        <h1 className="text-xl font-black md:text-2xl lg:text-3xl">Delcy</h1>
+        <h1 className="text-xl font-black md:text-2xl lg:text-4xl">Delcy</h1>
         {/* Menu Link */}
         <ul className="text-[16px] hidden md:flex md:gap-4 xl:gap-8">
           <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:py-7 lg:py-8 lg:text-xl lg:gap-2">
@@ -55,25 +55,25 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuTrigger className="space-x-4 py-2 px-3">
                 <div className="flex items-center gap-2">
-                  <Avatar className="w-8 h-8">
+                  <Avatar className="w-8 h-8 lg:w-10 lg:h-10">
                     <AvatarImage
                       src="https://avatars.githubusercontent.com/u/137702546?v=4"
                       alt="fatir-ganteng"
                     />
                     <AvatarFallback>profile image</AvatarFallback>
                   </Avatar>
-                  <p className="text-sm md:hidden lg:block">Fatir Al Fatih</p>
+                  <p className="text-sm md:hidden lg:block lg:text-lg">Fatir Al Fatih</p>
                 </div>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="w-full divide-y-2">
-                  <li className="py-2 ps-2 text-sm flex items-center gap-2 pe-9 hover:bg-zinc-100 cursor-pointer lg:ps-3 lg:pe-20">
+                  <li className="py-2 ps-2 text-sm flex items-center gap-2 pe-9 hover:bg-zinc-100 cursor-pointer lg:ps-3 lg:pe-32">
                     <span>
                       <LuUserCircle className="text-xl " />
                     </span>
                     Profile
                   </li>
-                  <li className="py-2 ps-2 text-sm flex items-center gap-2 text-red-500 hover:bg-zinc-100 cursor-pointer lg:ps-3 lg:pe-20">
+                  <li className="py-2 ps-2 text-sm flex items-center gap-2 text-red-500 hover:bg-zinc-100 cursor-pointer lg:ps-3 lg:pe-32">
                     <span>
                       <IoMdLogOut className="text-xl" />
                     </span>
