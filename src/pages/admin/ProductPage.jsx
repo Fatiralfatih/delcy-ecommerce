@@ -1,8 +1,10 @@
+import { Navbar } from "@/layouts/admin/components";
+
 const ProductPage = () => {
   return (
-    <div>
-      <h1>Ini halaman Admin</h1>
-    </div>
+    <>
+      <Navbar />
+    </>
   );
 };
 

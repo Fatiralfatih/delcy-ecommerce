@@ -1,9 +1,9 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaRegHeart, FaRegUser } from "react-icons/fa6";
-import { MenuMobile } from "@/components/element";
 import { Button, Input } from "@/components/ui";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import { MenuHorizontal } from ".";
 
 const Navbar = () => {
   return (
@@ -54,7 +54,7 @@ const Navbar = () => {
             </Button>
             {/** Menu Mobile */}
             <div className="md:hidden">
-              <MenuMobile />
+              <MenuHorizontal />
             </div>
             {/** End Menu Mobile */}
           </div>

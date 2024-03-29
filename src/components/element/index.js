@@ -1,2 +1,2 @@
-export * from './MenuMobile';
 export * from './Footer';
+export * from './Profile';
