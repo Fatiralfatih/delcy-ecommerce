@@ -1,33 +1,41 @@
-import { Footer, Navbar } from "@/components/element";
 import { Route, Routes } from "react-router-dom";
-import { CartPage, NotFound404, ProductDetailPage, ProductPage } from "./pages";
+import {
+  CartPage,
+  NotFound404,
+  ProductDetailPage,
+  ProductPage as ProductPageCostumer,
+} from "./pages/costumer";
+import { ProductPage as ProductPageAdmin } from "./pages/admin";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen pb-9 bg-[#F0F2F5]">
-        <Routes>
-          <Route
-            path="*"
-            element={<NotFound404 />}
-          />
-          <Route
-            path="/"
-            element={<ProductPage />}
-          />
-          <Route
-            path="/:slug"
-            element={<ProductDetailPage />}
-          />
-          <Route
-            path="/cart"
-            element={<CartPage />}
-          />
-        </Routes>
-      </main>
-      <Footer />
-    </>
+    <Routes key={"costumer"}>
+      {/* costumer */}
+      <Route
+        path="*"
+        element={<NotFound404 />}
+      />
+      <Route
+        path="/"
+        element={<ProductPageCostumer />}
+      />
+      <Route
+        path="/:slug/"
+        element={<ProductDetailPage />}
+      />
+      <Route
+        path="cart"
+        element={<CartPage />}
+      />
+      {/* end Costumer */}
+
+      {/* admin */}
+      <Route
+        path="/admin/product"
+        element={<ProductPageAdmin />}
+      />
+      {/* end admin */}
+    </Routes>
   );
 }
 
