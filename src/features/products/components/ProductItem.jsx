@@ -1,12 +1,12 @@
 import { Button, Card, CardContent, CardHeader } from "@/components/ui";
 import { formatRupiah } from "@/lib";
-import { string } from "prop-types";
+import { object, string } from "prop-types";
 import { CiStar } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa6";
 import { TbListDetails } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
-const ProductItem = ({ slug, title, thumbnail, price }) => {
+const ProductItem = ({ slug, title, thumbnail, price, variant }) => {
   return (
     <Card className="max-w-md rounded-sm md:shadow-lg">
       <CardHeader className="p-2">
@@ -40,12 +40,11 @@ const ProductItem = ({ slug, title, thumbnail, price }) => {
             404 (23 reviews)
           </div>
           <h1 className="text-sm pt-1 font-black md:text-lg">
-            {formatRupiah(price)}{" "}
+            {formatRupiah(price)}
           </h1>
           <div className="flex w-full pe-1 pb-2 mt-4">
             <Link
               to={`/${slug}`}
-              reloadDocument
               className="w-full"
             >
               <Button
@@ -70,6 +69,7 @@ ProductItem.propTypes = {
   price: string,
   title: string.isRequired,
   thumbnail: string,
+  variant: object,
 };
 
 export { ProductItem };

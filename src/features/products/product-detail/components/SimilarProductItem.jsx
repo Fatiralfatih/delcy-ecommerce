@@ -5,7 +5,7 @@ import { array } from "prop-types";
 const SimilarProductItem = ({ products }) => {
   return (
     <CardContent className="p-0">
-      {products ? (
+      {products?.length >= 1 ? (
         <ProductList className="md:grid-cols-3 md:pb-5 lg:grid-cols-4 xl:grid-cols-5 ">
           {products?.map((product) => (
             <ProductItem

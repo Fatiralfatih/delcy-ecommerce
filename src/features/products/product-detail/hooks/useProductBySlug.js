@@ -1,18 +1,18 @@
 import { axiosInstance } from "@/lib"
 import { useQuery } from "@tanstack/react-query"
+
 export const useProductBySlug = ({ slug }) => {
 
-    const fetchProductBySlug = async () => {
+    const fetchProductBySlug = async (slug) => {
         try {
-            const response = await axiosInstance.get(`/product/${slug}`);
-            return response;
+            const response = await axiosInstance.get(`/product/${slug}/show`);
+            return response.data;
         } catch (error) {
             throw new Error(error.message);
         }
     }
-
     return useQuery({
-        queryKey: [`detail-product`],
-        queryFn: () => fetchProductBySlug()
+        queryKey: [`detail-product`, slug],
+        queryFn: () => fetchProductBySlug(slug),
     })
 }

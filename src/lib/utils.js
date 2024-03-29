@@ -11,3 +11,7 @@ export const formatRupiah = (price) => {
     currency: 'IDR'
   }).format(price);
 };
+
+export const removeDuplicateArray = (data) => {
+  return [...new Set(data)];
+};

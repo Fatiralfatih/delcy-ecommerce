@@ -47,3 +47,8 @@ export const products = [
         thumbnail: 'https://www.maternaldisaster.com/wp-content/uploads/2023/09/darklight-1.jpg'
     },
 ]
+
+export const variant = {
+    size: ['small', 'medium', 'large', 'x-large', 'xx-large'],
+    color: ['red', 'green', 'blue', 'white', 'black', 'gray', 'purple', 'pink', 'orange']
+}

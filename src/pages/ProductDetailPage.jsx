@@ -25,27 +25,31 @@ import { RxSlash } from "react-icons/rx";
 import { useParams } from "react-router-dom";
 import { NotFound404 } from ".";
 import { useProductBySlug } from "@/features/products/product-detail/hooks";
-import { object } from "prop-types";
+import { useFetchProducts } from "@/features/products/hooks";
 
-const ProductDetailPage = ({ products }) => {
+const ProductDetailPage = () => {
   const { slug } = useParams();
-
   const {
     data: product,
     isError: isErrorInProduct,
-    error: errorInProdutct,
+    error: errorInProduct,
+    isFetching: isFetchingInProduct,
   } = useProductBySlug({ slug });
 
+  const { data: products } = useFetchProducts();
+
   const filterProductByCategory = () => {
-    return products?.data.data.filter(
+    return products?.data.filter(
       (data) =>
-        data.slug !== slug &&
-        data.category.name === product?.data.data.category.name
+        data.slug !== slug && data.category.name === product?.data.category.name
     );
   };
-
   if (isErrorInProduct) {
-    return <NotFound404 error={errorInProdutct} />;
+    return <NotFound404 error={errorInProduct} />;
+  }
+
+  if (isFetchingInProduct) {
+    return <h1 className="pt-20">loading brp</h1>;
   }
 
   return (
@@ -73,7 +77,7 @@ const ProductDetailPage = ({ products }) => {
               href="#"
               className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
             >
-              {product?.data.data.category.name}
+              {product?.data.category.name}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
@@ -84,7 +88,7 @@ const ProductDetailPage = ({ products }) => {
               href="#"
               className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
             >
-              {product?.data.data.title}
+              {product?.data.title}
             </BreadcrumbLink>
           </BreadcrumbItem>
         </BreadcrumbList>
@@ -92,25 +96,34 @@ const ProductDetailPage = ({ products }) => {
 
       {/**product detail and transaction detail */}
       <section className="flex flex-col md:flex-row pt-5 md:container">
-        <Carousel className="basis-[400px] md:basis-[600px]">
+        <Carousel className="md:basis-[600px] ">
           <CarouselContent className="max-w-[25rem] md:max-w-lg lg:max-w-full">
-            {product?.data.data.gallery.map((galery) => (
-              <CarouselItem
-                key={galery.id}
-                className="pl-0 md:pl-2"
-              >
-                <figure className="w-full">
+            {product?.data.gallery <= 1 ? (
+              <CarouselItem>
+                <figure className="w-full h-full ">
                   <img
-                    src={galery.image}
+                    src={product?.data.thumbnail}
                     alt={"sda"}
                     className="rounded-xl w-full h-full"
                   />
                 </figure>
               </CarouselItem>
-            ))}
+            ) : (
+              product?.data.gallery.map((galery) => (
+                <CarouselItem key={galery.id}>
+                  <figure className="w-full h-full ">
+                    <img
+                      src={galery.image}
+                      alt={"sda"}
+                      className="rounded-xl w-full h-full"
+                    />
+                  </figure>
+                </CarouselItem>
+              ))
+            )}
           </CarouselContent>
           <CarouselPrevious className="top-1/2 left-3 w-10 sm:hidden" />
-          <CarouselNext className="top-1/2 right-3 w-10 sm:hidden" />
+          <CarouselNext className="top-1/2 right-6 w-10 sm:hidden" />
           <CarouselThumbs
             images={product}
             className="md:max-w-[20rem] lg:max-w-full"
@@ -153,10 +166,6 @@ const ProductDetailPage = ({ products }) => {
       </section>
     </div>
   );
-};
-
-ProductDetailPage.propTypes = {
-  products: object,
 };
 
 export { ProductDetailPage };

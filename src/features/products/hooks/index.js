@@ -1,2 +1,2 @@
-export * from './useProducts'
-export * from './useCategories'
+export * from './useFetchProducts'
+export * from './useFetchCategories'
