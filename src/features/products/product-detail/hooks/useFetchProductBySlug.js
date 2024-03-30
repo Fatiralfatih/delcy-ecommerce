@@ -1,7 +1,7 @@
 import { axiosInstance } from "@/lib"
 import { useQuery } from "@tanstack/react-query"
 
-export const useProductBySlug = ({ slug }) => {
+export const useFetchProductBySlug = ({ slug }) => {
 
     const fetchProductBySlug = async (slug) => {
         try {

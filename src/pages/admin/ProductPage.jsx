@@ -10,7 +10,13 @@ import {
   Input,
 } from "@/components/ui";
 import { Textarea } from "@/components/ui/textarea";
-import { ProductItem, ProductList } from "@/features/products/components";
+import {
+  ProductContent,
+  ProductFooter,
+  ProductHeader,
+  ProductItem,
+  ProductList,
+} from "@/features/products/components";
 import {
   useFetchCategories,
   useFetchProducts,
@@ -25,7 +31,7 @@ const ProductPage = () => {
 
   return (
     <AdminLayout>
-      <div className="px-3 flex justify-center md:gap-3 md:px-5 ">
+      <div className="px-3 flex justify-center md:gap-3 md:px-5 lg:gap-4 ">
         {/* products items */}
         <Card className="py-3">
           <CardHeader className="p-3 gap-y-2 lg:flex-row lg:justify-between lg:items-center">
@@ -60,20 +66,30 @@ const ProductPage = () => {
             </BadgeCategory>
           </CardHeader>
           <CardContent className="pt-2">
+            {/* product list */}
             <ProductList className="md:px-0 md:grid-cols-2">
               {products?.data.map((product) => (
-                <ProductItem
-                  key={product.id}
-                  {...product}
-                />
+                <ProductItem key={product.id}>
+                  <ProductHeader thumbnail={product.thumbnail} />
+                  <ProductContent
+                    title={product.title}
+                    price={product.price}
+                  />
+                  <ProductFooter className="pb-5 ps-3 pe-5">
+                    <Button className="w-full">Edit Products</Button>
+                  </ProductFooter>
+                </ProductItem>
               ))}
             </ProductList>
           </CardContent>
         </Card>
-        {/* detail products on click */}
-        <Card className="hidden md:block md:py-3">
+
+        {/* edit detail products on click */}
+        <Card className="hidden md:block md:py-3 lg:px-4">
           <CardHeader className="p-3 flex flex-row lg:justify-between lg:items-center">
-            <CardTitle className="text-lg lg:text-2xl">Detail Product</CardTitle>
+            <CardTitle className="text-lg lg:text-2xl">
+              Detail Product
+            </CardTitle>
             <Button
               variant="outline"
               className="gap-3 text-xs lg:text-sm"
@@ -86,7 +102,7 @@ const ProductPage = () => {
           </CardHeader>
           <CardContent className="lg:pt-3">
             {/* thumbnail product */}
-            <figure className="w-full h-64 lg:h-[340px]">
+            <figure className="w-full h-64 lg:h-[300px] lg:w-[80%] mx-auto">
               <img
                 src="https://img.freepik.com/free-photo/levitating-music-headphones-display_23-2149817602.jpg?t=st=1711811605~exp=1711815205~hmac=6a0e0373a9b89f73dcee08f676dd80d4bb1796852aa50ce5042e72eaa08720af&w=740"
                 alt="maternal"
@@ -94,7 +110,9 @@ const ProductPage = () => {
               />
             </figure>
             {/* title prodcut description */}
-            <CardTitle className="text-lg py-4 lg:text-xl">Description</CardTitle>
+            <CardTitle className="text-lg py-4 lg:text-xl">
+              Description
+            </CardTitle>
 
             <Card>
               <CardContent className="p-3 space-y-3 lg:space-y-4">
@@ -112,7 +130,9 @@ const ProductPage = () => {
 
                 {/* product price */}
                 <div className="space-y-1 lg:space-y-2">
-                  <CardDescription className="text-xs lg:text-sm">Price</CardDescription>
+                  <CardDescription className="text-xs lg:text-sm">
+                    Price
+                  </CardDescription>
                   <Input
                     className="text text-xs p-2 h-8 ms-1 focus-visible:ring-0 lg:h-10 lg:text-sm"
                     name="price"
@@ -122,7 +142,9 @@ const ProductPage = () => {
 
                 {/* product stock */}
                 <div className="space-y-1 lg:space-y-2">
-                  <CardDescription className="text-xs lg:text-sm">Stock</CardDescription>
+                  <CardDescription className="text-xs lg:text-sm">
+                    Stock
+                  </CardDescription>
                   <Input
                     className="text text-xs p-2 h-8 ms-1 focus-visible:ring-0 lg:h-10 lg:text-sm"
                     name="stock"
@@ -143,10 +165,12 @@ const ProductPage = () => {
                 </div>
 
                 {/* variant (color and size) */}
-                <div className="space-y-3 lg:flex lg:items-center lg:space-y-0 lg:gap-1">
+                <div className="space-y-3 lg:flex lg:items-center lg:space-y-0 lg:gap-3">
                   {/* color */}
                   <div className="space-y-1 lg:space-y-2">
-                    <CardDescription className="text-xs lg:text-sm">Color</CardDescription>
+                    <CardDescription className="text-xs lg:text-sm">
+                      Color
+                    </CardDescription>
                     <Input
                       className="text text-xs p-2 h-8 ms-1 focus-visible:ring-0 lg:h-10 lg:text-sm"
                       name="color"
@@ -155,7 +179,9 @@ const ProductPage = () => {
                   </div>
                   {/* size */}
                   <div className="space-y-1 lg:space-y-2">
-                    <CardDescription className="text-xs lg:text-sm">Size</CardDescription>
+                    <CardDescription className="text-xs lg:text-sm">
+                      Size
+                    </CardDescription>
                     <Input
                       className="text text-xs p-2 h-8 ms-1 focus-visible:ring-0 lg:h-10 lg:text-sm"
                       name="size"

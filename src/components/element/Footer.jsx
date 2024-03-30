@@ -8,8 +8,8 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="container py-9">
-      <Card className="px-4 py-6">
+    <div className=" pt-5 ">
+      <Card className=" container px-4 py-6">
         <CardContent>
           <div className="flex flex-col gap-4">
             <article className="flex flex-col space-y-2 md:text-center">

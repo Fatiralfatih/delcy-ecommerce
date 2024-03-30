@@ -2,8 +2,6 @@ import { func, object } from "prop-types";
 import { TbCategory } from "react-icons/tb";
 
 const ProductCategoryList = ({ categories, handleFilterCategory }) => {
-
-
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center">

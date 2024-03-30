@@ -19,34 +19,34 @@ const Navbar = () => {
       <div className="flex justify-between items-center py-4 px-5 rounded-full md:px-8 md:py-2 md:mt-2 md:items-stretch bg-white">
         <Link
           // to={"/"}
-          className="text-2xl font-black md:mt-1 lg:text-4xl lg:mt-3"
+          className="text-2xl font-black md:mt-1 lg:text-3xl lg:mt-3"
         >
           Delcy
         </Link>
         {/* Menu Link */}
         <ul className="text-[16px] hidden md:flex md:gap-4 xl:gap-8 md:items-center">
-          <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:text-lg lg:gap-2">
+          <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:gap-2">
             <span>
               <RiDashboardLine className="text-lg mb-[1px] lg:text-2xl" />
             </span>
             Dashboard
             <div className="w-full h-1 absolute bottom-0 rounded-full group-hover:bg-success-500 transition-all duration-200 ease-in-out" />
           </li>
-          <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:text-lg lg:gap-2">
+          <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:gap-2">
             <span>
               <RiBox3Line className="text-lg mb-[1px] lg:text-2xl" />
             </span>
             Products
             <div className="w-full h-1 absolute bottom-0 rounded-full group-hover:bg-success-500 transition-all duration-200 ease-in-out" />
           </li>
-          <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:text-lg lg:gap-2">
+          <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:gap-2">
             <span>
               <CgCreditCard className="text-lg mb-[1px] lg:text-2xl" />
             </span>
             Purchase
             <div className="w-full h-1 absolute bottom-0 rounded-full group-hover:bg-success-500 transition-all duration-200 ease-in-out" />
           </li>
-          <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:text-lg lg:gap-2">
+          <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:gap-2">
             <span>
               <LuUsers className="text-lg mb-[1px] lg:text-2xl" />
             </span>
@@ -61,14 +61,14 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuTrigger className="space-x-4 py-2 px-3 lg:py-7">
                 <div className="flex items-center gap-2 lg:gap-4">
-                  <Avatar className="w-8 h-8 lg:w-12 lg:h-12">
+                  <Avatar className="w-8 h-8 lg:w-10 lg:h-10">
                     <AvatarImage
                       src="https://avatars.githubusercontent.com/u/137702546?v=4"
                       alt="fatir-ganteng"
                     />
                     <AvatarFallback>profile image</AvatarFallback>
                   </Avatar>
-                  <p className="text-sm md:hidden lg:block lg:text-lg truncate max-w-[140px]">
+                  <p className="text-sm md:hidden lg:block lg:text-[15px] truncate max-w-[100px]">
                     Fatir Al Fatih kashdkaskjdshkahdsk
                   </p>
                 </div>

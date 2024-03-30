@@ -12,6 +12,9 @@ import {
 } from "@/components/ui";
 import {
   ProductCategoryList,
+  ProductContent,
+  ProductFooter,
+  ProductHeader,
   ProductItem,
   ProductList,
   ProductVariantList,
@@ -25,6 +28,8 @@ import {
   useFetchProducts,
 } from "@/features/products/hooks";
 import { BadgeCategory } from "@/components/element";
+import { Link } from "react-router-dom";
+import { TbListDetails } from "react-icons/tb";
 
 const ProductPage = () => {
   const [filterProductByCategory, setFlterProductByCategory] = useState("");
@@ -127,10 +132,31 @@ const ProductPage = () => {
             {isLoadingInProducts && <SkeletonProduct />}
             <ProductList>
               {filterProducts?.map((product) => (
-                <ProductItem
-                  key={product.id}
-                  {...product}
-                />
+                <ProductItem key={product.id}>
+                  <ProductHeader thumbnail={product.thumbnail} />
+                  <ProductContent
+                    title={product.title}
+                    price={product.price}
+                  />
+                  <ProductFooter>
+                    <div className="flex w-full px-3 pb-5">
+                      <Link
+                        to={`/${product.slug}`}
+                        className="w-full"
+                      >
+                        <Button
+                          className=" w-full text-xs lg:text-sm"
+                          name={`${product.slug}`}
+                        >
+                          <span className="pe-2">
+                            <TbListDetails className="text-sm md:text-lg" />
+                          </span>
+                          Lihat Detail
+                        </Button>
+                      </Link>
+                    </div>
+                  </ProductFooter>
+                </ProductItem>
               ))}
             </ProductList>
           </div>

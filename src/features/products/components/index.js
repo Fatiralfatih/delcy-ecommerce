@@ -1,5 +1,4 @@
 export * from "./ProductList"
-export * from "./ProductItem"
 export * from "./ProductCategoryList"
 export * from "./ProductVariantList"
 export * from "./SkeletonProduct"

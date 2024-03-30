@@ -6,7 +6,7 @@ const CostumerLayout = ({ children }) => {
   return (
     <>
       <NavbarCostumer />
-      <main className="min-h-screen">{children}</main>
+      <main className="pb-10 bg-zinc-100">{children}</main>
       <Footer />
     </>
   );

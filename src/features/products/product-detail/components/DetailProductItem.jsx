@@ -3,7 +3,7 @@ import { formatRupiah, removeDuplicateArray } from "@/lib";
 import { object } from "prop-types";
 import { CiHeart, CiStar } from "react-icons/ci";
 
-export const DetailProductItem = ({ product,refecthInProduct }) => {
+export const DetailProductItem = ({ product }) => {
   const renderSize = () => {
     const removeDuplicateSize = removeDuplicateArray(
       product?.data.variant.size

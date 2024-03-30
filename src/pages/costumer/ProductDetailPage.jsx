@@ -24,9 +24,9 @@ import { LuFilter, LuHome } from "react-icons/lu";
 import { RxSlash } from "react-icons/rx";
 import { useParams } from "react-router-dom";
 import { NotFound404 } from ".";
-import { useProductBySlug } from "@/features/products/product-detail/hooks";
 import { useFetchProducts } from "@/features/products/hooks";
 import CostumerLayout from "@/layouts/costumer/CostumerLayout";
+import { useFetchProductBySlug } from "@/features/products/product-detail/hooks";
 
 const ProductDetailPage = () => {
   const { slug } = useParams();
@@ -35,7 +35,7 @@ const ProductDetailPage = () => {
     isError: isErrorInProduct,
     error: errorInProduct,
     isFetching: isFetchingInProduct,
-  } = useProductBySlug({ slug });
+  } = useFetchProductBySlug({ slug });
 
   const { data: products } = useFetchProducts();
 

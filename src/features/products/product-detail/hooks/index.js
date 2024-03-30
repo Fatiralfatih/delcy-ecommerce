@@ -1,2 +1,2 @@
-export * from './useProductBySlug'
+export * from './useFetchProductBySlug'
 export * from './useGalleriesByIdProduct'
