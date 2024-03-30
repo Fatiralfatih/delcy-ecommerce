@@ -5,8 +5,12 @@ const useFetchCategories = () => {
     return useQuery({
         queryKey: ['categories-data'],
         queryFn: async () => {
-            const response = await axiosInstance.get('categories');
-            return response.data
+            try {
+                const response = await axiosInstance.get('categories');
+                return response.data
+            } catch (error) {
+                throw new Error(error.message);
+            }
         }
     })
 }

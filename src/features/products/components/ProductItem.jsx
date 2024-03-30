@@ -1,4 +1,10 @@
-import { Button, Card, CardContent, CardHeader } from "@/components/ui";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui";
 import { formatRupiah } from "@/lib";
 import { object, string } from "prop-types";
 import { CiStar } from "react-icons/ci";
@@ -27,9 +33,11 @@ const ProductItem = ({ slug, title, thumbnail, price, variant }) => {
       </CardHeader>
       <CardContent>
         <article className="flex flex-col pt-2">
-          <h1 className="text-sm font-semibold line-clamp-2 w-full h-[40px] overflow-hidden md:h-[30px] md:text-[15px] md:text-lg">
+          {/* title */}
+          <h1 className="text-sm font-semibold line-clamp-2 w-full h-[20px] overflow-hidden md:h-[30px] md:text-[15px] md:text-lg">
             {title}
           </h1>
+          {/* reviews */}
           <div className="flex gap-1 text-xs items-center">
             <Button
               variant="ghost"
@@ -39,27 +47,30 @@ const ProductItem = ({ slug, title, thumbnail, price, variant }) => {
             </Button>
             404 (23 reviews)
           </div>
-          <h1 className="text-sm pt-1 font-black md:text-lg">
+          {/* price */}
+          <h1 className="text-lg pt-1 font-black">
             {formatRupiah(price)}
           </h1>
-          <div className="flex w-full pe-1 pb-2 mt-4">
-            <Link
-              to={`/${slug}`}
-              className="w-full"
-            >
-              <Button
-                className=" w-full text-xs lg:text-sm"
-                name={`${slug}`}
-              >
-                <span className="pe-2">
-                  <TbListDetails className="text-sm md:text-lg" />
-                </span>
-                Lihat Detail
-              </Button>
-            </Link>
-          </div>
         </article>
       </CardContent>
+      <CardFooter className="p-0">
+        <div className="flex w-full px-3 pb-5">
+          <Link
+            to={`/${slug}`}
+            className="w-full"
+          >
+            <Button
+              className=" w-full text-xs lg:text-sm"
+              name={`${slug}`}
+            >
+              <span className="pe-2">
+                <TbListDetails className="text-sm md:text-lg" />
+              </span>
+              Lihat Detail
+            </Button>
+          </Link>
+        </div>
+      </CardFooter>
     </Card>
   );
 };

@@ -29,7 +29,7 @@ export const MenuHorizontal = () => {
             <RxHamburgerMenu className="text-2xl" />
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="max-w-md">
+        <DrawerContent className="max-w-md h-screen fixed top-0">
           {/* header */}
           <div className="flex mt-4 px-3 items-center gap-2">
             <DrawerClose asChild>

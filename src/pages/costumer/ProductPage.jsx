@@ -24,6 +24,7 @@ import {
   useFetchCategories,
   useFetchProducts,
 } from "@/features/products/hooks";
+import { BadgeCategory } from "@/components/element";
 
 const ProductPage = () => {
   const [filterProductByCategory, setFlterProductByCategory] = useState("");
@@ -65,7 +66,7 @@ const ProductPage = () => {
         {isLoadingInCategories ? (
           <></>
         ) : (
-          <div className="flex gap-3 w-full overflow-auto scrollbar-hide md:hidden">
+          <BadgeCategory>
             {categories?.data.map((category) => (
               <Button
                 key={category.id}
@@ -75,7 +76,7 @@ const ProductPage = () => {
                 {category.name}
               </Button>
             ))}
-          </div>
+          </BadgeCategory>
         )}
         {/** web */}
         <div className="flex">
