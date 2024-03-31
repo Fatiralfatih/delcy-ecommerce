@@ -149,7 +149,7 @@ const ProductPage = () => {
                           name={`${product.slug}`}
                         >
                           <span className="pe-2">
-                            <TbListDetails className="text-sm md:text-lg" />
+                            <TbListDetails className="text-sm md:text-lg " />
                           </span>
                           Lihat Detail
                         </Button>

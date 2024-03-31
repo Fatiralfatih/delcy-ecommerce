@@ -248,7 +248,7 @@ const CarouselThumbs = React.forwardRef(({ images, className }, ref) => {
         ref={emblaThumbsRef}
       >
         <div className="flex gap-2 w-full ">
-          {images.data?.gallery.map((image, index) => (
+          {images?.data?.gallery.map((image, index) => (
             <img
               key={image.id}
               src={image.image}

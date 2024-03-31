@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-10 px-2 md:px-4 lg:px-5 xl:px-10 ">
       <div className="flex justify-between items-center py-4 px-5 rounded-full md:px-8 md:py-2 md:mt-2 md:items-stretch bg-white">
         <Link
-          // to={"/"}
+          to={"/"}
           className="text-2xl font-black md:mt-1 lg:text-3xl lg:mt-3"
         >
           Delcy

@@ -2,10 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import {
   CartPage,
   NotFound404,
-  ProductDetailPage,
+  ProductDetailPage as ProductDetailCostumer,
   ProductPage as ProductPageCostumer,
 } from "./pages/costumer";
-import { ProductPage as ProductPageAdmin } from "./pages/admin";
+import {
+  ProductDetailPage as ProductDetailPageAdmin,
+  ProductPage as ProductPageAdmin,
+} from "./pages/admin";
 
 function App() {
   return (
@@ -21,7 +24,7 @@ function App() {
       />
       <Route
         path="/:slug/"
-        element={<ProductDetailPage />}
+        element={<ProductDetailCostumer />}
       />
       <Route
         path="cart"
@@ -33,6 +36,10 @@ function App() {
       <Route
         path="/admin/product"
         element={<ProductPageAdmin />}
+      />
+      <Route
+        path="/admin/product/:slug/show"
+        element={<ProductDetailPageAdmin />}
       />
       {/* end admin */}
     </Routes>
