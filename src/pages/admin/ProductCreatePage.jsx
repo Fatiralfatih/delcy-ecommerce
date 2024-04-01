@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 const ProductCreatePage = () => {
   return (
     <AdminLayout>
-      <header className="container flex justify-start items-start -mt-2">
+      <header className="container -mt-2 flex justify-start items-start md:mt-0 md:max-w-xl lg:max-w-4xl ">
         <Link to="/admin/product">
           <Button
             variant="primary"
@@ -29,12 +29,12 @@ const ProductCreatePage = () => {
           </Button>
         </Link>
       </header>
-      <section className="container flex justify-start pt-7">
+      <section className="container flex justify-start md:justify-center md:items-center md:max-w-xl lg:max-w-4xl pt-7">
         <Card className="w-full">
           <CardHeader className="p-4">
-            <h1 className="text-xl font-semibold flex items-center gap-2">
+            <h1 className="text-xl font-semibold flex items-center gap-2 lg:text-2xl">
               <span>
-                <LuPackagePlus className="text-3xl mb-[2px]" />
+                <LuPackagePlus className="text-3xl mb-[2px] lg:text-4xl" />
               </span>
               From Create Product
             </h1>
@@ -76,19 +76,20 @@ const ProductCreatePage = () => {
                 </div>
 
                 {/* variant */}
-                <div className="flex flex-col gap-y-7">
+                <div className="flex flex-col gap-y-7 md:flex-row md:gap-x-5">
                   {/* color */}
-                  <div className="space-y-1">
+                  <div className="space-y-1 md:flex-grow">
                     <Label>color</Label>
                     <Input
                       name="color"
                       variant="rawrr"
                       placeholder="Masukkan color..."
+                      className="md:w-full"
                       required
                     />
                   </div>
 
-                  <div className="space-y-1">
+                  <div className="space-y-1 lg:flex-grow">
                     <Label>size</Label>
                     <Input
                       name="size"

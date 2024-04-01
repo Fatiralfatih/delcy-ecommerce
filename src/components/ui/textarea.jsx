@@ -11,7 +11,7 @@ const textareaVariants = cva(
       variant: {
         default: "border-zinc-200 bg-white border focus-visible:ring-2",
         rawrr:
-          "shadow-intervaless-button border-2 border-zinc-700  active:shadow-intervaless-button-active focus-visible:ring-0 ",
+          "shadow-intervaless-button border-2 border-zinc-700  active:shadow-intervaless-button-active focus-visible:ring-1 ",
       },
     },
     defaultVariants: {
