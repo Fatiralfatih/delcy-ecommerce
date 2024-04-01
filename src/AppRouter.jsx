@@ -6,6 +6,7 @@ import {
   ProductPage as ProductPageCostumer,
 } from "./pages/costumer";
 import {
+  ProductCreatePage,
   ProductDetailPage as ProductDetailPageAdmin,
   ProductPage as ProductPageAdmin,
 } from "./pages/admin";
@@ -40,6 +41,10 @@ function App() {
       <Route
         path="/admin/product/:slug/show"
         element={<ProductDetailPageAdmin />}
+      />
+      <Route
+        path="/admin/product/create"
+        element={<ProductCreatePage />}
       />
       {/* end admin */}
     </Routes>

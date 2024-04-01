@@ -24,7 +24,7 @@ const ProductPage = () => {
     <AdminLayout>
       <section className="flex justify-center md:gap-3 md:px-3 lg:gap-4 xl:px-16">
         {/* products items */}
-        <Card className={`py-3 w-fit}`}>
+        <Card className={`py-3 w-full}`}>
           <CardHeader className="p-3 gap-y-2 lg:flex-row lg:justify-between lg:items-center">
             {/* header */}
             <h1 className="font-bold text-xl lg:text-2xl">Products</h1>
@@ -36,27 +36,26 @@ const ProductPage = () => {
                 placeholder="Search product..."
                 className="text-sm"
               />
-              <Button
-                variant="outline"
-                className="text-sm px-3 flex gap-2"
-              >
-                Add Product
-                <PiPlusCircle className="text-xl" />
-              </Button>
+              <Link to="/admin/product/create">
+                <Button
+                  variant="outline"
+                  className="text-sm px-3 flex gap-2"
+                >
+                  Add Product
+                  <PiPlusCircle className="text-xl" />
+                </Button>
+              </Link>
             </div>
           </CardHeader>
           <CardContent className="pt-2 space-y-5">
             {/* category list */}
             <BadgeCategory className="max-w-xs md:flex">
-              {categories?.data.map((category) => (
-                <Button
-                  key={category.id}
-                  variant="ghost"
-                  className="capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800"
-                >
-                  {category.name}
-                </Button>
-              ))}
+              <Button
+                variant="ghost"
+                className="capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800"
+              >
+                All Product
+              </Button>
               {categories?.data.map((category) => (
                 <Button
                   key={category.id}

@@ -2,23 +2,42 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 import { string } from "prop-types";
+import { cva } from "class-variance-authority";
 
-const Textarea = React.forwardRef(({ className, ...props }, ref) => {
-  return (
-    <textarea
-      className={cn(
-        "flex min-h-[80px] w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder:text-zinc-400 dark:focus-visible:ring-zinc-300",
-        className
-      )}
-      ref={ref}
-      {...props}
-    />
-  );
-});
+const textareaVariants = cva(
+  "flex items-center min-h-[80px] w-full rounded-md px-4 py-2 text-[15px]  file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-500 disabled:cursor-not-allowed transition ease-in-out duration-300 ring-offset-white focus-visible:outline-none  focus-visible:ring-zinc-950 focus-visible:ring-offset-2s disabled:opacity-50 ",
+  {
+    variants: {
+      variant: {
+        default: "border-zinc-200 bg-white border focus-visible:ring-2",
+        rawrr:
+          "shadow-intervaless-button border-2 border-zinc-700  active:shadow-intervaless-button-active focus-visible:ring-0 ",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+const Textarea = React.forwardRef(
+  ({ className, variant, name, ...props }, ref) => {
+    return (
+      <textarea
+        name={name}
+        className={cn(textareaVariants({ className, variant }))}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
 Textarea.displayName = "Textarea";
 
 Textarea.propTypes = {
   className: string,
+  variant: string,
+  name: string,
 };
 
 export { Textarea };

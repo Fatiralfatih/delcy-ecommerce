@@ -6,7 +6,7 @@ import {
   CardHeader,
 } from "@/components/ui";
 import { cn, formatRupiah } from "@/lib";
-import { array, element, string } from "prop-types";
+import { any, array, element, string } from "prop-types";
 import { forwardRef } from "react";
 import { CiStar } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa6";
@@ -129,7 +129,7 @@ ProductContent.propTypes = {
 
 ProductFooter.propTypes = {
   className: string,
-  children: element,
+  children: any,
 };
 
 export {

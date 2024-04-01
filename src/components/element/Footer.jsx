@@ -8,7 +8,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <div className=" pt-5 ">
+    <footer className=" pt-5 ">
       <Card className=" container px-4 py-6">
         <CardContent>
           <div className="flex flex-col gap-4">
@@ -91,7 +91,7 @@ const Footer = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </footer>
   );
 };
 

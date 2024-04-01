@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
-import { array, object, string } from "prop-types";
+import { any, array, element, object, string } from "prop-types";
 
 const CarouselContext = React.createContext(null);
 
@@ -270,7 +270,7 @@ Carousel.propTypes = {
   setApi: string,
   plugins: string,
   className: string,
-  children: array,
+  children: any,
 };
 
 CarouselContent.propTypes = {

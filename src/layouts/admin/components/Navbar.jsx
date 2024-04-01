@@ -11,9 +11,11 @@ import { RiBox3Line, RiDashboardLine } from "react-icons/ri";
 import { CgCreditCard } from "react-icons/cg";
 import { LuUserCircle, LuUsers } from "react-icons/lu";
 import { IoMdLogOut } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useHref } from "react-router-dom";
 
 const Navbar = () => {
+  const href = useHref();
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-10 px-2 md:px-4 lg:px-5 xl:px-10 ">
       <div className="flex justify-between items-center py-4 px-5 rounded-full md:px-8 md:py-2 md:mt-2 md:items-stretch bg-white">
@@ -32,13 +34,20 @@ const Navbar = () => {
             Dashboard
             <div className="w-full h-1 absolute bottom-0 rounded-full group-hover:bg-success-500 transition-all duration-200 ease-in-out" />
           </li>
-          <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:gap-2">
+          <Link
+            to="/admin/product"
+            className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:gap-2"
+          >
             <span>
               <RiBox3Line className="text-lg mb-[1px] lg:text-2xl" />
             </span>
             Products
-            <div className="w-full h-1 absolute bottom-0 rounded-full group-hover:bg-success-500 transition-all duration-200 ease-in-out" />
-          </li>
+            {href === "/admin/product" ? (
+              <div className="w-full h-1 absolute bottom-0 rounded-full bg-success-500 transition-all duration-200 ease-in-out" />
+            ) : (
+              <div className="w-full h-1 absolute bottom-0 rounded-full group-hover:bg-success-500 transition-all duration-200 ease-in-out" />
+            )}
+          </Link>
           <li className="relative flex items-center group gap-[5px] cursor-pointer text-[15px] md:pb-5 md:pt-2 lg:pt-4 lg:gap-2">
             <span>
               <CgCreditCard className="text-lg mb-[1px] lg:text-2xl" />

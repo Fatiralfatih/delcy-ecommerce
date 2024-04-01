@@ -1,4 +1,4 @@
-import { element } from "prop-types";
+import { any } from "prop-types";
 import { Navbar as NavbarAdmin } from "./components";
 import { Footer } from "@/components/element";
 
@@ -13,7 +13,7 @@ const AdminLayout = ({ children }) => {
 };
 
 AdminLayout.propTypes = {
-  children: element,
+  children: any,
 };
 
 export default AdminLayout;

@@ -10,4 +10,6 @@ export * from './skeleton';
 export * from './breadcrumb';
 export * from './carousel';
 export * from './Divide';
-export * from './tabs';
+export * from './form';
+export * from './label';
+export * from './textarea';
