@@ -39,7 +39,14 @@ const ProductPage = () => {
     return <NotFound404 error={errorInProducts} />;
   }
 
-  console.log(products);
+  const uniqueCategory = new Set();
+
+  const productList = products?.data.map((product) => {
+    return {
+      ...product,
+      uniqueCategory: uniqueCategory.add(product.category),
+    };
+  });
 
   return (
     <CostumerLayout>
@@ -52,6 +59,15 @@ const ProductPage = () => {
           >
             All Product
           </Button>
+          {Array.from(uniqueCategory).map((category) => (
+            <Button
+              key={category}
+              variant="ghost"
+              className="capitalize px-2 py-1 rounded-xl hover:bg-success-500 hover:text-zinc-800"
+            >
+              {category}
+            </Button>
+          ))}
         </BadgeCategory>
         {/** web */}
         <div className="flex">
@@ -60,7 +76,7 @@ const ProductPage = () => {
               <h1 className="text-2xl font-black">Filter </h1>
             </CardHeader>
             <CardContent className="sticky top-[100px] md:top-[79px]">
-              <ProductCategoryList />
+              <ProductCategoryList uniqueCategory={uniqueCategory} />
               {/** product size list */}
               <ProductVariantList />
             </CardContent>
@@ -71,7 +87,7 @@ const ProductPage = () => {
                 <h1 className="text-xl font-bold md:text-2xl">
                   Give All You Need
                 </h1>
-                <p className="text-sm w-full">All(25 total)</p>
+                <p className="text-sm w-full">All (25 total)</p>
               </article>
               <Select>
                 <SelectTrigger className="w-[100px] max-w-xs sm:w-[150px]">
@@ -89,7 +105,7 @@ const ProductPage = () => {
             </div>
             {isLoadingInProducts && <SkeletonProduct />}
             <ProductList>
-              {products?.data.map((product) => (
+              {productList?.map((product) => (
                 <ProductItem key={product.id}>
                   <ProductHeader thumbnail={product.thumbnail} />
                   <ProductContent

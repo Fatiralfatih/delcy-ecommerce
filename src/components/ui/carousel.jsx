@@ -251,7 +251,7 @@ const CarouselThumbs = React.forwardRef(({ images, className }, ref) => {
           {images?.data?.gallery.map((image, index) => (
             <img
               key={image.id}
-              src={image.image}
+              src={`http://localhost:8000/storage/${image.image}`}
               alt={image.id}
               className="w-[100px] h-full aspect-auto border cursor-pointer rounded-xl md:w-[60px] lg:w-[90px]"
               onClick={() => onThumbClick(index)}

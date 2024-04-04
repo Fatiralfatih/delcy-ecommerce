@@ -1,18 +1,21 @@
 import { Button, CardContent } from "@/components/ui";
 // import { ProductItem, ProductList } from "../../components";
-import { array } from "prop-types";
+import { array, bool } from "prop-types";
 import {
   ProductContent,
   ProductFooter,
   ProductHeader,
   ProductItem,
   ProductList,
+  SkeletonProduct,
 } from "../../components";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 
-const SimilarProductItem = ({ products }) => {
-  return (
+const SimilarProductItem = ({ products, isLoadingInProducts }) => {
+  return isLoadingInProducts ? (
+    <SkeletonProduct count={4} />
+  ) : (
     <CardContent className="p-0">
       {products?.length >= 1 ? (
         <ProductList className="md:grid-cols-3 md:pb-5 lg:grid-cols-4 xl:grid-cols-5 ">
@@ -53,6 +56,7 @@ const SimilarProductItem = ({ products }) => {
 
 SimilarProductItem.propTypes = {
   products: array,
+  isLoadingInProducts: bool,
 };
 
 export { SimilarProductItem };

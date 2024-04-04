@@ -17,6 +17,7 @@ const DescriptionProduct = ({
   description,
   thumbnail,
 }) => {
+  console.log({ color });
   return (
     <article>
       <CardHeader className="p-4">
@@ -71,7 +72,7 @@ const DescriptionProduct = ({
             color
           </CardDescription>
           <CardTitle className="text-lg capitalize">
-            {color?.map((color) => color + " ") || "tidak ada color"}
+            {color?.map((color) => color + ", ") || "tidak ada color"}
           </CardTitle>
         </div>
 
@@ -81,7 +82,7 @@ const DescriptionProduct = ({
             size
           </CardDescription>
           <CardTitle className="text-lg capitalize">
-            {size?.map((size) => size + " ") || "tidak ada size"}
+            {size?.map((size) => size + ", ") || "tidak ada size"}
           </CardTitle>
         </div>
 

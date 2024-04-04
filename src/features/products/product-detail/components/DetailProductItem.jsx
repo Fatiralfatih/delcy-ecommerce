@@ -1,4 +1,11 @@
-import { Button, Divide } from "@/components/ui";
+import {
+  Button,
+  Divide,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui";
 import { formatRupiah, removeDuplicateArray } from "@/lib";
 import { object } from "prop-types";
 import { CiHeart, CiStar } from "react-icons/ci";
@@ -6,34 +13,48 @@ import { CiHeart, CiStar } from "react-icons/ci";
 export const DetailProductItem = ({ product }) => {
   const renderSize = () => {
     const removeDuplicateSize = removeDuplicateArray(
-      product?.data.variant.size
+      product?.data.variant?.size
     );
-    return removeDuplicateSize.map((size) => (
-      <span
-        key={size}
-        className="text-sm py-[5px] px-3 rounded-lg bg-zinc-200  hover:bg-success-500 text-zinc-950 cursor-pointer uppercase"
-      >
-        {size}
-      </span>
+    return removeDuplicateSize?.map((size) => (
+      <TooltipProvider key={size}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="text-sm py-[5px] px-3 rounded-lg bg-zinc-200  hover:bg-success-500 text-zinc-950 cursor-pointer uppercase">
+              {size}
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{size}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     ));
   };
 
   const renderColors = () => {
     const removeDuplicateColor = removeDuplicateArray(
-      product?.data.variant.color
+      product?.data.variant?.color
     );
 
-    return removeDuplicateColor.map((color, index) => (
-      <span
-        key={index + 1}
-        className="text-sm p-4 rounded-full cursor-pointer"
-        style={{ backgroundColor: color }}
-      />
+    return removeDuplicateColor?.map((color, index) => (
+      <TooltipProvider key={index + 1}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span
+              className="text-sm p-4 rounded-full  cursor-pointer"
+              style={{ backgroundColor: color === "white" ? "#DDDD" : color }}
+            />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p className="capitalize">{color}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     ));
   };
 
   return (
-    <div className="bg-white p-4 text-lg rounded-xl w-full lg:basis-[70rem] xl:max-w-md xl:basis-[80rem]">
+    <div className="bg-white p-4 text-lg rounded-xl w-full md:basis-[64rem] lg:basis-[70rem] xl:max-w-md xl:basis-[80rem]">
       <article className="space-y-2">
         <div className="flex flex-col">
           <div className="flex justify-between w-full">
@@ -68,7 +89,7 @@ export const DetailProductItem = ({ product }) => {
       {/**size */}
       <article className=" space-y-3">
         <h1 className="font-bold text-xl md:text-lg">Size</h1>
-        <div className="flex gap-2">{renderSize()}</div>
+        <div className="flex gap-2 flex-wrap">{renderSize()}</div>
       </article>
 
       <Divide />
@@ -76,7 +97,7 @@ export const DetailProductItem = ({ product }) => {
       {/** Color */}
       <article className=" space-y-3">
         <h1 className="font-bold text-xl md:text-lg">Color</h1>
-        <div className="flex gap-2">{renderColors()}</div>
+        <div className="flex gap-2 flex-wrap ">{renderColors()}</div>
       </article>
 
       <Divide />

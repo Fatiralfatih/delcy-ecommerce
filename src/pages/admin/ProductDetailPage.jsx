@@ -129,7 +129,10 @@ const ProductDetailPage = () => {
                 </div>
               ) : (
                 <>
-                  <h1 className="text-xl font-bold p-4 lg:p-2">Galleries</h1>
+                  <div className="flex justify-between gap-20 mb-10">
+                    <h1 className="text-xl font-bold p-4 lg:p-2">Galleries</h1>
+                    <Button>Tambah Gallery</Button>
+                  </div>
                   <CarouselContent className="max-w-[25rem] md:max-w-xl lg:max-w-[30rem] border">
                     {product?.data.gallery <= 1 ? (
                       <CarouselItem>
@@ -175,7 +178,7 @@ const ProductDetailPage = () => {
                     price={product?.data.price}
                     stock={product?.data.stock}
                     color={product?.data.variant?.color}
-                    size={product?.data?.variant?.size}
+                    size={product?.data.variant?.size}
                     description={product?.data.description}
                     thumbnail={product?.data.thumbnail}
                   />

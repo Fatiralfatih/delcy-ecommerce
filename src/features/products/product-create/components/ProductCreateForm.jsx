@@ -281,6 +281,12 @@ const ProductCreateForm = ({ handleSubmit, isPending }) => {
             type="button"
             variant="danger"
             className="w-full"
+            onClick={() =>
+              form.reset({
+                size: setSelectedSizes(""),
+                color: setSelectedColors(""),
+              })
+            }
           >
             Discard
           </Button>
