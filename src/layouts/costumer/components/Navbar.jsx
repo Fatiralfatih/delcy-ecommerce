@@ -2,7 +2,6 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaRegHeart, FaRegUser } from "react-icons/fa6";
 import { Button, Input } from "@/components/ui";
 import { Link } from "react-router-dom";
-import { CiSearch } from "react-icons/ci";
 import { MenuHorizontal } from ".";
 
 const Navbar = () => {
@@ -26,7 +25,6 @@ const Navbar = () => {
             type="search"
             aria-label="input-search"
             className="w-full border-2 max-w-3xl"
-            iconLeft={<CiSearch className="text-xl" />}
             placeholder="Cari di Delcy....."
           />
           <div className="flex justify-center gap-1 items-center">

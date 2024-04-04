@@ -1,19 +1,39 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Form,
-  Input,
-  Label,
-  Textarea,
-} from "@/components/ui";
+import { Button, Card, CardContent, CardHeader } from "@/components/ui";
+import { useToast } from "@/components/ui/use-toast";
+import { ProductCreateForm } from "@/features/products/product-create/components";
+import { useFetchCreateProduct } from "@/features/products/product-create/hooks";
 import AdminLayout from "@/layouts/admin/AdminLayout";
+import { AxiosError } from "axios";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { LuPackagePlus } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductCreatePage = () => {
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const { mutate, isPending } = useFetchCreateProduct({
+    onSuccess: (data) => {
+      if (data.status === "success") {
+        toast({
+          title: "berhasil create product",
+          variant: "info",
+        });
+        navigate("/admin/product");
+      }
+    },
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        const err = error;
+        toast({
+          title: err.response?.data.message,
+          description: "Check again inputs",
+          variant: "destructive",
+        });
+      }
+    },
+  });
+
   return (
     <AdminLayout>
       <header className="container -mt-2 flex justify-start items-start md:mt-0 md:max-w-xl lg:max-w-4xl ">
@@ -40,117 +60,10 @@ const ProductCreatePage = () => {
             </h1>
           </CardHeader>
           <CardContent className="px-5 pt-4 pb-8">
-            <Form>
-              <form className="space-y-7">
-                {/* product name */}
-                <div className="space-y-1">
-                  <Label>Product Title</Label>
-                  <Input
-                    name="title"
-                    variant="rawrr"
-                    placeholder="Masukkan Product title..."
-                    required
-                  />
-                </div>
-
-                {/* category */}
-                <div className="space-y-1">
-                  <Label>category</Label>
-                  <Input
-                    name="category"
-                    variant="rawrr"
-                    placeholder="Masukkan category..."
-                    required
-                  />
-                </div>
-
-                {/* price */}
-                <div className="space-y-1">
-                  <Label>price</Label>
-                  <Input
-                    name="price"
-                    variant="rawrr"
-                    placeholder="Masukkan price..."
-                    required
-                  />
-                </div>
-
-                {/* variant */}
-                <div className="flex flex-col gap-y-7 md:flex-row md:gap-x-5">
-                  {/* color */}
-                  <div className="space-y-1 md:flex-grow">
-                    <Label>color</Label>
-                    <Input
-                      name="color"
-                      variant="rawrr"
-                      placeholder="Masukkan color..."
-                      className="md:w-full"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-1 lg:flex-grow">
-                    <Label>size</Label>
-                    <Input
-                      name="size"
-                      variant="rawrr"
-                      placeholder="Masukkan size..."
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* stock */}
-                <div className="space-y-1">
-                  <Label>stock</Label>
-                  <Input
-                    name="stock"
-                    variant="rawrr"
-                    placeholder="Masukkan stock..."
-                    required
-                  />
-                </div>
-
-                {/* description */}
-                <div className="space-y-1">
-                  <Label>description</Label>
-                  <Textarea
-                    name="description"
-                    variant="rawrr"
-                    placeholder="Masukkan description..."
-                    required
-                  />
-                </div>
-
-                {/* image */}
-                <div className="space-y-1">
-                  <Label>Thumbnail</Label>
-                  <Input
-                    type="file"
-                    variant="rawrr"
-                    className="hover:file:bg-zinc-200"
-                  />
-                </div>
-
-                {/* action submit and discard */}
-                <div className="flex gap-5">
-                  <Button
-                    type="button"
-                    variant="danger"
-                    className="w-full"
-                  >
-                    Discard
-                  </Button>
-                  <Button
-                    type="submit"
-                    variant="warning"
-                    className="w-full"
-                  >
-                    Create
-                  </Button>
-                </div>
-              </form>
-            </Form>
+            <ProductCreateForm
+              handleSubmit={mutate}
+              isPending={isPending}
+            />
           </CardContent>
         </Card>
       </section>

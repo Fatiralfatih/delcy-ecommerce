@@ -5,6 +5,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
+  Button,
   Card,
   CardHeader,
   Carousel,
@@ -13,6 +14,13 @@ import {
   CarouselNext,
   CarouselPrevious,
   CarouselThumbs,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
   Skeleton,
 } from "@/components/ui";
 import { useFetchProductBySlug } from "@/features/products/product-detail/hooks";
@@ -20,22 +28,48 @@ import AdminLayout from "@/layouts/admin/AdminLayout";
 import { AiOutlineShop } from "react-icons/ai";
 import { RiBox3Line } from "react-icons/ri";
 import { RxSlash } from "react-icons/rx";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { NotFound404 } from "../costumer";
-import {
-  ActionDetailProduct,
-  DescriptionProduct,
-} from "@/layouts/admin/components";
+import { DescriptionProduct } from "@/layouts/admin/components";
+import { ProductFooter } from "@/features/products/components";
+import { QueryCache } from "@tanstack/react-query";
+import { useToast } from "@/components/ui/use-toast";
+import { AxiosError } from "axios";
+import { useFetchDeleteProductBySlug } from "@/features/products/product-delete/hooks";
 
 const ProductDetailPage = () => {
   const { slug } = useParams();
 
+  const navigate = useNavigate();
+  const { toast } = useToast();
   const {
     data: product,
     isLoading: isLoadingInProduct,
     isError: isErrorInProduct,
     error: errorInProduct,
   } = useFetchProductBySlug({ slug });
+
+  const { mutate } = useFetchDeleteProductBySlug({
+    slug, //parameter slug
+    onSuccess: () => {
+      toast({
+        title: "berhasil menghapus barang",
+      });
+      navigate("/admin/product");
+    },
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        const err = error;
+        toast({
+          title: err.response?.data.message,
+          variant: "destructive",
+        });
+      }
+    },
+    onSettled: () => {
+      QueryCache.invalidateQueries({ queryKey: "products-data" });
+    },
+  });
 
   if (isErrorInProduct) {
     return <NotFound404 error={errorInProduct} />;
@@ -137,15 +171,53 @@ const ProductDetailPage = () => {
                 <>
                   <DescriptionProduct
                     title={product?.data.title}
-                    category={product?.data.category.name}
+                    category={product?.data.category}
                     price={product?.data.price}
                     stock={product?.data.stock}
-                    color={product?.data.variant.color}
-                    size={product?.data.variant.size}
+                    color={product?.data.variant?.color}
+                    size={product?.data?.variant?.size}
                     description={product?.data.description}
                     thumbnail={product?.data.thumbnail}
                   />
-                  <ActionDetailProduct />
+                  <ProductFooter className="flex justify-center gap-5 py-8">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="danger"
+                          className="w-fit "
+                        >
+                          Delete Product
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader className="text-lg">
+                          Delete Product {product?.data.title}
+                        </DialogHeader>
+                        <DialogDescription className="text-red-600 text-lg">
+                          Yakin mau hapus?
+                        </DialogDescription>
+                        <DialogFooter>
+                          <DialogClose asChild>
+                            <Button>Cancel</Button>
+                          </DialogClose>
+                          <Button
+                            type="submit"
+                            name="delete-product"
+                            variant="danger"
+                            onClick={mutate}
+                          >
+                            Delete
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                    <Button
+                      variant="primary"
+                      className="w-full lg:w-fit"
+                    >
+                      Edit Product
+                    </Button>
+                  </ProductFooter>
                 </>
               )}
             </Card>

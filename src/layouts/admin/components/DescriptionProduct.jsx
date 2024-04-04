@@ -71,7 +71,7 @@ const DescriptionProduct = ({
             color
           </CardDescription>
           <CardTitle className="text-lg capitalize">
-            {color.map((color) => color + " ")}
+            {color?.map((color) => color + " ") || "tidak ada color"}
           </CardTitle>
         </div>
 
@@ -81,7 +81,7 @@ const DescriptionProduct = ({
             size
           </CardDescription>
           <CardTitle className="text-lg capitalize">
-            {size.map((size) => size + " ")}
+            {size?.map((size) => size + " ") || "tidak ada size"}
           </CardTitle>
         </div>
 
@@ -96,13 +96,13 @@ const DescriptionProduct = ({
         </div>
 
         {/* thumbnail */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-col md:flex-row">
           <CardDescription className="text-lg capitalize w-[120px]">
             Thumbnail
           </CardDescription>
-          <figure className="md:max-w-[260px] border rounded-lg">
+          <figure className="h-[50%] md:max-w-[260px] border rounded-lg">
             <img
-              src={thumbnail}
+              src={`http://localhost:8000/storage/${thumbnail}`}
               alt={"thumbnail-" + title}
               className="w-full h-full aspect-auto rounded-lg"
             />
@@ -118,10 +118,10 @@ DescriptionProduct.propTypes = {
   category: string.isRequired,
   price: string.isRequired,
   stock: string.isRequired,
-  color: array.isRequired,
-  size: array.isRequired,
+  color: array,
+  size: array,
   description: string.isRequired,
-  thumbnail: string.isRequired,
+  thumbnail: string,
 };
 
 export { DescriptionProduct };

@@ -20,20 +20,14 @@ import {
   ProductVariantList,
   SkeletonProduct,
 } from "@/features/products/components";
-import { useState } from "react";
 import { NotFound404 } from ".";
 import CostumerLayout from "@/layouts/costumer/CostumerLayout";
-import {
-  useFetchCategories,
-  useFetchProducts,
-} from "@/features/products/hooks";
+import { useFetchProducts } from "@/features/products/hooks";
 import { BadgeCategory } from "@/components/element";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 
 const ProductPage = () => {
-  const [filterProductByCategory, setFlterProductByCategory] = useState("");
-
   const {
     data: products,
     isError: isErrorInProducts,
@@ -41,48 +35,24 @@ const ProductPage = () => {
     isLoading: isLoadingInProducts,
   } = useFetchProducts();
 
-  const {
-    data: categories,
-    isError: isErrorInCategories,
-    isLoading: isLoadingInCategories,
-    error: errorInCategories,
-  } = useFetchCategories();
-
-  const handleFilterCategory = (category) => {
-    const { name } = category;
-
-    setFlterProductByCategory(name);
-  };
-
-  const filterProducts = products?.data.filter((product) =>
-    filterProductByCategory
-      ? product.category.name === filterProductByCategory
-      : product
-  );
-
-  if (isErrorInProducts || isErrorInCategories) {
-    return <NotFound404 error={errorInProducts || errorInCategories} />;
+  if (isErrorInProducts) {
+    return <NotFound404 error={errorInProducts} />;
   }
+
+  console.log(products);
 
   return (
     <CostumerLayout>
       <div className="container pt-24">
         {/**Category mobile */}
-        {isLoadingInCategories ? (
-          <></>
-        ) : (
-          <BadgeCategory>
-            {categories?.data.map((category) => (
-              <Button
-                key={category.id}
-                variant="ghost"
-                className="capitalize px-2 py-1 rounded-xl hover:bg-success-500 hover:text-zinc-800"
-              >
-                {category.name}
-              </Button>
-            ))}
-          </BadgeCategory>
-        )}
+        <BadgeCategory>
+          <Button
+            variant="ghost"
+            className="capitalize px-2 py-1 rounded-xl hover:bg-success-500 hover:text-zinc-800"
+          >
+            All Product
+          </Button>
+        </BadgeCategory>
         {/** web */}
         <div className="flex">
           <Card className="hidden md:max-w-md md:basis-[300px] rounded-s-lg rounded-e-none md:border-0 md:block lg:basis-[350px]">
@@ -90,19 +60,9 @@ const ProductPage = () => {
               <h1 className="text-2xl font-black">Filter </h1>
             </CardHeader>
             <CardContent className="sticky top-[100px] md:top-[79px]">
-              {/**category */}
-              {isLoadingInCategories ? (
-                <></>
-              ) : (
-                <>
-                  <ProductCategoryList
-                    categories={categories}
-                    handleFilterCategory={handleFilterCategory}
-                  />
-                  {/** product size list */}
-                  <ProductVariantList />
-                </>
-              )}
+              <ProductCategoryList />
+              {/** product size list */}
+              <ProductVariantList />
             </CardContent>
           </Card>
           <div className="space-y-4  pb-5 md:pb-10 w-full rounded-e-lg mt-[30px] md:mt-0 bg-white">
@@ -111,9 +71,7 @@ const ProductPage = () => {
                 <h1 className="text-xl font-bold md:text-2xl">
                   Give All You Need
                 </h1>
-                <p className="text-sm w-full">
-                  {filterProductByCategory || "All"} (25 total)
-                </p>
+                <p className="text-sm w-full">All(25 total)</p>
               </article>
               <Select>
                 <SelectTrigger className="w-[100px] max-w-xs sm:w-[150px]">
@@ -131,7 +89,7 @@ const ProductPage = () => {
             </div>
             {isLoadingInProducts && <SkeletonProduct />}
             <ProductList>
-              {filterProducts?.map((product) => (
+              {products?.data.map((product) => (
                 <ProductItem key={product.id}>
                   <ProductHeader thumbnail={product.thumbnail} />
                   <ProductContent

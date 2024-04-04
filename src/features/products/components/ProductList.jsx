@@ -29,7 +29,7 @@ ProductList.displayName = "ProductList";
 const ProductItem = forwardRef(({ className, children, ...props }, ref) => (
   <Card
     ref={ref}
-    className={cn("max-w-md rounded-sm md:shadow-lg", className)}
+    className={cn("w-full rounded-sm md:shadow-lg", className)}
     {...props}
   >
     {children}
@@ -41,14 +41,14 @@ ProductItem.displayName = "ProductItem";
 const ProductHeader = forwardRef(({ className, thumbnail, ...props }, ref) => (
   <CardHeader
     ref={ref}
-    className={cn("p-2", className)}
+    className={cn("p-2 relative w-full", className)}
     {...props}
   >
-    <figure className="w-full group h-[150px] relative sm:h-[180px] max-h-[300px] md:h-[200px]">
+    <figure className="w-full group h-[150px] sm:h-[180px] max-h-[300px] md:h-[200px] ">
       <img
-        src={thumbnail}
+        src={`http://localhost:8000/storage/${thumbnail}`}
         alt={`image-${thumbnail}`}
-        className="w-full h-full max-w-md rounded-lg bg-cover aspect-auto"
+        className="w-full h-full rounded-lg aspect-auto"
       />
       <Button
         className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 duration-500 border-0"
@@ -118,7 +118,7 @@ ProductItem.propTypes = {
 
 ProductHeader.propTypes = {
   className: string,
-  thumbnail: string.isRequired,
+  thumbnail: string,
 };
 
 ProductContent.propTypes = {

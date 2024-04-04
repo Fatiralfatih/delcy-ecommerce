@@ -41,7 +41,7 @@ Input.propTypes = {
   className: string,
   type: string,
   variant: string,
-  name: string.isRequired,
+  name: string,
 };
 
 export { Input };

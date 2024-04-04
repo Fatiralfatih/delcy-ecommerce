@@ -41,10 +41,11 @@ const ProductDetailPage = () => {
 
   const filterProductByCategory = () => {
     return products?.data.filter(
-      (data) =>
-        data.slug !== slug && data.category.name === product?.data.category.name
+      (data) => data.slug !== slug && data.category === product?.data.category
     );
   };
+
+  console.log(product);
   if (isErrorInProduct) {
     return <NotFound404 error={errorInProduct} />;
   }
@@ -79,7 +80,7 @@ const ProductDetailPage = () => {
                 href="#"
                 className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
               >
-                {product?.data.category.name}
+                {product?.data.category}
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator>

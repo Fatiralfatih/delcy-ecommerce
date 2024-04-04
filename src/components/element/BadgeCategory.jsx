@@ -1,5 +1,5 @@
 import { cn } from "@/lib";
-import { array, element, string } from "prop-types";
+import { string } from "prop-types";
 
 const BadgeCategory = ({ children, className }) => {
   return (
@@ -15,7 +15,7 @@ const BadgeCategory = ({ children, className }) => {
 };
 
 BadgeCategory.propTypes = {
-  children: array || element,
+  children: string,
   className: string,
 };
 

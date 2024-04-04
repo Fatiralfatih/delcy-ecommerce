@@ -50,5 +50,5 @@ export const products = [
 
 export const variant = {
     size: ['small', 'medium', 'large', 'x-large', 'xx-large'],
-    color: ['red', 'green', 'blue', 'white', 'black', 'gray', 'purple', 'pink', 'orange']
+    color: ['red', 'green', 'blue', 'white', 'black', 'gray', 'purple', 'pink', 'orange', 'zinc', "yellow"],
 }

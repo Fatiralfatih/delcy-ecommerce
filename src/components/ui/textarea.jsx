@@ -5,7 +5,7 @@ import { string } from "prop-types";
 import { cva } from "class-variance-authority";
 
 const textareaVariants = cva(
-  "flex items-center min-h-[80px] w-full rounded-md px-4 py-2 text-[15px]  file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-500 disabled:cursor-not-allowed transition ease-in-out duration-300 ring-offset-white focus-visible:outline-none  focus-visible:ring-zinc-950 focus-visible:ring-offset-2s disabled:opacity-50 ",
+  "flex items-center min-h-[80px] w-full rounded-md px-2 py-2 text-[15px]  file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-500 disabled:cursor-not-allowed transition ease-in-out duration-300 ring-offset-white focus-visible:outline-none  focus-visible:ring-zinc-950 focus-visible:ring-offset-2s disabled:opacity-50 ",
   {
     variants: {
       variant: {

@@ -6,12 +6,12 @@ import { cn } from "@/lib/utils";
 import { bool, string } from "prop-types";
 
 const buttonVariants = cva(
-  "inline-flex items-center py-5 justify-center whitespace-nowrap rounded-md font-normal font-mono text-lg border border-black transition-all ease-in-out duration-300",
+  "inline-flex items-center py-5 justify-center whitespace-nowrap rounded-md font-normal font-mono text-lg border border-black transition-all ease-in-out duration-150",
   {
     variants: {
       variant: {
         default:
-          "bg-zinc-900 text-white hover:bg-success-500 hover:text-zinc-900 shadow-intervaless-button active:shadow-intervaless-button-active shadow-intervaless-button active:shadow-intervaless-button-active",
+          "bg-zinc-900 text-white hover:bg-success-500 hover:text-zinc-900 shadow-intervaless-button active:shadow-intervaless-button-active",
         primary:
           "bg-primary text-zinc-800 hover:bg-primary/90 shadow-intervaless-button active:shadow-intervaless-button-active",
         facebook:
