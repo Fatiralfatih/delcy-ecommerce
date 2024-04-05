@@ -129,7 +129,7 @@ const ProductDetailPage = () => {
                 </div>
               ) : (
                 <>
-                  <div className="flex justify-between gap-20 mb-10">
+                  <div className="flex justify-between gap-20 md:mb-10">
                     <h1 className="text-xl font-bold p-4 lg:p-2">Galleries</h1>
                     <Button>Tambah Gallery</Button>
                   </div>
@@ -145,8 +145,8 @@ const ProductDetailPage = () => {
                         <CarouselItem key={image.id}>
                           <figure className="w-full h-full lg:w-fit">
                             <img
-                              src={image.image}
-                              alt={"sda"}
+                              src={`http://localhost:8000/storage/${image.image}`}
+                              alt={image.image}
                               className="rounded-xl w-full h-full"
                             />
                           </figure>
@@ -154,8 +154,8 @@ const ProductDetailPage = () => {
                       ))
                     )}
                   </CarouselContent>
-                  <CarouselPrevious className="top-1/2 left-3 w-10 sm:hidden" />
-                  <CarouselNext className="top-1/2 right-6 w-10 sm:hidden" />
+                  <CarouselPrevious className="top-[180px] left-3 w-10 sm:hidden " />
+                  <CarouselNext className="top-[180px] right-6 w-10 sm:hidden" />
                   <CarouselThumbs
                     images={product}
                     className="md:max-w-[20rem] lg:max-w-full "

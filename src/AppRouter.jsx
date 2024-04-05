@@ -28,7 +28,7 @@ function App() {
         element={<ProductDetailCostumer />}
       />
       <Route
-        path="cart"
+        path="/cart"
         element={<CartPage />}
       />
       {/* end Costumer */}

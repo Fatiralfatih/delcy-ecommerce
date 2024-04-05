@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui";
-import { variant } from "@/lib";
+import { variants } from "@/lib";
 import { RiCheckboxBlankCircleFill, RiPencilRuler2Line } from "react-icons/ri";
 import { TiWaves } from "react-icons/ti";
 
@@ -14,12 +14,12 @@ const ProductVariantList = () => {
           Size
         </h1>
         <ul className="ps-8 flex flex-col gap-2 flex-wrap">
-          {variant.size.map((item) => (
+          {variants.size.map((size) => (
             <li
-              key={item}
+              key={size.value}
               className="cursor-pointer w-fit link-underline link-underline-black"
             >
-              {item}
+              {size.value}
             </li>
           ))}
         </ul>
@@ -32,19 +32,21 @@ const ProductVariantList = () => {
           Color
         </h1>
         <ul className="ps-4 flex gap-2 flex-wrap">
-          {variant.color.map((item) => (
+          {variants.color.map((color) => (
             <Button
-              key={item}
+              key={color.value}
               variant="ghost"
               className="w-16 h-16 border-none hover:bg-zinc-200 flex flex-col text-sm"
             >
               <span>
                 <RiCheckboxBlankCircleFill
                   className="text-3xl"
-                  style={{ color: item === "white" ? "whitesmoke" : item }}
+                  style={{
+                    color: color.value === "white" ? "whitesmoke" : color.value,
+                  }}
                 />
               </span>
-              {item}
+              {color.value}
             </Button>
           ))}
         </ul>

@@ -1,7 +1,7 @@
 import { object } from "prop-types";
 import { TbCategory } from "react-icons/tb";
 
-const ProductCategoryList = ({ uniqueCategory }) => {
+const ProductCategoryList = ({ categories }) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center">
@@ -17,12 +17,12 @@ const ProductCategoryList = ({ uniqueCategory }) => {
       </div>
 
       <ul className={`ps-8 space-y-2 max-h-full`}>
-        {Array.from(uniqueCategory).map((category) => (
+        {categories?.data.map((category) => (
           <li
-            key={category}
+            key={category.id}
             className={`flex gap-2 items-center cursor-pointer w-fit link-underline link-underline-black`}
           >
-            {category}
+            {category.name}
           </li>
         ))}
       </ul>
@@ -31,7 +31,7 @@ const ProductCategoryList = ({ uniqueCategory }) => {
 };
 
 ProductCategoryList.propTypes = {
-  uniqueCategory: object,
+  categories: object,
 };
 
 export { ProductCategoryList };

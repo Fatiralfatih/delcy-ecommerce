@@ -14,19 +14,17 @@ export const productCreateFormSchema = z.object({
     .string()
     .min(4, { message: "title minimal 4 karakter" })
     .max(255, { message: "title tidak boleh melebihi 255 karakter" }),
-  category: z
+  category_id: z
     .string()
-    .min(2, { message: "category minimal 2 karakter" })
+    .min(1, { message: "category minimal 2 karakter" })
     .max(255, { message: "category tidak boleh melebihi 255 karakter" }),
   price: z.string().min(2, { message: "price minimal 2 karakter" }).max(255),
-
   color: z.array(z.string()).min(1),
   size: z.array(z.string()).min(1),
-  
   status: z.boolean({
     invalid_type_error: "status harus bertipe false atau true",
   }),
-  stock: z.number().gte(2, { message: "stock minimal 2 karakter" }).lte(255),
+  stock: z.string().min(2, { message: "stock minimal 2 karakter" }).max(255),
   description: z
     .string()
     .min(10, { message: "description minimal 10 karakter" })

@@ -1,5 +1,6 @@
 import { Button, Card, CardContent, CardHeader } from "@/components/ui";
 import { useToast } from "@/components/ui/use-toast";
+import { useFetchCategories } from "@/features/products/hooks";
 import { ProductCreateForm } from "@/features/products/product-create/components";
 import { useFetchCreateProduct } from "@/features/products/product-create/hooks";
 import AdminLayout from "@/layouts/admin/AdminLayout";
@@ -11,6 +12,8 @@ import { Link, useNavigate } from "react-router-dom";
 const ProductCreatePage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  const { data: categories } = useFetchCategories();
 
   const { mutate, isPending } = useFetchCreateProduct({
     onSuccess: (data) => {
@@ -63,6 +66,7 @@ const ProductCreatePage = () => {
             <ProductCreateForm
               handleSubmit={mutate}
               isPending={isPending}
+              categories={categories}
             />
           </CardContent>
         </Card>

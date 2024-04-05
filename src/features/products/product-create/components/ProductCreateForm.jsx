@@ -8,37 +8,34 @@ import {
   FormMessage,
   Input,
   Textarea,
+  Select as RadixSelect,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
 } from "@/components/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { bool, func } from "prop-types";
+import { bool, func, object } from "prop-types";
 import { Switch } from "@/components/ui/switch";
 import { LuLoader2 } from "react-icons/lu";
-import { variant } from "@/lib";
 import { productCreateFormSchema } from "../form/product-create-schema";
 import { useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import { variants } from "@/lib";
 
-const ProductCreateForm = ({ handleSubmit, isPending }) => {
+const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
-
-  const colorOptions = variant.color.map((color) => ({
-    value: color,
-    label: color,
-  }));
-
-  const sizeOptions = variant.size.map((size) => ({
-    value: size,
-    label: size,
-  }));
 
   const form = useForm({
     resolver: zodResolver(productCreateFormSchema),
     defaultValues: {
       title: "",
-      category: "",
+      category_id: "",
       price: "",
       stock: "",
       description: "",
@@ -77,25 +74,6 @@ const ProductCreateForm = ({ handleSubmit, isPending }) => {
           )}
         />
 
-        {/* category */}
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Category</FormLabel>
-              <FormControl>
-                <Input
-                  variant="rawrr"
-                  placeholder="Masukkan category..."
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         {/* price */}
         <FormField
           control={form.control}
@@ -116,8 +94,29 @@ const ProductCreateForm = ({ handleSubmit, isPending }) => {
           )}
         />
 
+        {/* stock */}
+        <FormField
+          control={form.control}
+          name="stock"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Stock</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  variant="rawrr"
+                  inputMode="numeric"
+                  placeholder="Masukkan stock..."
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         {/* variant */}
-        <div className="flex flex-col gap-y-7 md:flex-row md:gap-x-5 md:items-center">
+        <div className="flex flex-col gap-y-7 md:flex-row md:gap-x-5 ">
           {/* color */}
           <FormField
             control={form.control}
@@ -128,9 +127,9 @@ const ProductCreateForm = ({ handleSubmit, isPending }) => {
                 <FormControl>
                   <Select
                     isMulti
-                    options={colorOptions}
+                    options={variants.color}
                     components={animatedComponents}
-                    className={`shadow-intervaless-button rounded-lg ${
+                    className={`shadow-intervaless-button rounded-lg text-sm ${
                       selectedColors.length >= 1 &&
                       "shadow-intervaless-button-active"
                     }
@@ -143,7 +142,7 @@ const ProductCreateForm = ({ handleSubmit, isPending }) => {
                         selectedOptions.map((option) => option.value)
                       );
                     }}
-                    value={colorOptions.filter((option) =>
+                    value={variants.color.filter((option) =>
                       selectedColors.includes(option.value)
                     )}
                   />
@@ -164,8 +163,8 @@ const ProductCreateForm = ({ handleSubmit, isPending }) => {
                   <Select
                     isMulti
                     components={animatedComponents}
-                    options={sizeOptions}
-                    className={`shadow-intervaless-button rounded-lg ${
+                    options={variants.size}
+                    className={`shadow-intervaless-button rounded-lg text-sm ${
                       selectedSizes.length >= 1 &&
                       "shadow-intervaless-button-active"
                     }
@@ -178,7 +177,7 @@ const ProductCreateForm = ({ handleSubmit, isPending }) => {
                         selectedOptions.map((option) => option.value)
                       );
                     }}
-                    value={sizeOptions.filter((option) =>
+                    value={variants.size.filter((option) =>
                       selectedSizes.includes(option.value)
                     )}
                   />
@@ -188,20 +187,36 @@ const ProductCreateForm = ({ handleSubmit, isPending }) => {
             )}
           />
         </div>
-        {/* stock */}
+
+        {/* category */}
         <FormField
           control={form.control}
-          name="stock"
+          name="category_id"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Stock</FormLabel>
+            <FormItem ref={field.ref}>
+              <FormLabel>Category</FormLabel>
               <FormControl>
-                <Input
-                  type="number"
-                  variant="rawrr"
-                  placeholder="Masukkan stock..."
-                  onChange={(e) => field.onChange(Number(e.target.value))}
-                />
+                <RadixSelect
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger className="shadow-intervaless-button">
+                    <SelectValue placeholder="pilih category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Pilih Category</SelectLabel>
+                      {categories?.data.map((category) => (
+                        <SelectItem
+                          key={category.id}
+                          value={category.id.toString()}
+                        >
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </RadixSelect>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -318,6 +333,7 @@ const ProductCreateForm = ({ handleSubmit, isPending }) => {
 ProductCreateForm.propTypes = {
   handleSubmit: func,
   isPending: bool,
+  categories: object,
 };
 
 export { ProductCreateForm };

@@ -7,7 +7,7 @@ export const useFetchCreateProduct = ({ onSuccess, onError }) => {
         mutationKey: ["create-product"],
         mutationFn: async (body) => {
             const formData = new FormData();
-            formData.append("category", body.category);
+            formData.append("category_id", parseInt(body.category_id));
             formData.append("description", body.description);
             formData.append("price", body.price);
             formData.append("status", body.status === true ? 1 : 0);
@@ -15,7 +15,7 @@ export const useFetchCreateProduct = ({ onSuccess, onError }) => {
                 color: body.color,
                 size: body.size,
             }))
-            formData.append("stock", body.stock);
+            formData.append("stock", parseInt(body.stock));
             formData.append("title", body.title);
             formData.append("thumbnail", body.thumbnail[0]);
             const response = await axiosInstance.post("/product/create", formData);

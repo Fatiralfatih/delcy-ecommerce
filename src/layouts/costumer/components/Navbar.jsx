@@ -28,7 +28,7 @@ const Navbar = () => {
             placeholder="Cari di Delcy....."
           />
           <div className="flex justify-center gap-1 items-center">
-            <Link to={"cart"}>
+            <Link to={"/cart"}>
               <Button
                 variant="outline"
                 className="border-0"

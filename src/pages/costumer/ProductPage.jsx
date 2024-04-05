@@ -22,7 +22,10 @@ import {
 } from "@/features/products/components";
 import { NotFound404 } from ".";
 import CostumerLayout from "@/layouts/costumer/CostumerLayout";
-import { useFetchProducts } from "@/features/products/hooks";
+import {
+  useFetchCategories,
+  useFetchProducts,
+} from "@/features/products/hooks";
 import { BadgeCategory } from "@/components/element";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
@@ -35,18 +38,11 @@ const ProductPage = () => {
     isLoading: isLoadingInProducts,
   } = useFetchProducts();
 
+  const { data: categories } = useFetchCategories();
+
   if (isErrorInProducts) {
     return <NotFound404 error={errorInProducts} />;
   }
-
-  const uniqueCategory = new Set();
-
-  const productList = products?.data.map((product) => {
-    return {
-      ...product,
-      uniqueCategory: uniqueCategory.add(product.category),
-    };
-  });
 
   return (
     <CostumerLayout>
@@ -59,13 +55,13 @@ const ProductPage = () => {
           >
             All Product
           </Button>
-          {Array.from(uniqueCategory).map((category) => (
+          {categories?.data.map((category) => (
             <Button
-              key={category}
+              key={category.id}
               variant="ghost"
               className="capitalize px-2 py-1 rounded-xl hover:bg-success-500 hover:text-zinc-800"
             >
-              {category}
+              {category.name}
             </Button>
           ))}
         </BadgeCategory>
@@ -76,7 +72,7 @@ const ProductPage = () => {
               <h1 className="text-2xl font-black">Filter </h1>
             </CardHeader>
             <CardContent className="sticky top-[100px] md:top-[79px]">
-              <ProductCategoryList uniqueCategory={uniqueCategory} />
+              <ProductCategoryList categories={categories} />
               {/** product size list */}
               <ProductVariantList />
             </CardContent>
@@ -105,7 +101,7 @@ const ProductPage = () => {
             </div>
             {isLoadingInProducts && <SkeletonProduct />}
             <ProductList>
-              {productList?.map((product) => (
+              {products?.data.map((product) => (
                 <ProductItem key={product.id}>
                   <ProductHeader thumbnail={product.thumbnail} />
                   <ProductContent

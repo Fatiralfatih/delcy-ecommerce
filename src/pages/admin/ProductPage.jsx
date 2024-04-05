@@ -60,7 +60,7 @@ const ProductPage = () => {
                     </Button>
                   </BadgeCategory>
                   {/* product list */}
-                  <ProductList className="md:px-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+                  <ProductList className="md:px-0 md:grid-cols-3 lg:grid-cols-4">
                     {products?.data.map((product) => (
                       <ProductItem key={product.id}>
                         <ProductHeader thumbnail={product.thumbnail} />

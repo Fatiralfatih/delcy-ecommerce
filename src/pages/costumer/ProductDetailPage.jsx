@@ -36,13 +36,20 @@ const ProductDetailPage = () => {
     isError: isErrorInProduct,
     error: errorInProduct,
     isLoading: isLoadingInProduct,
+    isFetching: isFetchingInProduct,
   } = useFetchProductBySlug({ slug });
 
-  const { data: products, isLoading: isLoadingInProducts } = useFetchProducts();
+  const {
+    data: products,
+    isLoading: isLoadingInProducts,
+    isFetching: isFetchingInProducts,
+    refetch,
+  } = useFetchProducts();
 
   const filterProductByCategory = () => {
     return products?.data.filter(
-      (data) => data.slug !== slug && data.category === product?.data.category
+      (data) =>
+        data.slug !== slug && data.category.name === product?.data.category.name
     );
   };
 
@@ -76,7 +83,7 @@ const ProductDetailPage = () => {
                 href="#"
                 className="bg-zinc-200 py-1 px-4 rounded-lg text-nowrap"
               >
-                {product?.data.category}
+                {product?.data.category.name}
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator>
@@ -93,7 +100,7 @@ const ProductDetailPage = () => {
           </BreadcrumbList>
         </Breadcrumb>
         {/**product detail and transaction detail */}
-        {isLoadingInProduct ? (
+        {isLoadingInProduct || isFetchingInProduct ? (
           <SkeletonProductDetail />
         ) : (
           <section className="flex flex-col md:flex-row pt-5 md:container">
@@ -164,6 +171,8 @@ const ProductDetailPage = () => {
             </CardHeader>
             <SimilarProductItem
               isLoadingInProducts={isLoadingInProducts}
+              isFetchingInProducts={isFetchingInProducts}
+              refetch={refetch}
               products={filterProductByCategory()}
             />
           </Card>

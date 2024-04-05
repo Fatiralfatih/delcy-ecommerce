@@ -45,7 +45,7 @@ const DescriptionProduct = ({
           <CardDescription className="text-lg capitalize w-[120px]">
             Category
           </CardDescription>
-          <CardTitle className="text-lg">{category}</CardTitle>
+          <CardTitle className="text-lg">{category.name}</CardTitle>
         </div>
 
         {/* price */}

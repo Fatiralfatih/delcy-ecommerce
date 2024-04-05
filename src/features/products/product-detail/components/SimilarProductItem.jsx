@@ -1,20 +1,27 @@
 import { Button, CardContent } from "@/components/ui";
 // import { ProductItem, ProductList } from "../../components";
-import { array, bool } from "prop-types";
+import { array, bool, func } from "prop-types";
 import {
   ProductContent,
   ProductFooter,
   ProductHeader,
   ProductItem,
   ProductList,
-  SkeletonProduct,
 } from "../../components";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
+import { Loader } from "@/components/element";
 
-const SimilarProductItem = ({ products, isLoadingInProducts }) => {
-  return isLoadingInProducts ? (
-    <SkeletonProduct count={4} />
+const SimilarProductItem = ({
+  products,
+  isLoadingInProducts,
+  isFetchingInProducts,
+  refetch,
+}) => {
+  return isLoadingInProducts || isFetchingInProducts ? (
+    <div className="w-full h-full flex justify-center  py-40">
+      <Loader />
+    </div>
   ) : (
     <CardContent className="p-0">
       {products?.length >= 1 ? (
@@ -35,6 +42,7 @@ const SimilarProductItem = ({ products, isLoadingInProducts }) => {
                     <Button
                       className=" w-full text-xs lg:text-sm"
                       name={`${product.slug}`}
+                      onClick={() => refetch()}
                     >
                       <span className="pe-2">
                         <TbListDetails className="text-sm md:text-lg" />
@@ -57,6 +65,8 @@ const SimilarProductItem = ({ products, isLoadingInProducts }) => {
 SimilarProductItem.propTypes = {
   products: array,
   isLoadingInProducts: bool,
+  isFetchingInProducts: bool,
+  refetch: func,
 };
 
 export { SimilarProductItem };

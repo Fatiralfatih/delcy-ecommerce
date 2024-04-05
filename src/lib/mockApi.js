@@ -48,7 +48,75 @@ export const products = [
     },
 ]
 
-export const variant = {
-    size: ['small', 'medium', 'large', 'x-large', 'xx-large'],
-    color: ['red', 'green', 'blue', 'white', 'black', 'gray', 'purple', 'pink', 'orange', 'zinc', "yellow"],
+
+
+export const variants = {
+    size: [
+        {
+            label: "small",
+            value: "small",
+        },
+        {
+            label: "medium",
+            value: "medium",
+        },
+        {
+            label: "large",
+            value: "large",
+        },
+        {
+            label: "x-large",
+            value: "x-large",
+        },
+        {
+            label: "xx-large",
+            value: "xx-large",
+        },
+    ],
+    color: [
+        {
+            label: "red",
+            value: "red"
+        },
+        {
+            label: "green",
+            value: "green"
+        },
+        {
+            label: "blue",
+            value: "blue"
+        },
+        {
+            label: "white",
+            value: "white"
+        },
+        {
+            label: "black",
+            value: "black"
+        },
+        {
+            label: "gray",
+            value: "gray"
+        },
+        {
+            label: "purple",
+            value: "purple"
+        },
+        {
+            label: "pink",
+            value: "pink"
+        },
+        {
+            label: "orange",
+            value: "orange"
+        },
+        {
+            label: "zinc",
+            value: "zinc"
+        },
+        {
+            label: "yellow",
+            value: "yellow"
+        },
+    ]
 }
