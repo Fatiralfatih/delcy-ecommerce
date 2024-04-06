@@ -2,73 +2,88 @@ import {
   Button,
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
   Input,
-  Textarea,
   Select as RadixSelect,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectGroup,
-  SelectLabel,
   SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+  Textarea,
 } from "@/components/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { bool, func, object } from "prop-types";
-import { Switch } from "@/components/ui/switch";
-import { LuLoader2 } from "react-icons/lu";
-import { useState } from "react";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
 import { variants } from "@/lib";
-import { productCreateSchema } from "../form/product-create-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import makeAnimated from "react-select/animated";
+import Select from "react-select";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Switch } from "@/components/ui/switch";
+import { bool, func, object } from "prop-types";
+import { productEditSchema } from "../form/product-edit-schema";
+import { LuLoader2 } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
-const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
+const ProductEditForm = ({
+  categories,
+  onSubmit,
+  product,
+  errorMutationInProduct,
+  isPendingInMutationProduct,
+}) => {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
 
   const form = useForm({
-    resolver: zodResolver(productCreateSchema),
+    resolver: zodResolver(productEditSchema),
     defaultValues: {
-      title: "",
-      category_id: "",
-      price: "",
-      stock: "",
-      description: "",
-      status: false,
-      thumbnail: undefined,
-      color: [],
-      size: [],
+      title: product?.data.title,
+      price: product?.data.price,
+      stock: product?.data.stock,
+      color: product?.data.variant.color,
+      size: product?.data.variant.size,
+      category_id: product?.data.category_id.toString(),
+      description: product?.data.description,
+      status: product?.data.status ? true : false,
     },
   });
 
+  // console.log(form.formState.defaultValues.color);
   const animatedComponents = makeAnimated();
-
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(handleSubmit)}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-7"
         encType="multipart/form-data"
       >
-        {/* product name */}
+        {/* title */}
         <FormField
-          control={form.control}
           name="title"
+          control={form.control}
+          defaultValue={form.formState.defaultValues.title}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Product Title</FormLabel>
               <FormControl>
                 <Input
                   variant="rawrr"
-                  placeholder="Masukkan Product title..."
+                  placeholder="Masukkan title..."
                   {...field}
+                  required
                 />
               </FormControl>
+              {errorMutationInProduct?.errors && (
+                <FormDescription className="text-red-500">
+                  {errorMutationInProduct?.errors.title}
+                </FormDescription>
+              )}
+
               <FormMessage />
             </FormItem>
           )}
@@ -76,19 +91,25 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
 
         {/* price */}
         <FormField
-          control={form.control}
           name="price"
+          control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Price</FormLabel>
               <FormControl>
                 <Input
-                  type="number"
                   variant="rawrr"
+                  type="number"
                   placeholder="Masukkan price..."
+                  required
                   {...field}
                 />
               </FormControl>
+              {errorMutationInProduct?.errors && (
+                <FormDescription className="text-red-500">
+                  {errorMutationInProduct?.errors.price}
+                </FormDescription>
+              )}
               <FormMessage />
             </FormItem>
           )}
@@ -96,8 +117,8 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
 
         {/* stock */}
         <FormField
-          control={form.control}
           name="stock"
+          control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Stock</FormLabel>
@@ -105,11 +126,16 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                 <Input
                   type="number"
                   variant="rawrr"
-                  inputMode="numeric"
                   placeholder="Masukkan stock..."
                   {...field}
+                  required
                 />
               </FormControl>
+              {errorMutationInProduct?.errors && (
+                <FormDescription className="text-red-500">
+                  {errorMutationInProduct?.errors.stock}
+                </FormDescription>
+              )}
               <FormMessage />
             </FormItem>
           )}
@@ -129,6 +155,7 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                     isMulti
                     options={variants.color}
                     components={animatedComponents}
+                    required
                     className={`shadow-intervaless-button rounded-lg text-sm ${
                       selectedColors.length >= 1 &&
                       "shadow-intervaless-button-active"
@@ -142,11 +169,14 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                         selectedOptions.map((option) => option.value)
                       );
                     }}
-                    value={variants.color.filter((option) =>
-                      selectedColors.includes(option.value)
-                    )}
+                    defaultValue={{ label: field.value, value: field.value }}
                   />
                 </FormControl>
+                {errorMutationInProduct?.errors && (
+                  <FormDescription className="text-red-500">
+                    {errorMutationInProduct?.errors["variant.color"]}
+                  </FormDescription>
+                )}
                 <FormMessage />
               </FormItem>
             )}
@@ -164,6 +194,7 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                     isMulti
                     components={animatedComponents}
                     options={variants.size}
+                    required
                     className={`shadow-intervaless-button rounded-lg text-sm ${
                       selectedSizes.length >= 1 &&
                       "shadow-intervaless-button-active"
@@ -177,11 +208,14 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                         selectedOptions.map((option) => option.value)
                       );
                     }}
-                    value={variants.size.filter((option) =>
-                      selectedSizes.includes(option.value)
-                    )}
+                    defaultValue={{ label: field.value, value: field.value }}
                   />
                 </FormControl>
+                {errorMutationInProduct?.errors && (
+                  <FormDescription className="text-red-500">
+                    {errorMutationInProduct?.errors["variant.size"]}
+                  </FormDescription>
+                )}
                 <FormMessage />
               </FormItem>
             )}
@@ -199,6 +233,7 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                 <RadixSelect
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  required
                 >
                   <SelectTrigger className="shadow-intervaless-button">
                     <SelectValue placeholder="pilih category" />
@@ -218,6 +253,11 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                   </SelectContent>
                 </RadixSelect>
               </FormControl>
+              {errorMutationInProduct?.errors && (
+                <FormDescription className="text-red-500">
+                  {errorMutationInProduct?.errors.category_id}
+                </FormDescription>
+              )}
               <FormMessage />
             </FormItem>
           )}
@@ -225,8 +265,8 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
 
         {/* description */}
         <FormField
-          control={form.control}
           name="description"
+          control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Description</FormLabel>
@@ -235,8 +275,14 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                   variant="rawrr"
                   placeholder="Masukkan description..."
                   {...field}
+                  required
                 />
               </FormControl>
+              {errorMutationInProduct?.errors && (
+                <FormDescription className="text-red-500">
+                  {errorMutationInProduct?.errors.description}
+                </FormDescription>
+              )}
               <FormMessage />
             </FormItem>
           )}
@@ -244,10 +290,10 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
 
         {/* status */}
         <FormField
-          control={form.control}
           name="status"
+          control={form.control}
           render={({ field }) => (
-            <FormItem className="space-y-0 flex flex-col gap-3">
+            <FormItem className="flex space-y-0 flex-col gap-4">
               <FormLabel>Status</FormLabel>
               <FormControl>
                 <Switch
@@ -256,28 +302,15 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                   aria-readonly
                 />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* thumbnail */}
-        <FormField
-          control={form.control}
-          name="thumbnail"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Thumbnail</FormLabel>
-              <FormControl>
-                <Input
-                  type="file"
-                  variant="rawrr"
-                  name={field.name}
-                  onChange={(e) => {
-                    field.onChange(e.target.files);
-                  }}
-                />
-              </FormControl>
+              {errorMutationInProduct?.errors ? (
+                <FormDescription className="text-red-500">
+                  {errorMutationInProduct?.errors.status}
+                </FormDescription>
+              ) : (
+                <FormDescription>
+                  {field.value ? "aktif" : "tidak aktif"}
+                </FormDescription>
+              )}
               <FormMessage />
             </FormItem>
           )}
@@ -285,20 +318,19 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
 
         {/* action submit and discard */}
         <div className="flex gap-5">
-          <Button
-            type="button"
-            variant="danger"
+          <Link
+            to={"/admin/product"}
             className="w-full"
-            onClick={() =>
-              form.reset({
-                size: setSelectedSizes(""),
-                color: setSelectedColors(""),
-              })
-            }
           >
-            Discard
-          </Button>
-          {isPending ? (
+            <Button
+              type="button"
+              variant="secondary"
+              className="w-full"
+            >
+              Cancel
+            </Button>
+          </Link>
+          {isPendingInMutationProduct ? (
             <Button
               disabled
               type="button"
@@ -314,7 +346,7 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
               variant="warning"
               className="w-full"
             >
-              Create
+              Edit
             </Button>
           )}
         </div>
@@ -323,10 +355,12 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
   );
 };
 
-ProductCreateForm.propTypes = {
-  handleSubmit: func,
-  isPending: bool,
+ProductEditForm.propTypes = {
   categories: object,
+  onSubmit: func,
+  errorMutationInProduct: object,
+  isPendingInMutationProduct: bool,
+  product: object,
 };
 
-export { ProductCreateForm };
+export { ProductEditForm };

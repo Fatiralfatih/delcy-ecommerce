@@ -28,7 +28,7 @@ import AdminLayout from "@/layouts/admin/AdminLayout";
 import { AiOutlineShop } from "react-icons/ai";
 import { RiBox3Line } from "react-icons/ri";
 import { RxSlash } from "react-icons/rx";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { NotFound404 } from "../costumer";
 import { DescriptionProduct } from "@/layouts/admin/components";
 import { ProductFooter } from "@/features/products/components";
@@ -80,7 +80,7 @@ const ProductDetailPage = () => {
       <Breadcrumb className="container lg:px-3">
         <BreadcrumbList className="text-zinc-800 flex-nowrap overflow-auto">
           <BreadcrumbItem>
-            <RiBox3Line className="text-xl mb-[0.5px]" />
+            <RiBox3Line className="text-xl mb-[0.5px] md:text-2xl lg:text-3xl" />
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -214,12 +214,14 @@ const ProductDetailPage = () => {
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>
-                    <Button
-                      variant="primary"
-                      className="w-full lg:w-fit"
-                    >
-                      Edit Product
-                    </Button>
+                    <Link to={`/admin/product/${slug}/edit`}>
+                      <Button
+                        variant="primary"
+                        className="w-full lg:w-fit"
+                      >
+                        Edit Product
+                      </Button>
+                    </Link>
                   </ProductFooter>
                 </>
               )}

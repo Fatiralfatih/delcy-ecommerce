@@ -8,6 +8,7 @@ import {
 import {
   ProductCreatePage,
   ProductDetailPage as ProductDetailPageAdmin,
+  ProductEditPage as ProductEditPageAdmin,
   ProductPage as ProductPageAdmin,
 } from "./pages/admin";
 
@@ -45,6 +46,10 @@ function App() {
       <Route
         path="/admin/product/create"
         element={<ProductCreatePage />}
+      />
+      <Route
+        path="/admin/product/:slug/edit"
+        element={<ProductEditPageAdmin />}
       />
       {/* end admin */}
     </Routes>

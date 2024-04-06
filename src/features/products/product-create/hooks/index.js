@@ -1,1 +1,1 @@
-export * from "./useFetchCreateProduct"
+export * from "./useMutationCreateProduct"

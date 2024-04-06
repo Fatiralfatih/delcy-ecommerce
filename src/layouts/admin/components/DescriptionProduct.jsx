@@ -17,7 +17,6 @@ const DescriptionProduct = ({
   description,
   thumbnail,
 }) => {
-  console.log({ color });
   return (
     <article>
       <CardHeader className="p-4">

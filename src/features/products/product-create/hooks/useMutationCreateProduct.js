@@ -2,7 +2,7 @@ import { axiosInstance } from "@/lib";
 import { useMutation } from "@tanstack/react-query";
 
 
-export const useFetchCreateProduct = ({ onSuccess, onError }) => {
+export const useMutationCreateProduct = ({ onSuccess, onError }) => {
     return useMutation({
         mutationKey: ["create-product"],
         mutationFn: async (body) => {

@@ -7,17 +7,22 @@ import {
   ProductItem,
   ProductList,
 } from "@/features/products/components";
-import { useFetchProducts } from "@/features/products/hooks";
+import {
+  useFetchCategories,
+  useFetchProducts,
+} from "@/features/products/hooks";
 import AdminLayout from "@/layouts/admin/AdminLayout";
 import { PiPlusCircle } from "react-icons/pi";
 import { Link } from "react-router-dom";
 
 const ProductPage = () => {
-  const { data: products, isFetching } = useFetchProducts();
+  const { data: products, isFetching: isFecthingInProducts } =
+    useFetchProducts();
+  const { data: categories } = useFetchCategories();
 
   return (
     <AdminLayout>
-      {isFetching ? (
+      {isFecthingInProducts ? (
         <div>loading pak</div>
       ) : (
         <section className="flex justify-center md:gap-3 md:px-3 lg:gap-4 xl:px-16">
@@ -51,13 +56,22 @@ const ProductPage = () => {
                 </div>
               ) : (
                 <>
-                  <BadgeCategory className="max-w-xs md:flex">
+                  <BadgeCategory className="max-w-xs md:flex md:max-w-full">
                     <Button
                       variant="ghost"
                       className="capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800"
                     >
                       All Product
                     </Button>
+                    {categories?.data.map((category) => (
+                      <Button
+                        key={category.id}
+                        variant="ghost"
+                        className="capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800"
+                      >
+                        {category.name}
+                      </Button>
+                    ))}
                   </BadgeCategory>
                   {/* product list */}
                   <ProductList className="md:px-0 md:grid-cols-3 lg:grid-cols-4">
@@ -80,7 +94,12 @@ const ProductPage = () => {
                               Show
                             </Button>
                           </Link>
-                          <Button className="w-full">Edit</Button>
+                          <Link
+                            to={`/admin/product/${product.slug}/edit`}
+                            className="w-full"
+                          >
+                            <Button className="w-full">Edit</Button>
+                          </Link>
                         </ProductFooter>
                       </ProductItem>
                     ))}
