@@ -45,8 +45,8 @@ const ProductEditForm = ({
       title: product?.data.title,
       price: product?.data.price,
       stock: product?.data.stock,
-      color: product?.data.variant.color,
-      size: product?.data.variant.size,
+      color: product?.data?.variant?.color || null,
+      size: product?.data?.variant?.size || null,
       category_id: product?.data.category_id.toString(),
       description: product?.data.description,
       status: product?.data.status ? true : false,
@@ -59,12 +59,12 @@ const ProductEditForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-7"
-        encType="multipart/form-data"
+        className='space-y-7'
+        encType='multipart/form-data'
       >
         {/* title */}
         <FormField
-          name="title"
+          name='title'
           control={form.control}
           defaultValue={form.formState.defaultValues.title}
           render={({ field }) => (
@@ -72,14 +72,14 @@ const ProductEditForm = ({
               <FormLabel>Product Title</FormLabel>
               <FormControl>
                 <Input
-                  variant="rawrr"
-                  placeholder="Masukkan title..."
+                  variant='rawrr'
+                  placeholder='Masukkan title...'
                   {...field}
                   required
                 />
               </FormControl>
               {errorMutationInProduct?.errors && (
-                <FormDescription className="text-red-500">
+                <FormDescription className='text-red-500'>
                   {errorMutationInProduct?.errors.title}
                 </FormDescription>
               )}
@@ -91,22 +91,22 @@ const ProductEditForm = ({
 
         {/* price */}
         <FormField
-          name="price"
+          name='price'
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Price</FormLabel>
               <FormControl>
                 <Input
-                  variant="rawrr"
-                  type="number"
-                  placeholder="Masukkan price..."
+                  variant='rawrr'
+                  type='number'
+                  placeholder='Masukkan price...'
                   required
                   {...field}
                 />
               </FormControl>
               {errorMutationInProduct?.errors && (
-                <FormDescription className="text-red-500">
+                <FormDescription className='text-red-500'>
                   {errorMutationInProduct?.errors.price}
                 </FormDescription>
               )}
@@ -117,22 +117,22 @@ const ProductEditForm = ({
 
         {/* stock */}
         <FormField
-          name="stock"
+          name='stock'
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Stock</FormLabel>
               <FormControl>
                 <Input
-                  type="number"
-                  variant="rawrr"
-                  placeholder="Masukkan stock..."
+                  type='number'
+                  variant='rawrr'
+                  placeholder='Masukkan stock...'
                   {...field}
                   required
                 />
               </FormControl>
               {errorMutationInProduct?.errors && (
-                <FormDescription className="text-red-500">
+                <FormDescription className='text-red-500'>
                   {errorMutationInProduct?.errors.stock}
                 </FormDescription>
               )}
@@ -142,13 +142,13 @@ const ProductEditForm = ({
         />
 
         {/* variant */}
-        <div className="flex flex-col gap-y-7 md:flex-row md:gap-x-5 ">
+        <div className='flex flex-col gap-y-7 md:flex-row md:gap-x-5 '>
           {/* color */}
           <FormField
             control={form.control}
-            name="color"
+            name='color'
             render={({ field }) => (
-              <FormItem className="md:w-full">
+              <FormItem className='md:w-full'>
                 <FormLabel>Color</FormLabel>
                 <FormControl>
                   <Select
@@ -169,11 +169,18 @@ const ProductEditForm = ({
                         selectedOptions.map((option) => option.value)
                       );
                     }}
+                    value={
+                      field.value &&
+                      field.value.map((value) => ({
+                        label: value,
+                        value: value,
+                      }))
+                    }
                     defaultValue={{ label: field.value, value: field.value }}
                   />
                 </FormControl>
                 {errorMutationInProduct?.errors && (
-                  <FormDescription className="text-red-500">
+                  <FormDescription className='text-red-500'>
                     {errorMutationInProduct?.errors["variant.color"]}
                   </FormDescription>
                 )}
@@ -185,9 +192,9 @@ const ProductEditForm = ({
           {/* size */}
           <FormField
             control={form.control}
-            name="size"
+            name='size'
             render={({ field }) => (
-              <FormItem className="md:w-full">
+              <FormItem className='md:w-full'>
                 <FormLabel>size</FormLabel>
                 <FormControl>
                   <Select
@@ -208,11 +215,18 @@ const ProductEditForm = ({
                         selectedOptions.map((option) => option.value)
                       );
                     }}
+                    value={
+                      field.value &&
+                      field.value.map((value) => ({
+                        label: value,
+                        value: value,
+                      }))
+                    }
                     defaultValue={{ label: field.value, value: field.value }}
                   />
                 </FormControl>
                 {errorMutationInProduct?.errors && (
-                  <FormDescription className="text-red-500">
+                  <FormDescription className='text-red-500'>
                     {errorMutationInProduct?.errors["variant.size"]}
                   </FormDescription>
                 )}
@@ -225,7 +239,7 @@ const ProductEditForm = ({
         {/* category */}
         <FormField
           control={form.control}
-          name="category_id"
+          name='category_id'
           render={({ field }) => (
             <FormItem ref={field.ref}>
               <FormLabel>Category</FormLabel>
@@ -235,8 +249,8 @@ const ProductEditForm = ({
                   defaultValue={field.value}
                   required
                 >
-                  <SelectTrigger className="shadow-intervaless-button">
-                    <SelectValue placeholder="pilih category" />
+                  <SelectTrigger className='shadow-intervaless-button'>
+                    <SelectValue placeholder='pilih category' />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -254,7 +268,7 @@ const ProductEditForm = ({
                 </RadixSelect>
               </FormControl>
               {errorMutationInProduct?.errors && (
-                <FormDescription className="text-red-500">
+                <FormDescription className='text-red-500'>
                   {errorMutationInProduct?.errors.category_id}
                 </FormDescription>
               )}
@@ -265,21 +279,21 @@ const ProductEditForm = ({
 
         {/* description */}
         <FormField
-          name="description"
+          name='description'
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea
-                  variant="rawrr"
-                  placeholder="Masukkan description..."
+                  variant='rawrr'
+                  placeholder='Masukkan description...'
                   {...field}
                   required
                 />
               </FormControl>
               {errorMutationInProduct?.errors && (
-                <FormDescription className="text-red-500">
+                <FormDescription className='text-red-500'>
                   {errorMutationInProduct?.errors.description}
                 </FormDescription>
               )}
@@ -290,10 +304,10 @@ const ProductEditForm = ({
 
         {/* status */}
         <FormField
-          name="status"
+          name='status'
           control={form.control}
           render={({ field }) => (
-            <FormItem className="flex space-y-0 flex-col gap-4">
+            <FormItem className='flex space-y-0 flex-col gap-4'>
               <FormLabel>Status</FormLabel>
               <FormControl>
                 <Switch
@@ -303,7 +317,7 @@ const ProductEditForm = ({
                 />
               </FormControl>
               {errorMutationInProduct?.errors ? (
-                <FormDescription className="text-red-500">
+                <FormDescription className='text-red-500'>
                   {errorMutationInProduct?.errors.status}
                 </FormDescription>
               ) : (
@@ -317,15 +331,15 @@ const ProductEditForm = ({
         />
 
         {/* action submit and discard */}
-        <div className="flex gap-5">
+        <div className='flex gap-5'>
           <Link
             to={"/admin/product"}
-            className="w-full"
+            className='w-full'
           >
             <Button
-              type="button"
-              variant="secondary"
-              className="w-full"
+              type='button'
+              variant='secondary'
+              className='w-full'
             >
               Cancel
             </Button>
@@ -333,18 +347,18 @@ const ProductEditForm = ({
           {isPendingInMutationProduct ? (
             <Button
               disabled
-              type="button"
-              variant="warning"
-              className="w-full flex gap-1 items-center"
+              type='button'
+              variant='warning'
+              className='w-full flex gap-1 items-center'
             >
-              <LuLoader2 className="text-xl animate-spin" />
+              <LuLoader2 className='text-xl animate-spin' />
               loading....
             </Button>
           ) : (
             <Button
-              type="submit"
-              variant="warning"
-              className="w-full"
+              type='submit'
+              variant='warning'
+              className='w-full'
             >
               Edit
             </Button>

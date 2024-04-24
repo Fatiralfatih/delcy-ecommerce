@@ -1,11 +1,15 @@
-import { axiosInstance } from "@/lib"
+import { axiosInstance } from "@/lib";
 import { useQuery } from "@tanstack/react-query"
 
-export const useFetchProductBySlug = ({ slug }) => {
+export const useFetchProductBySlug = ({ slug, token }) => {
 
     const fetchProductBySlug = async (slug) => {
         try {
-            const response = await axiosInstance.get(`/product/${slug}/show`);
+            const response = await axiosInstance.get(`/product/${slug}/show`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             return response.data;
         } catch (error) {
             throw new Error(error.message);

@@ -54,6 +54,7 @@ export const MenuHorizontal = () => {
             <div className="space-y-4">
               <Button
                 variant="secondary"
+                name="dashboard-admin"
                 className="w-full justify-start text-[15px] gap-3"
               >
                 <span>
@@ -63,6 +64,7 @@ export const MenuHorizontal = () => {
               </Button>
               <Button
                 variant="secondary"
+                name="products-admin"
                 className="w-full justify-start text-[15px] gap-3"
               >
                 <span>
@@ -72,6 +74,7 @@ export const MenuHorizontal = () => {
               </Button>
               <Button
                 variant="secondary"
+                name="purchase-admin"
                 className="w-full justify-start text-[15px] gap-3"
               >
                 <span>
@@ -81,6 +84,7 @@ export const MenuHorizontal = () => {
               </Button>
               <Button
                 variant="secondary"
+                name="costumers-admin"
                 className="w-full justify-start text-[15px] gap-3"
               >
                 <span>

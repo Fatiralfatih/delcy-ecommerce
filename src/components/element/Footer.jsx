@@ -25,7 +25,7 @@ const Footer = () => {
             <div className="flex gap-8 flex-col sm:flex-row sm:justify-between items-center">
               <div className="sm:mt-8">
                 <p className="text-sm">
-                  &copy; {year} Delcy Inc. All rights reserved{" "}
+                  &copy; {year} Delcy Inc. All rights reserved
                 </p>
               </div>
 
@@ -66,26 +66,47 @@ const Footer = () => {
                 </div>
               </div>
               <div className="flex gap-4">
-                <Button
-                  variant="instagram"
-                  size="icon"
-                  className="text-2xl"
+                <a
+                  href="https://www.instagram.com/fatiralfatihh/"
+                  target="_blank"
+                  aria-label="Read more about profil instagram fatir"
                 >
-                  <FaInstagram />
-                </Button>
-                <Button
-                  variant="facebook"
-                  size="icon"
-                  className="text-2xl text-white"
+                  <Button
+                    variant="instagram"
+                    size="icon"
+                    name="instagram"
+                    className="text-2xl"
+                  >
+                    <FaInstagram />
+                  </Button>
+                </a>
+                <a
+                  href="https://www.facebook.com/fatir.alfatih.144"
+                  target="_blank"
+                  aria-label="Read more about profil facebook fatir"
                 >
-                  <FaFacebook />
-                </Button>
-                <Button
-                  size="icon"
-                  className="text-2xl hover:bg-zinc-950/80 hover:text-white"
+                  <Button
+                    variant="facebook"
+                    size="icon"
+                    name="facebook"
+                    className="text-2xl text-white"
+                  >
+                    <FaFacebook />
+                  </Button>
+                </a>
+                <a
+                  href="https://github.com/Fatiralfatih"
+                  target="_blank"
+                  name="github"
+                  aria-label="Read more about profil github fatir"
                 >
-                  <FaGithub />
-                </Button>
+                  <Button
+                    size="icon"
+                    className="text-2xl hover:bg-zinc-950/80 hover:text-white"
+                  >
+                    <FaGithub />
+                  </Button>
+                </a>
               </div>
             </div>
           </div>

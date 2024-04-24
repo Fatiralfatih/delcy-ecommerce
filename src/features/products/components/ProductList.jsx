@@ -47,7 +47,7 @@ const ProductHeader = forwardRef(({ className, thumbnail, ...props }, ref) => (
     <figure className="w-full group h-[150px] sm:h-[180px] max-h-[300px] md:h-[200px] ">
       <img
         src={`http://localhost:8000/storage/${thumbnail}`}
-        alt={`image-${thumbnail}`}
+        alt={`image-product-delcy`}
         className="w-full h-full rounded-lg aspect-auto"
       />
       <Button
@@ -80,6 +80,7 @@ const ProductContent = forwardRef(
           <Button
             variant="ghost"
             className="border-0 p-0 mb-1"
+            name={`reviews-${title}`}
           >
             <CiStar className="text-lg fill-current" />
           </Button>

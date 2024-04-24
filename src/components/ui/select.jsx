@@ -12,7 +12,7 @@ const SelectGroup = SelectPrimitive.Group;
 const SelectValue = SelectPrimitive.Value;
 
 const SelectTrigger = React.forwardRef(
-  ({ className, children, ...props }, ref) => (
+  ({ className, children, icon, ...props }, ref) => (
     <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
@@ -23,7 +23,7 @@ const SelectTrigger = React.forwardRef(
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <LuChevronDown className="h-4 w-4 opacity-50" />
+        {icon ? icon : <LuChevronDown className="h-4 w-4 opacity-50" />}
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )
@@ -32,6 +32,7 @@ SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 SelectTrigger.propTypes = {
   className: string,
   children: object,
+  icon: element,
 };
 const SelectScrollUpButton = React.forwardRef(
   ({ className, ...props }, ref) => (

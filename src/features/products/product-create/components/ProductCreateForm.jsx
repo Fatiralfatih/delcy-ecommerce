@@ -142,7 +142,7 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
                         selectedOptions.map((option) => option.value)
                       );
                     }}
-                    value={variants.color.filter((option) =>
+                    defaultValue={variants.color.filter((option) =>
                       selectedColors.includes(option.value)
                     )}
                   />
@@ -288,6 +288,7 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
           <Button
             type="button"
             variant="danger"
+            name="discard"
             className="w-full"
             onClick={() =>
               form.reset({
@@ -302,6 +303,7 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
             <Button
               disabled
               type="button"
+              name="loading"
               variant="warning"
               className="w-full flex gap-1 items-center"
             >
@@ -311,6 +313,7 @@ const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {
           ) : (
             <Button
               type="submit"
+              name="create"
               variant="warning"
               className="w-full"
             >

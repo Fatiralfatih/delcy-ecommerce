@@ -11,12 +11,16 @@ import AdminLayout from "@/layouts/admin/AdminLayout";
 import { AxiosError } from "axios";
 import { LuPackageOpen } from "react-icons/lu";
 import { useParams, useNavigate } from "react-router-dom";
-import { NotFound404 } from "../costumer";
+import { useAuthenticated } from "@/contexts";
+import { NotFound404 } from "@/components/element";
 
 const ProductEditPage = () => {
   const { slug } = useParams();
 
+  const { authedUser } = useAuthenticated();
+
   const { toast } = useToast();
+
   const navigate = useNavigate();
 
   const {
@@ -24,21 +28,22 @@ const ProductEditPage = () => {
     isError: isErrorInProduct,
     error: errorInProduct,
     isLoading: isLoadingInProduct,
-  } = useFetchProductBySlug({ slug });
+  } = useFetchProductBySlug({ slug, token: authedUser.token });
 
   const {
     data: categories,
     isError: isErrorInCategories,
     isLoading: isLoadingInCategories,
     error: errorInCategories,
-  } = useFetchCategories();
+  } = useFetchCategories({ token: authedUser.token });
 
   const {
     mutate,
     error: errorMutationInProduct,
     isPending: isPendingInMutationProduct,
   } = useMutationEditProductBySlug({
-    slug,
+    slug, // parameter slug
+    token: authedUser.token,
     onSuccess: (data) => {
       if (data.status === "success") {
         toast({
@@ -60,7 +65,11 @@ const ProductEditPage = () => {
   });
 
   if (isErrorInProduct || isErrorInCategories) {
-    return <NotFound404 error={errorInProduct || errorInCategories} />;
+    return (
+      <NotFound404
+        error={errorInProduct.message || errorInCategories.message}
+      />
+    );
   }
 
   return (
@@ -69,17 +78,17 @@ const ProductEditPage = () => {
       {isLoadingInProduct || isLoadingInCategories ? (
         <LoadingFormProductEdit />
       ) : (
-        <section className="container flex justify-start md:justify-center md:items-center md:max-w-xl lg:max-w-4xl pt-7">
-          <Card className="w-full">
-            <CardHeader className="p-4">
-              <h1 className="text-xl font-semibold flex items-center gap-4 lg:text-2xl">
+        <section className='container flex justify-start md:justify-center md:items-center md:max-w-xl lg:max-w-4xl pt-7'>
+          <Card className='w-full'>
+            <CardHeader className='p-4'>
+              <h1 className='text-xl font-semibold flex items-center gap-4 lg:text-2xl'>
                 <span>
-                  <LuPackageOpen className="text-3xl mb-[2px] lg:text-4xl" />
+                  <LuPackageOpen className='text-3xl mb-[2px] lg:text-4xl' />
                 </span>
                 Form Edit Product {product?.data.title}
               </h1>
             </CardHeader>
-            <CardContent className="px-5 pt-4 pb-8">
+            <CardContent className='px-5 pt-4 pb-8'>
               <ProductEditForm
                 onSubmit={mutate}
                 product={product}

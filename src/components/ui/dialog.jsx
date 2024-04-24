@@ -2,7 +2,7 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "@/lib/utils";
 import { LuX } from "react-icons/lu";
-import { element, string } from "prop-types";
+import { array, string } from "prop-types";
 
 const Dialog = DialogPrimitive.Root;
 
@@ -51,7 +51,7 @@ const DialogContent = React.forwardRef(
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 DialogContent.propTypes = {
   className: string,
-  children: element,
+  children: array,
 };
 const DialogHeader = ({ className, ...props }) => (
   <div

@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -10,6 +11,13 @@ export const formatRupiah = (price) => {
     style: 'currency',
     currency: 'IDR'
   }).format(price);
+};
+
+export const handleValidationErrors = (error) => {
+  if (error instanceof AxiosError) {
+    const err = error;
+    return err.response.data;
+  }
 };
 
 export const removeDuplicateArray = (data) => {

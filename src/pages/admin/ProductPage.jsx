@@ -1,5 +1,6 @@
-import { BadgeCategory } from "@/components/element";
+import { BadgeCategory, NotFound404 } from "@/components/element";
 import { Button, Card, CardContent, CardHeader, Input } from "@/components/ui";
+import { useAuthenticated } from "@/contexts";
 import {
   ProductContent,
   ProductFooter,
@@ -16,65 +17,85 @@ import { PiPlusCircle } from "react-icons/pi";
 import { Link } from "react-router-dom";
 
 const ProductPage = () => {
-  const { data: products, isFetching: isFecthingInProducts } =
-    useFetchProducts();
-  const { data: categories } = useFetchCategories();
+  const { authedUser } = useAuthenticated();
+
+  const {
+    data: products,
+    isFetching: isFecthingInProducts,
+    isError: isErrorInProducts,
+    error: errorInProducts,
+  } = useFetchProducts({ token: authedUser.token });
+  const {
+    data: categories,
+    isError: isErrorInCategories,
+    error: errorInCategories,
+  } = useFetchCategories({ token: authedUser.token });
+
+  if (isErrorInCategories || isErrorInProducts) {
+    return (
+      <NotFound404
+        error={errorInCategories.message || errorInProducts.message}
+      />
+    );
+  }
 
   return (
     <AdminLayout>
       {isFecthingInProducts ? (
         <div>loading pak</div>
       ) : (
-        <section className="flex justify-center md:gap-3 md:px-3 lg:gap-4 xl:px-16">
+        <section className='flex  justify-center md:gap-3 md:px-3 lg:gap-4 xl:px-16'>
           {/* products items */}
           <Card className={`py-3 w-full}`}>
-            <CardHeader className="p-3 gap-y-2 lg:flex-row lg:justify-between lg:items-center">
+            <CardHeader className='p-3 gap-y-2 lg:flex-row lg:justify-between lg:items-center'>
               {/* header */}
-              <h1 className="font-bold text-xl lg:text-2xl">Products</h1>
-              <div className="flex gap-3">
+              <h1 className='font-bold text-xl lg:text-2xl'>Products</h1>
+              <div className='flex gap-3'>
                 <Input
-                  type="text"
-                  name="seact-product"
-                  placeholder="Search product..."
-                  className="text-sm"
+                  type='text'
+                  name='seact-product'
+                  placeholder='Search product...'
+                  className='text-sm'
                 />
-                <Link to="/admin/product/create">
+                <Link to='/admin/product/create'>
                   <Button
-                    variant="outline"
-                    className="text-sm px-3 flex gap-2"
+                    variant='outline'
+                    className='text-sm px-3 flex gap-2'
                   >
                     Add Product
-                    <PiPlusCircle className="text-xl" />
+                    <PiPlusCircle className='text-xl' />
                   </Button>
                 </Link>
               </div>
             </CardHeader>
-            <CardContent className="pt-2 space-y-5">
+            <CardContent className='pt-2 space-y-5'>
               {products?.data.length <= 0 ? (
-                <div className=" flex justify-center w-full">
-                  <h1 className="w-full text-red-600">Tidak ada product</h1>
+                <div className=' flex justify-center w-full'>
+                  <h1 className='w-full text-red-600'>Tidak ada product</h1>
                 </div>
               ) : (
                 <>
-                  <BadgeCategory className="max-w-xs md:flex md:max-w-full">
+                  <BadgeCategory className='w-fit max-w-xs md:flex md:max-w-full'>
                     <Button
-                      variant="ghost"
-                      className="capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800"
+                      variant='ghost'
+                      name='all-product'
+                      className='capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800'
                     >
                       All Product
                     </Button>
                     {categories?.data.map((category) => (
                       <Button
                         key={category.id}
-                        variant="ghost"
-                        className="capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800"
+                        variant='ghost'
+                        name={category.name}
+                        className='capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800'
                       >
                         {category.name}
                       </Button>
                     ))}
                   </BadgeCategory>
                   {/* product list */}
-                  <ProductList className="md:px-0 md:grid-cols-3 lg:grid-cols-4">
+                  <ProductList className='px-2 md:px-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
                     {products?.data.map((product) => (
                       <ProductItem key={product.id}>
                         <ProductHeader thumbnail={product.thumbnail} />
@@ -82,23 +103,29 @@ const ProductPage = () => {
                           title={product.title}
                           price={product.price}
                         />
-                        <ProductFooter className="pb-5 ps-3 pe-5 flex flex-col gap-4">
+                        <ProductFooter className='pb-5 ps-3 pe-5 flex flex-col gap-4'>
                           <Link
                             to={`/admin/product/${product.slug}/show`}
-                            className="w-full"
+                            className='w-full'
                           >
                             <Button
-                              variant="primary"
-                              className="w-full"
+                              variant='primary'
+                              className='w-full'
+                              name={`show-${product.slug}`}
                             >
                               Show
                             </Button>
                           </Link>
                           <Link
                             to={`/admin/product/${product.slug}/edit`}
-                            className="w-full"
+                            className='w-full'
                           >
-                            <Button className="w-full">Edit</Button>
+                            <Button
+                              name={`edit-${product.slug}`}
+                              className='w-full'
+                            >
+                              Edit
+                            </Button>
                           </Link>
                         </ProductFooter>
                       </ProductItem>

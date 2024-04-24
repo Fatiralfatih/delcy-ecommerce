@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import {
   CartPage,
-  NotFound404,
   ProductDetailPage as ProductDetailCostumer,
   ProductPage as ProductPageCostumer,
 } from "./pages/costumer";
@@ -11,47 +10,75 @@ import {
   ProductEditPage as ProductEditPageAdmin,
   ProductPage as ProductPageAdmin,
 } from "./pages/admin";
+import { LoginPage, RegisterPage } from "./pages/authentication";
+import { useAuthenticated } from "./contexts";
+import { NotFound404 } from "./components/element";
 
 function App() {
-  return (
-    <Routes key={"costumer"}>
-      {/* costumer */}
-      <Route
-        path="*"
-        element={<NotFound404 />}
-      />
-      <Route
-        path="/"
-        element={<ProductPageCostumer />}
-      />
-      <Route
-        path="/:slug/"
-        element={<ProductDetailCostumer />}
-      />
-      <Route
-        path="/cart"
-        element={<CartPage />}
-      />
-      {/* end Costumer */}
+  const { authedUser } = useAuthenticated();
 
-      {/* admin */}
+  return (
+    <Routes>
       <Route
-        path="/admin/product"
-        element={<ProductPageAdmin />}
+        path='*'
+        element={
+          <NotFound404
+            error={!authedUser && "silahkan login terlebih dahulu"}
+          />
+        }
       />
-      <Route
-        path="/admin/product/:slug/show"
-        element={<ProductDetailPageAdmin />}
-      />
-      <Route
-        path="/admin/product/create"
-        element={<ProductCreatePage />}
-      />
-      <Route
-        path="/admin/product/:slug/edit"
-        element={<ProductEditPageAdmin />}
-      />
-      {/* end admin */}
+
+      {!authedUser ? (
+        <>
+          <Route
+            path='/login'
+            element={<LoginPage />}
+          />
+
+          <Route
+            path='/register'
+            element={<RegisterPage />}
+          />
+        </>
+      ) : (
+        <>
+          {/* costumer */}
+          <Route
+            path='/cart'
+            element={<CartPage />}
+          />
+
+          <Route
+            path='/'
+            element={<ProductPageCostumer />}
+          />
+
+          <Route
+            path='/show/:slug/'
+            element={<ProductDetailCostumer />}
+          />
+          {/* end Costumer */}
+
+          {/* admin */}
+          <Route
+            path='/admin/product'
+            element={<ProductPageAdmin />}
+          />
+          <Route
+            path='/admin/product/:slug/show'
+            element={<ProductDetailPageAdmin />}
+          />
+          <Route
+            path='/admin/product/create'
+            element={<ProductCreatePage />}
+          />
+          <Route
+            path='/admin/product/:slug/edit'
+            element={<ProductEditPageAdmin />}
+          />
+          {/* end admin */}
+        </>
+      )}
     </Routes>
   );
 }

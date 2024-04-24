@@ -2,7 +2,7 @@ import { axiosInstance } from "@/lib";
 import { useMutation } from "@tanstack/react-query";
 
 
-export const useMutationCreateProduct = ({ onSuccess, onError }) => {
+export const useMutationCreateProduct = ({ token, onSuccess, onError }) => {
     return useMutation({
         mutationKey: ["create-product"],
         mutationFn: async (body) => {
@@ -14,11 +14,17 @@ export const useMutationCreateProduct = ({ onSuccess, onError }) => {
             formData.append("variant", JSON.stringify({
                 color: body.color,
                 size: body.size,
-            }))
+            }));
             formData.append("stock", parseInt(body.stock));
             formData.append("title", body.title);
             formData.append("thumbnail", body.thumbnail[0]);
-            const response = await axiosInstance.post("/product/create", formData);
+
+            const response = await axiosInstance.post("/product/create", formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
             return response.data;
         },
         onSuccess,
