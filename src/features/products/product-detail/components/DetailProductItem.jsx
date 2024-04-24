@@ -6,7 +6,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui";
-import { formatRupiah, removeDuplicateArray } from "@/lib";
+import { formatRupiah, removeDuplicateArray } from "@/libs";
 import { object } from "prop-types";
 import { CiHeart, CiStar } from "react-icons/ci";
 

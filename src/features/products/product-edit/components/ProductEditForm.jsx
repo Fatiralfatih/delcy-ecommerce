@@ -17,7 +17,7 @@ import {
   SelectValue,
   Textarea,
 } from "@/components/ui";
-import { variants } from "@/lib";
+import { variants } from "@/libs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import makeAnimated from "react-select/animated";
 import Select from "react-select";

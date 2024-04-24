@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/lib";
+import { axiosInstance } from "@/libs";
 import { useQuery } from "@tanstack/react-query"
 
 export const useFetchProductBySlug = ({ slug, token }) => {

@@ -1,4 +1,4 @@
-import { cn } from "@/lib";
+import { cn } from "@/libs";
 import { array, string } from "prop-types";
 
 const BadgeCategory = ({ children, className }) => {

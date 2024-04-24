@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/lib";
+import { axiosInstance } from "@/libs";
 import { useMutation } from "@tanstack/react-query"
 
 export const useMutationEditProductBySlug = ({ slug, token, onSuccess, onError }) => {

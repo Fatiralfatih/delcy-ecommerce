@@ -24,7 +24,7 @@ import { LuLoader2 } from "react-icons/lu";
 import { useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { variants } from "@/lib";
+import { variants } from "@/libs";
 import { productCreateSchema } from "../form/product-create-schema";
 
 const ProductCreateForm = ({ handleSubmit, isPending, categories }) => {

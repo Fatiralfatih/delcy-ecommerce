@@ -1,5 +1,5 @@
 import { Button, Card, CardFooter, CardHeader } from "@/components/ui"
-import { cn } from "@/lib"
+import { cn } from "@/libs"
 import { string } from "prop-types"
 
 const OrderAmount = ({ className }) => {

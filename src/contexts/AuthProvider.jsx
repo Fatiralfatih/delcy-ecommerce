@@ -5,14 +5,12 @@ const AuthContext = createContext({
   authedUser: null,
   addAuthedUser: () => {},
   removeAuthedUser: () => {},
-  initialize: null,
 });
 
 const AuthProvider = ({ children }) => {
   const [authedUser, setAuthedUser] = useState(
     JSON.parse(localStorage.getItem("authedUser")) || null
   );
-  const [initialize] = useState(true);
 
   const addAuthedUser = (authedUser) => {
     localStorage.setItem("authedUser", JSON.stringify(authedUser));
@@ -30,7 +28,6 @@ const AuthProvider = ({ children }) => {
         authedUser,
         addAuthedUser,
         removeAuthedUser,
-        initialize,
       }}
     >
       {children}
@@ -38,10 +35,7 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-function useAuthenticated() {
-  const context = useContext(AuthContext);
-  return context;
-}
+const useAuthenticated = () => useContext(AuthContext);
 
 // eslint-disable-next-line react-refresh/only-export-components
 export { useAuthenticated, AuthContext, AuthProvider };

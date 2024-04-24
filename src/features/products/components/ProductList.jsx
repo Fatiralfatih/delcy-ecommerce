@@ -5,7 +5,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui";
-import { cn, formatRupiah } from "@/lib";
+import { cn, formatRupiah } from "@/libs";
 import { any, array, element, string } from "prop-types";
 import { forwardRef } from "react";
 import { CiStar } from "react-icons/ci";

@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui";
 import { useAuthenticated } from "@/contexts";
-import { bool, string } from "prop-types";
+import { any } from "prop-types";
 import { Link } from "react-router-dom";
 
 const NotFound404 = ({ error }) => {
@@ -40,8 +40,7 @@ const NotFound404 = ({ error }) => {
 };
 
 NotFound404.propTypes = {
-  error: string,
-  token: bool,
+  error: any,
 };
 
 export { NotFound404 };

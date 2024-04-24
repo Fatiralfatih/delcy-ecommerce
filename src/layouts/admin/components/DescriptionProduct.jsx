@@ -4,7 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui";
-import { formatRupiah } from "@/lib";
+import { formatRupiah } from "@/libs";
 import { array, object, string } from "prop-types";
 
 const DescriptionProduct = ({

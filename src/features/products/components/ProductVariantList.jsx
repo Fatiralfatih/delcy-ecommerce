@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui";
-import { variants } from "@/lib";
+import { variants } from "@/libs";
 import { RiCheckboxBlankCircleFill, RiPencilRuler2Line } from "react-icons/ri";
 import { TiWaves } from "react-icons/ti";
 

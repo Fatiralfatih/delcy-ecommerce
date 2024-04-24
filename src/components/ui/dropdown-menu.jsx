@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import { LuCheck, LuChevronRight, LuCircle } from "react-icons/lu";
 import { array, bool, element, number, string } from "prop-types";
 

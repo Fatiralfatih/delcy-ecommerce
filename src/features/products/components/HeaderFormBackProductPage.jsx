@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui";
-import { cn } from "@/lib";
+import { cn } from "@/libs";
 import { string } from "prop-types";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";

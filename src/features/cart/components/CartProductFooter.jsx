@@ -1,5 +1,5 @@
 import { Button, Input } from "@/components/ui";
-import { cn } from "@/lib";
+import { cn } from "@/libs";
 import { string } from "prop-types";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FiMinus, FiPlus } from "react-icons/fi";

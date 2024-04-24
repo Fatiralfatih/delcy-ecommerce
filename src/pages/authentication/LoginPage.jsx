@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, useToast } from "@/components/ui";
 import { useAuthenticated } from "@/contexts";
 import { LoginForm } from "@/features/auth/login/components";
 import { useMutationLogin } from "@/features/auth/login/hooks/useMutationLogin";
-import { handleValidationErrors } from "@/lib";
+import { handleValidationErrors } from "@/libs";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 

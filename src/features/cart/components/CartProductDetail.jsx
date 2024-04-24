@@ -1,4 +1,4 @@
-import { cn } from "@/lib"
+import { cn } from "@/libs"
 import { string } from "prop-types"
 import { IoCheckboxOutline } from "react-icons/io5"
 

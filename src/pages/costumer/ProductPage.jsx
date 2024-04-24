@@ -114,35 +114,41 @@ const ProductPage = () => {
               </Select>
             </div>
             {isLoadingInProducts && <SkeletonProduct />}
-            <ProductList>
-              {products?.data.map((product) => (
-                <ProductItem key={product.id}>
-                  <ProductHeader thumbnail={product.thumbnail} />
-                  <ProductContent
-                    title={product.title}
-                    price={product.price}
-                  />
-                  <ProductFooter>
-                    <div className='flex w-full px-3 pb-5'>
-                      <Link
-                        to={`/show/${product.slug}`}
-                        className='w-full'
-                      >
-                        <Button
-                          className=' w-full text-xs lg:text-sm'
-                          name={`/show/${product.slug}/`}
+            {products?.data.length <= 0 ? (
+              <h1 className='flex justify-center items-center'>
+                Tidak ada product
+              </h1>
+            ) : (
+              <ProductList>
+                {products?.data.map((product) => (
+                  <ProductItem key={product.id}>
+                    <ProductHeader thumbnail={product.thumbnail} />
+                    <ProductContent
+                      title={product.title}
+                      price={product.price}
+                    />
+                    <ProductFooter>
+                      <div className='flex w-full px-3 pb-5'>
+                        <Link
+                          to={`/show/${product.slug}`}
+                          className='w-full'
                         >
-                          <span className='pe-2'>
-                            <TbListDetails className='text-sm md:text-lg ' />
-                          </span>
-                          Lihat Detail
-                        </Button>
-                      </Link>
-                    </div>
-                  </ProductFooter>
-                </ProductItem>
-              ))}
-            </ProductList>
+                          <Button
+                            className=' w-full text-xs lg:text-sm'
+                            name={`/show/${product.slug}/`}
+                          >
+                            <span className='pe-2'>
+                              <TbListDetails className='text-sm md:text-lg ' />
+                            </span>
+                            Lihat Detail
+                          </Button>
+                        </Link>
+                      </div>
+                    </ProductFooter>
+                  </ProductItem>
+                ))}
+              </ProductList>
+            )}
           </div>
         </div>
       </div>

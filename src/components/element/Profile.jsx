@@ -1,4 +1,4 @@
-import { cn } from "@/lib";
+import { cn } from "@/libs";
 import { Avatar, AvatarFallback, AvatarImage, Button } from "../ui";
 import { string } from "prop-types";
 

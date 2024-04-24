@@ -2,7 +2,7 @@ import { Footer } from "@/components/element";
 import { Card, CardContent, CardHeader, useToast } from "@/components/ui";
 import { RegisterForm } from "@/features/auth/register/components";
 import { useMutationRegister } from "@/features/auth/register/hooks";
-import { handleValidationErrors } from "@/lib";
+import { handleValidationErrors } from "@/libs";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 

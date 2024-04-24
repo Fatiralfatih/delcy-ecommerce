@@ -1,5 +1,5 @@
 import { Card, CardContent, } from "@/components/ui"
-import { cn } from "@/lib"
+import { cn } from "@/libs"
 import { array, element, string } from "prop-types"
 
 const CartProducts = ({ children, className }) => {

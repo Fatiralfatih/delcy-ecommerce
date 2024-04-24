@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage, Card, CardContent, CardHeader } from "@/components/ui"
-import { cn } from "@/lib"
+import { cn } from "@/libs"
 import { string } from "prop-types"
 import { CiStar } from "react-icons/ci"
 

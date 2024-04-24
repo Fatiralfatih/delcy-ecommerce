@@ -1,4 +1,4 @@
-import { cn } from "@/lib";
+import { cn } from "@/libs";
 import { string } from "prop-types";
 
 const Loader = ({ className }) => {

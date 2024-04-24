@@ -1,7 +1,7 @@
 import * as React from "react"
 import { LuChevronRight, LuMoreHorizontal } from "react-icons/lu";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/libs/utils"
 import { element, string } from "prop-types";
 import { Link } from "react-router-dom";
 
