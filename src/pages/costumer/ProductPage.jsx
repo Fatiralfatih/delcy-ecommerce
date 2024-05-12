@@ -62,7 +62,7 @@ const ProductPage = () => {
         <BadgeCategory>
           <Button
             variant='ghost'
-            className='capitalize px-2 py-1 rounded-xl hover:bg-success-500 hover:text-zinc-800'
+            className='px-2 py-1 capitalize rounded-xl hover:bg-success-500 hover:text-zinc-800'
           >
             All Product
           </Button>
@@ -70,7 +70,7 @@ const ProductPage = () => {
             <Button
               key={category.id}
               variant='ghost'
-              className='capitalize px-2 py-1 rounded-xl hover:bg-success-500 hover:text-zinc-800'
+              className='px-2 py-1 capitalize rounded-xl hover:bg-success-500 hover:text-zinc-800'
             >
               {category.name}
             </Button>
@@ -94,7 +94,7 @@ const ProductPage = () => {
                 <h1 className='text-xl font-bold md:text-2xl'>
                   Give All You Need
                 </h1>
-                <p className='text-sm w-full'>All (25 total)</p>
+                <p className='w-full text-sm'>All (25 total)</p>
               </article>
               <Select>
                 <SelectTrigger
@@ -115,7 +115,7 @@ const ProductPage = () => {
             </div>
             {isLoadingInProducts && <SkeletonProduct />}
             {products?.data.length <= 0 ? (
-              <h1 className='flex justify-center items-center'>
+              <h1 className='flex items-center uppercase justify-center min-h-[80vh]'>
                 Tidak ada product
               </h1>
             ) : (
@@ -134,7 +134,7 @@ const ProductPage = () => {
                           className='w-full'
                         >
                           <Button
-                            className=' w-full text-xs lg:text-sm'
+                            className='w-full text-xs lg:text-sm'
                             name={`/show/${product.slug}/`}
                           >
                             <span className='pe-2'>

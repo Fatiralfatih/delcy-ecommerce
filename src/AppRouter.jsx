@@ -17,68 +17,68 @@ import { NotFound404 } from "./components/element";
 function App() {
   const { authedUser } = useAuthenticated();
 
+  if (!authedUser) {
+    return (
+      <Routes>
+        <Route
+          path='*'
+          element={
+            <NotFound404
+              error={!authedUser && "silahkan login terlebih dahulu"}
+            />
+          }
+        />
+        <Route
+          path='/'
+          element={<LoginPage />}
+        />
+
+        <Route
+          path='/register'
+          element={<RegisterPage />}
+        />
+      </Routes>
+    );
+  }
+
   return (
     <Routes>
       <Route
         path='*'
-        element={
-          <NotFound404
-            error={!authedUser && "silahkan login terlebih dahulu"}
-          />
-        }
+        element={<NotFound404 />}
       />
-
-      {!authedUser ? (
-        <>
-          <Route
-            path='/login'
-            element={<LoginPage />}
-          />
-
-          <Route
-            path='/register'
-            element={<RegisterPage />}
-          />
-        </>
-      ) : (
-        <>
-          {/* costumer */}
-          <Route
-            path='/cart'
-            element={<CartPage />}
-          />
-
-          <Route
-            path='/'
-            element={<ProductPageCostumer />}
-          />
-
-          <Route
-            path='/show/:slug/'
-            element={<ProductDetailCostumer />}
-          />
-          {/* end Costumer */}
-
-          {/* admin */}
-          <Route
-            path='/admin/product'
-            element={<ProductPageAdmin />}
-          />
-          <Route
-            path='/admin/product/:slug/show'
-            element={<ProductDetailPageAdmin />}
-          />
-          <Route
-            path='/admin/product/create'
-            element={<ProductCreatePage />}
-          />
-          <Route
-            path='/admin/product/:slug/edit'
-            element={<ProductEditPageAdmin />}
-          />
-          {/* end admin */}
-        </>
-      )}
+      {/* costumer */}
+      <Route
+        path='/cart'
+        element={<CartPage />}
+      />
+      <Route
+        path='/'
+        element={<ProductPageCostumer />}
+      />
+      <Route
+        path='/show/:slug/'
+        element={<ProductDetailCostumer />}
+      />
+      {/* end Costumer */}
+      {/* admin */}
+      <Route
+        path='/admin/product'
+        element={<ProductPageAdmin />}
+      />
+      <Route
+        path='/admin/product/:slug/show'
+        element={<ProductDetailPageAdmin />}
+      />
+      <Route
+        path='/admin/product/create'
+        element={<ProductCreatePage />}
+      />
+      <Route
+        path='/admin/product/:slug/edit'
+        element={<ProductEditPageAdmin />}
+      />
+      {/* end admin */}
     </Routes>
   );
 }

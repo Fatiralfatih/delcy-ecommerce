@@ -36,7 +36,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
         <FormField
           name='username'
           render={({ field }) => (
-            <FormItem className='space-y-2 py-3'>
+            <FormItem className='py-3 space-y-2'>
               <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input
@@ -47,7 +47,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
                 />
               </FormControl>
               {error?.errors.username && (
-                <FormDescription className='text-red-500 pt-1'>
+                <FormDescription className='pt-1 text-red-500'>
                   {error?.errors?.username}
                 </FormDescription>
               )}
@@ -59,7 +59,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
         <FormField
           name='name'
           render={({ field }) => (
-            <FormItem className='space-y-2 py-3'>
+            <FormItem className='py-3 space-y-2'>
               <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input
@@ -69,7 +69,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
                 />
               </FormControl>
               {error?.errors.name && (
-                <FormDescription className='text-red-500 pt-1'>
+                <FormDescription className='pt-1 text-red-500'>
                   {error?.errors?.name}
                 </FormDescription>
               )}
@@ -81,7 +81,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
         <FormField
           name='email'
           render={({ field }) => (
-            <FormItem className='space-y-2 py-3'>
+            <FormItem className='py-3 space-y-2'>
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
@@ -92,7 +92,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
                 />
               </FormControl>
               {error?.errors.email && (
-                <FormDescription className='text-red-500 pt-1'>
+                <FormDescription className='pt-1 text-red-500'>
                   {error?.errors?.email}
                 </FormDescription>
               )}
@@ -104,7 +104,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
         <FormField
           name='password'
           render={({ field }) => (
-            <FormItem className='space-y-2 py-3'>
+            <FormItem className='py-3 space-y-2'>
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
@@ -123,20 +123,20 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
                 </Input>
               </FormControl>
               {error?.errors.password && (
-                <FormDescription className='text-red-500 pt-1'>
+                <FormDescription className='pt-1 text-red-500'>
                   {error?.errors?.password}
                 </FormDescription>
               )}
-              <FormMessage className='pt-1 max-w-xs' />
+              <FormMessage className='max-w-xs pt-1' />
             </FormItem>
           )}
         />
 
-        <div className='flex items-center pt-5 pb-2 gap-1'>
+        <div className='flex items-center gap-1 pt-5 pb-2'>
           <p className='text-sm'>Already have an account?</p>
           <Link
-            to='/login'
-            className='text-sm text-blue-700 font-semibold'
+            to='/'
+            className='text-sm font-semibold text-blue-700'
           >
             Sign In
           </Link>
@@ -149,7 +149,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
               type='button'
               name='loading'
               variant='primary'
-              className='w-full flex gap-1 items-center'
+              className='flex items-center w-full gap-1'
             >
               <LuLoader2 className='text-xl animate-spin' />
               loading....

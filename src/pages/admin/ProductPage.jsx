@@ -44,12 +44,12 @@ const ProductPage = () => {
       {isFecthingInProducts ? (
         <div>loading pak</div>
       ) : (
-        <section className='flex  justify-center md:gap-3 md:px-3 lg:gap-4 xl:px-16'>
+        <section className='flex justify-center md:gap-3 md:px-3 lg:gap-4 xl:px-16'>
           {/* products items */}
           <Card className={`py-3 w-full}`}>
             <CardHeader className='p-3 gap-y-2 lg:flex-row lg:justify-between lg:items-center'>
               {/* header */}
-              <h1 className='font-bold text-xl lg:text-2xl'>Products</h1>
+              <h1 className='text-xl font-bold lg:text-2xl'>Products</h1>
               <div className='flex gap-3'>
                 <Input
                   type='text'
@@ -60,7 +60,7 @@ const ProductPage = () => {
                 <Link to='/admin/product/create'>
                   <Button
                     variant='outline'
-                    className='text-sm px-3 flex gap-2'
+                    className='flex gap-2 px-3 text-sm'
                   >
                     Add Product
                     <PiPlusCircle className='text-xl' />
@@ -70,16 +70,16 @@ const ProductPage = () => {
             </CardHeader>
             <CardContent className='pt-2 space-y-5'>
               {products?.data.length <= 0 ? (
-                <div className=' flex justify-center w-full'>
-                  <h1 className='w-full text-red-600'>Tidak ada product</h1>
-                </div>
+                <h1 className='flex items-center justify-center min-h-[80vh] text-red-600'>
+                  Tidak ada product
+                </h1>
               ) : (
                 <>
-                  <BadgeCategory className='w-fit max-w-xs md:flex md:max-w-full'>
+                  <BadgeCategory className='max-w-xs w-fit md:flex md:max-w-full'>
                     <Button
                       variant='ghost'
                       name='all-product'
-                      className='capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800'
+                      className='px-3 py-2 capitalize border rounded-xl hover:bg-success-500 hover:text-zinc-800'
                     >
                       All Product
                     </Button>
@@ -88,7 +88,7 @@ const ProductPage = () => {
                         key={category.id}
                         variant='ghost'
                         name={category.name}
-                        className='capitalize border px-3 py-2 rounded-xl hover:bg-success-500 hover:text-zinc-800'
+                        className='px-3 py-2 capitalize border rounded-xl hover:bg-success-500 hover:text-zinc-800'
                       >
                         {category.name}
                       </Button>
@@ -103,7 +103,7 @@ const ProductPage = () => {
                           title={product.title}
                           price={product.price}
                         />
-                        <ProductFooter className='pb-5 ps-3 pe-5 flex flex-col gap-4'>
+                        <ProductFooter className='flex flex-col gap-4 pb-5 ps-3 pe-5'>
                           <Link
                             to={`/admin/product/${product.slug}/show`}
                             className='w-full'

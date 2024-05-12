@@ -32,7 +32,7 @@ const Navbar = () => {
         toast({
           title: "berhasil logout",
         });
-        navigate("/login");
+        navigate("/");
       }
     },
     onError: (error) => {
@@ -47,13 +47,13 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav className='fixed top-0 left-0 z-10 right-0 py-5 bg-white'>
-        <div className=' flex justify-between gap-1 items-center container sm:gap-8 lg:gap-44 '>
+      <nav className='fixed top-0 left-0 right-0 z-10 py-5 bg-white'>
+        <div className='container flex items-center justify-between gap-1  sm:gap-8 lg:gap-44'>
           <Link
             to={"/"}
             className='bg-white'
           >
-            <h1 className='hidden sm:block sm:text-2xl font-black lg:text-3xl'>
+            <h1 className='hidden font-black sm:block sm:text-2xl lg:text-3xl'>
               Delcy.
               <span className='text-fuchsia-500'>GG</span>
             </h1>
@@ -64,10 +64,10 @@ const Navbar = () => {
             name='search'
             type='search'
             aria-label='input-search'
-            className='w-full border-2 max-w-3xl'
+            className='w-full max-w-3xl border-2'
             placeholder='Cari di Delcy.....'
           />
-          <div className='flex justify-center gap-1 items-center'>
+          <div className='flex items-center justify-center gap-1'>
             <Link to={"/cart"}>
               <Button
                 variant='outline'
@@ -79,10 +79,10 @@ const Navbar = () => {
 
             <Button
               variant='outline'
-              className='border-0 hidden hover:text-indigo-500 sm:flex'
+              className='hidden border-0 hover:text-indigo-500 sm:flex'
               name='whislist'
             >
-              <FaRegHeart className='text-2xl  ' />
+              <FaRegHeart className='text-2xl ' />
             </Button>
 
             {authedUser ? (
@@ -91,7 +91,7 @@ const Navbar = () => {
                   <Button
                     variant='primary'
                     size='sm'
-                    className='text-sm hidden md:flex'
+                    className='hidden text-sm md:flex'
                   >
                     Log Out
                   </Button>
@@ -99,7 +99,7 @@ const Navbar = () => {
                 <DropdownMenuContent className='w-40'>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => mutate()}>
-                    <LuLogOut className='mr-2 h-4 w-4' />
+                    <LuLogOut className='w-4 h-4 mr-2' />
                     <span>Log out</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -109,7 +109,7 @@ const Navbar = () => {
                 to={"/login"}
                 className='min-w-[140px] hidden md:block'
               >
-                <Button className=' px-10 py-5 bg-white text-zinc-900 '>
+                <Button className='px-10 py-5 bg-white  text-zinc-900'>
                   Login
                 </Button>
               </Link>
