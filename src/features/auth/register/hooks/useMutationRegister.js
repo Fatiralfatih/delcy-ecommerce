@@ -5,6 +5,7 @@ export const useMutationRegister = ({ onSuccess, onError }) => {
     return useMutation({
         mutationKey: ["register"],
         mutationFn: async (body) => {
+            console.log(body);
             const response = await axiosInstance.post("/register", body);
             return response.data;
         },

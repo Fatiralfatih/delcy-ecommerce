@@ -16,5 +16,8 @@ export default defineConfig({
   define: {
     // eslint-disable-next-line no-undef
     'process.env': process.env
+  },
+  server: {
+    port: 3000
   }
 })

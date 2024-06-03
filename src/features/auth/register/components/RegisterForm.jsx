@@ -46,7 +46,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
                   {...field}
                 />
               </FormControl>
-              {error?.errors.username && (
+              {error?.errors?.username && (
                 <FormDescription className='pt-1 text-red-500'>
                   {error?.errors?.username}
                 </FormDescription>
@@ -68,7 +68,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
                   {...field}
                 />
               </FormControl>
-              {error?.errors.name && (
+              {error?.errors?.name && (
                 <FormDescription className='pt-1 text-red-500'>
                   {error?.errors?.name}
                 </FormDescription>
@@ -91,7 +91,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
                   {...field}
                 />
               </FormControl>
-              {error?.errors.email && (
+              {error?.errors?.email && (
                 <FormDescription className='pt-1 text-red-500'>
                   {error?.errors?.email}
                 </FormDescription>
@@ -122,7 +122,7 @@ const RegisterForm = ({ onSubmit, error, isPending }) => {
                   </div>
                 </Input>
               </FormControl>
-              {error?.errors.password && (
+              {error?.errors?.password && (
                 <FormDescription className='pt-1 text-red-500'>
                   {error?.errors?.password}
                 </FormDescription>

@@ -14,8 +14,9 @@ const LoginPage = () => {
 
   const { toast } = useToast();
 
-  const { mutate, isPending, error } = useMutationLogin({
+  const { mutate, isPending, error, data } = useMutationLogin({
     onSuccess: (data) => {
+      console.log(data);
       if (data.status === "success") {
         toast({
           title: "berhasil login",
@@ -38,16 +39,17 @@ const LoginPage = () => {
     },
   });
 
+  console.log(error);
   return (
     <>
       <section className='min-h-screen flex justify-center items-center bg-zinc-100 sm:px-24 lg:px-64 xl:px-[30rem]'>
-        <Card className='sm:w-full'>
+        <Card className='sm:w-full md:min-w-[450px]'>
           <CardHeader>
-            <h1 className='font-semibold text-2xl font-sans text-center lg:text-3xl'>
+            <h1 className='font-sans text-2xl font-semibold text-center lg:text-3xl'>
               Sign in your Delcy account
             </h1>
           </CardHeader>
-          <CardContent className='px-6 pb-8'>
+          <CardContent className='px-6 pb-8 '>
             <LoginForm
               onSubmit={mutate}
               error={handleValidationErrors(error)}

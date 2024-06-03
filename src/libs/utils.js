@@ -16,7 +16,7 @@ export const formatRupiah = (price) => {
 export const handleValidationErrors = (error) => {
   if (error instanceof AxiosError) {
     const err = error;
-    return err.response.data;
+    return err.response?.data;
   }
 };
 

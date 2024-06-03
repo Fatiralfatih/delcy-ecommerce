@@ -35,7 +35,7 @@ const LoginForm = ({ onSubmit, error, isPending }) => {
         <FormField
           name='username'
           render={({ field }) => (
-            <FormItem className='space-y-2 py-3'>
+            <FormItem className='py-3 space-y-2'>
               <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input
@@ -60,7 +60,7 @@ const LoginForm = ({ onSubmit, error, isPending }) => {
         <FormField
           name='password'
           render={({ field }) => (
-            <FormItem className='space-y-2 py-3'>
+            <FormItem className='py-3 space-y-2'>
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
@@ -89,11 +89,11 @@ const LoginForm = ({ onSubmit, error, isPending }) => {
           )}
         />
 
-        <div className='flex items-center pt-5 pb-2 gap-1'>
+        <div className='flex items-center gap-1 pt-5 pb-2'>
           <p className='text-sm'>Don`t have an account?</p>
           <Link
             to='/register'
-            className='text-sm text-blue-700 font-semibold'
+            className='text-sm font-semibold text-blue-700'
           >
             Sign Up
           </Link>
@@ -106,7 +106,7 @@ const LoginForm = ({ onSubmit, error, isPending }) => {
               type='button'
               name='loading'
               variant='primary'
-              className='w-full flex gap-1 items-center'
+              className='flex items-center w-full gap-1'
             >
               <LuLoader2 className='text-xl animate-spin' />
               loading....
